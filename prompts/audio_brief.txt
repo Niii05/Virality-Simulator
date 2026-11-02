@@ -1,0 +1,3 @@
+Analyze only the supplied audio from a short social video. Return one JSON object with fields: language (string), transcript_best_effort (string), music_present (boolean), mood (short string), energy (low/medium/high), voice_clarity (integer 1-5), background_noise (low/medium/high), first_3_seconds_sound (one sentence), sound_dependent (boolean; true only when the video loses meaning with sound off). Transcripts may be inaccurate, especially Hindi/Hinglish; mark uncertainty and do not invent words. Be concise and return JSON only.
+
+Never identify real people from their face or appearance. Name a person only if their name appears in on-screen text, captions, or spoken audio; otherwise describe them generically (for example, “an actor in a movie clip” or “a young woman”).

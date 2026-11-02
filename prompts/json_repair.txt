@@ -1,0 +1,7 @@
+Return only one valid JSON object that satisfies the original request. Do not add Markdown fences or commentary.
+
+Original request:
+{{PROMPT}}
+
+Response to repair:
+{{RESPONSE}}
