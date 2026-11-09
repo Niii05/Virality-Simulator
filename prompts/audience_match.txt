@@ -1,0 +1,5 @@
+﻿Choose exactly {{WAVE1_SIZE}} distinct persona ids that best match the brief. Use ids from the provided persona list only. Return JSON only in this shape: {"ids": ["id", ...]}.
+BRIEF:
+{{BRIEF}}
+PERSONAS:
+{{PERSONAS}}

@@ -2,3 +2,4 @@ streamlit
 faster-whisper
 python-dotenv
 google-genai
+numpy

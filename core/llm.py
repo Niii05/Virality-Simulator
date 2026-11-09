@@ -23,6 +23,11 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 _client = None
 _timeout_clients = {}
 _client_lock = threading.Lock()
+_rate_limit_lock = threading.Lock()
+_next_call_at = 0.0
+_circuit_lock = threading.Lock()
+_model_failures = {}
+_model_circuit_until = {}
 API_CALL_COUNT = 0
 CALL_EVENTS = []
 _CALL_STAGE = ContextVar("llm_call_stage", default="unspecified")
@@ -106,6 +111,79 @@ def _is_retryable(error):
     return _is_timeout(error) or status == 429 or (status is not None and 500 <= status <= 599)
 
 
+def _redact_error(error):
+    message = str(error).replace("\r", " ").replace("\n", " ")
+    key = os.getenv("GEMINI_API_KEY")
+    if key:
+        message = message.replace(key, "[redacted]")
+    return re.sub(r"AIza[0-9A-Za-z_-]{20,}", "[redacted]", message)
+
+
+def _daily_quota_exhausted(error):
+    message = str(error).lower()
+    return any(token in message for token in ("per_day", "per day", "daily quota", "quota for today", "requests_per_day"))
+
+
+def _retry_after_seconds(error):
+    candidates = [getattr(error, "retry_delay", None), getattr(error, "retry_after", None)]
+    response = getattr(error, "response", None)
+    headers = getattr(response, "headers", {}) or {}
+    try:
+        candidates.append(headers.get("Retry-After"))
+    except AttributeError:
+        pass
+    for candidate in candidates:
+        if candidate is None:
+            continue
+        if hasattr(candidate, "total_seconds"):
+            return max(0.0, float(candidate.total_seconds()))
+        if hasattr(candidate, "seconds"):
+            try:
+                return max(0.0, float(candidate.seconds))
+            except (TypeError, ValueError):
+                pass
+        match = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*(?:s|sec|seconds)?", str(candidate), re.I)
+        if match:
+            return max(0.0, float(match.group(1)))
+    match = re.search(r"(?:retry\s+in|retry_delay[\"']?\s*[:=]\s*[\"']?)([0-9]+(?:\.[0-9]+)?)\s*s", str(error), re.I)
+    return float(match.group(1)) if match else None
+
+
+def _rate_limit_call():
+    global _next_call_at
+    interval = 60.0 / max(1, int(config.MAX_CALLS_PER_MIN))
+    now = time.monotonic()
+    with _rate_limit_lock:
+        scheduled = max(now, _next_call_at)
+        _next_call_at = scheduled + interval
+    delay = scheduled - now
+    if delay > 0:
+        time.sleep(delay)
+
+
+def _circuit_open(model):
+    with _circuit_lock:
+        until = _model_circuit_until.get(model, 0.0)
+        if until <= time.monotonic():
+            _model_circuit_until.pop(model, None)
+            return False
+        return True
+
+
+def _note_model_failure(model):
+    with _circuit_lock:
+        failures = _model_failures.get(model, 0) + 1
+        _model_failures[model] = failures
+        if failures >= config.LLM_CIRCUIT_BREAKER_FAILURES:
+            _model_circuit_until[model] = time.monotonic() + config.LLM_CIRCUIT_BREAKER_SECONDS
+
+
+def _note_model_success(model):
+    with _circuit_lock:
+        _model_failures[model] = 0
+        _model_circuit_until.pop(model, None)
+
+
 @contextmanager
 def call_stage(stage):
     """Attach a safe stage label to every provider attempt made in this block."""
@@ -153,12 +231,12 @@ def _safe_error_message(error):
     if key:
         message = message.replace(key, "[redacted]")
     message = re.sub(r"AIza[0-9A-Za-z_-]{20,}", "[redacted]", message)
-    return message[: config.LLM_ERROR_SNIPPET_LENGTH]
+    return message
 
 
 def _raise_provider_error(error):
     status = _status_code(error)
-    detail = f"{type(error).__name__}: {_safe_error_message(error)}"
+    detail = f"{type(error).__name__}: {_redact_error(error)}"
     if status == 401:
         raise RuntimeError(f"Gemini authentication failed (401; {detail}). Check GEMINI_API_KEY.") from error
     if status == 403:
@@ -166,7 +244,7 @@ def _raise_provider_error(error):
     if status == 404:
         raise RuntimeError(f"Gemini model was not found (404; {detail}). Check GEMINI_MODEL.") from error
     raise RuntimeError(
-        f"Gemini request failed ({type(error).__name__}: {_safe_error_message(error)})"
+        f"Gemini request failed ({type(error).__name__}: {_redact_error(error)})"
     ) from error
 
 
@@ -198,11 +276,19 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
         fallback = os.getenv("GEMINI_FALLBACK_MODEL", "").strip()
         if fallback and fallback not in models:
             models.append(fallback)
+    if models and _circuit_open(models[0]):
+        logging.getLogger(__name__).warning("Model circuit open model=%s; routing directly to fallback", models[0])
+        models = models[1:]
+        if not models:
+            raise RuntimeError("Gemini model circuit is open and no fallback model is configured.")
     for model_index, model in enumerate(models):
+        if _circuit_open(model):
+            continue
         for attempt in range(attempts):
             call_started = time.perf_counter()
             try:
                 global API_CALL_COUNT
+                _rate_limit_call()
                 API_CALL_COUNT += 1
                 client = _get_client(timeout_sec=timeout_seconds) if timeout_sec is not None else _get_client()
                 response = client.models.generate_content(
@@ -210,14 +296,20 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                 )
                 reason = "fallback" if model_index else ("retry" if attempt else "initial")
                 _record_call(model, attempt + 1, time.perf_counter() - call_started, "OK", reason)
+                _note_model_success(model)
                 return response.text
             except Exception as error:
                 reason = "fallback" if model_index else ("retry" if attempt else "initial")
                 _record_call(model, attempt + 1, time.perf_counter() - call_started,
                              _call_status(error), reason)
+                logging.getLogger(__name__).error("Model request error model=%s: %s: %s",
+                                                  model, type(error).__name__, _redact_error(error))
+                _note_model_failure(model)
                 status = _status_code(error)
                 if status in (401, 403, 404):
                     _raise_provider_error(error)
+                if status == 429 and _daily_quota_exhausted(error):
+                    raise RuntimeError(f"Gemini daily quota is exhausted; stopping retries. Original error: {type(error).__name__}: {_redact_error(error)}") from error
                 if _is_timeout(error) and attempt == attempts - 1:
                     raise RuntimeError(
                         f"Gemini request timed out after {timeout_seconds:g} seconds. "
@@ -227,15 +319,21 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                 if not _is_retryable(error):
                     _raise_provider_error(error)
                 if attempt == attempts - 1:
-                    if model_index + 1 < len(models) and status in (429, 503):
+                    if model_index + 1 < len(models):
                         break
                     _raise_provider_error(error)
-                backoff = min(
-                    config.LLM_RETRY_BACKOFF_BASE_SECONDS * (2 ** attempt),
-                    config.LLM_RETRY_BACKOFF_MAX_SECONDS,
-                )
-                delay = backoff + random.uniform(0, config.LLM_RETRY_JITTER_SECONDS)
+                retry_after = _retry_after_seconds(error) if status == 429 else None
+                if retry_after is not None:
+                    delay = min(retry_after, config.LLM_RETRY_MAX_SECONDS)
+                else:
+                    backoff = min(config.LLM_RETRY_INITIAL_SECONDS * (2 ** attempt),
+                                  config.LLM_RETRY_MAX_SECONDS)
+                    delay = min(config.LLM_RETRY_MAX_SECONDS,
+                                backoff + random.uniform(0, config.LLM_RETRY_JITTER_SECONDS))
                 time.sleep(delay)
+        else:
+            continue
+    raise RuntimeError("No available Gemini model remains after retries or circuit-breaker checks.")
 
 
 def _strip_json_fence(raw):
@@ -253,9 +351,9 @@ def _raw_snippet(raw):
     return snippet[: config.LLM_ERROR_SNIPPET_LENGTH]
 
 
-def ask_json(prompt, images=None, audio_path=None):
+def ask_json(prompt, images=None, audio_path=None, temperature=0.7):
     """Return a JSON object, allowing one model repair attempt if needed."""
-    raw = ask(prompt, images=images, audio_path=audio_path, json_mode=True)
+    raw = ask(prompt, images=images, audio_path=audio_path, json_mode=True, temperature=temperature)
     for attempt in range(2):
         try:
             result = json.loads(_strip_json_fence(raw))
@@ -272,5 +370,6 @@ def ask_json(prompt, images=None, audio_path=None):
                     images=images,
                     audio_path=audio_path,
                     json_mode=True,
+                    temperature=temperature,
                 )
     raise ValueError(f"Could not parse JSON response: {_raw_snippet(raw)}")
