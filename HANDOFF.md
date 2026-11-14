@@ -1,37 +1,31 @@
-﻿# Reliability and Resume Handoff
+﻿# Wave Completion Handoff
 
-## Changes
+## Confirmed cause
 
-- Added a shared, thread-safe provider request limiter. `MAX_CALLS_PER_MIN` defaults to 10.
-- Provider retries honor a 429 retry delay from the error, capped at 60 seconds. 503/504 and other retryable server errors use exponential backoff starting at 2 seconds with jitter, capped at 60 seconds, with at most three attempts per model. Daily quota errors stop immediately with a clear message. Full key-redacted provider error text is logged.
-- Added a per-model circuit breaker: five consecutive failures opens the circuit for 60 seconds; calls route directly to the configured fallback while it is open.
-- Results include `personas_intended`, `personas_scored`, `personas_failed`, and `complete`. Coverage below `MIN_COMPLETE_FRACTION` (default 0.8) sets `reach_tier` to `Incomplete - rerun` and `final_score` to null.
-- Successful persona reactions are cached immediately by video hash, configured model, persona ID, and sound condition. Incomplete cached runs resume by default when caching is enabled; `--retry-failed` enables this behavior explicitly, and `--no-retry-failed` disables it.
-- Added mock tests for rate spacing, retry delays, full error logging, daily quota stop, 503/504 backoff/fallback, circuit breaking, incomplete coverage, and reaction cache reuse.
+`tmp\result5.json` has `gate_passed: false`, 8 scored Wave 1 personas, no Wave 2 results, no failed personas, and an empty `errors` list. `core/waves.py` nevertheless set `personas_intended` to all 24 personas. The scoring layer then classified the valid gate-stopped run as incomplete because it compared 8 scored against 24 intended.
 
-## Files changed
+## Files changed for this task
 
-- `core/config.py`
-- `core/llm.py`
-- `core/waves.py`
-- `core/scoring.py`
-- `core/pipeline.py`
-- `tests/test_llm.py`
-- `tests/test_phase3.py`
-- `HANDOFF.md`
+- `core/waves.py`: intended count is the Wave 1 size when the gate fails and all personas when it passes; adds `waves_run` as `[1]` or `[1, 2]`.
+- `core/scoring.py`: marks a run incomplete only when its intended personas are not all scored. Failed Wave 1 or Wave 2 personas therefore retain the rerun status.
+- `core/pipeline.py`: includes `waves_run` in the saved result JSON.
+- `tests/test_phase3.py`: covers a complete gate failure, an incomplete Wave 2, and a fully scored two-wave run.
+- `tests/test_framework.py`: updates the mocked simulation payload with `waves_run`.
 
-## Verification and limits
-
-- Mock-only test suite: `93 passed`.
-- No real API calls or media runs were performed. `.env` and API keys were not opened or printed.
-- Live Gemini retry metadata shapes and real quota behavior remain unverified.
-- `--no-cache` does **not** write to the cache. It still writes the requested result JSON to `--out`.
-
-## Commands
-
-From the project root in PowerShell:
+## Run and test (PowerShell)
 
 ```powershell
-.\venv\Scripts\python.exe -m pytest tests -q -p no:cacheprovider
-.\venv\Scripts\python.exe -m core.pipeline "D:\path\to\video.mp4" --out tmp\result.json --retry-failed
+.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider
 ```
+
+To rerun the prior video and write an updated result:
+
+```powershell
+.\venv\Scripts\python.exe -m core.pipeline tmp\<video-file> --out tmp\result5.json
+```
+
+## Verification and gaps
+
+- Mock test suite: `113 passed in 31.83s`.
+- No real model/API calls were made. `.env` and API keys were not opened or printed.
+- The old `tmp\result5.json` was inspected but not edited; rerun the source video to produce a result with the corrected fields and scoring.

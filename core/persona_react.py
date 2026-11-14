@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from core import config, llm
+from core import config, framework, llm
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "persona.txt"
 
@@ -19,7 +19,9 @@ def react(persona, brief, condition):
         "sound_on": "Assume sound is ON and audible; do not mention muting or missing audio.\n",
         "sound_off": "Assume you cannot hear any audio; judge only visuals and on-screen text.\n",
     }[condition]
-    prompt = (PROMPT_PATH.read_text(encoding="utf-8") + "\n\nCONDITION: " + condition
+    niche = framework.normalize_niche(brief.get("niche_category"))
+    prompt = (PROMPT_PATH.read_text(encoding="utf-8") + "\n\nEVALUATION FRAMEWORK (selected niche only):\n"
+              + framework.render_rules(niche) + "\n\nCONDITION: " + condition
               + "\nCONDITION INSTRUCTION: " + condition_instruction + "PERSONA:\n"
               + json.dumps(persona, ensure_ascii=False) + "\nBRIEF:\n"
               + json.dumps(visible_brief, ensure_ascii=False))
@@ -31,6 +33,9 @@ def react(persona, brief, condition):
         result[field] = max(0, min(config.SCALE_MAX, int(round(value))))
     if not isinstance(result.get("reason"), str) or not isinstance(result.get("biggest_issue"), str):
         raise ValueError("Persona reaction reason and biggest_issue must be strings.")
+    valid_criteria = {item["id"] for item in __import__("core.framework", fromlist=["_load"])._load()["common_criteria"]}
+    cited = result.get("criteria_cited")
+    result["criteria_cited"] = list(dict.fromkeys(item for item in cited if isinstance(item, str) and item in valid_criteria)) if isinstance(cited, list) else []
     if not isinstance(result.get("stop_scrolling"), int) or not isinstance(result.get("watch_to_end"), int):
         raise ValueError("Persona reaction scores must be integers.")
     return result

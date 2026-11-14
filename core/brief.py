@@ -4,7 +4,7 @@ import copy
 import json
 from pathlib import Path
 
-from core import llm
+from core import framework, llm
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "brief.txt"
 AUDIO_ONLY_FIELDS = {
@@ -22,8 +22,17 @@ def build_brief(extract_result, audio=None):
         "transcript_approximate": extract_result.get("transcript", ""),
         "transcript_language_guess": extract_result.get("language", ""),
     }
-    prompt = PROMPT_PATH.read_text(encoding="utf-8") + "\n\nExtracted context (transcript is approximate):\n" + json.dumps(data, ensure_ascii=False)
-    return llm.ask_json(prompt, images=extract_result.get("frames", []))
+    prompt_template = PROMPT_PATH.read_text(encoding="utf-8")
+    prompt = prompt_template.replace("{{NICHE_DETECTION}}", framework.render_niche_detection())
+    prompt += "\n\nExtracted context (transcript is approximate):\n" + json.dumps(data, ensure_ascii=False)
+    result = llm.ask_json(prompt, images=extract_result.get("frames", []))
+    if not isinstance(result, dict):
+        raise ValueError("Brief response must be a JSON object")
+    result["niche_category"] = framework.normalize_niche(result.get("niche_category"))
+    niche_reason = result.get("niche_reason")
+    result["niche_reason"] = niche_reason.strip() if isinstance(niche_reason, str) and niche_reason.strip() else "The video did not clearly fit a specific niche based on its purpose."
+    result["framework_version"] = framework.get_version()
+    return result
 
 
 def build_full_brief(extract_result, audio=None):

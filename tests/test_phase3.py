@@ -176,21 +176,69 @@ def test_reach_tier_is_capped_after_gate_failure(monkeypatch):
     assert result["label"] == "Virality potential estimate"
 
 
-def test_partial_persona_coverage_is_marked_incomplete(monkeypatch):
+def test_gate_failure_with_all_wave1_scored_is_complete(monkeypatch):
     people = load_personas()
     selected = people[:config.WAVE1_SIZE]
     monkeypatch.setattr(waves, "choose_wave1", lambda brief, personas: (selected, None))
     monkeypatch.setattr(waves, "run_wave", lambda selected_people, brief, audio_available: (
-        [{"persona_id": p["id"], "score": 1, "sound_on": reaction(), "sound_off": reaction()}
+        [{"persona_id": p["id"], "score": 2, "sound_on": reaction(), "sound_off": reaction()}
          for p in selected_people], []))
     output = waves.simulate({}, personas=people)
     scored = scoring.score_result(output)
-    assert output["personas_intended"] == len(people)
+    assert output["gate_passed"] is False
+    assert output["waves_run"] == [1]
+    assert output["personas_intended"] == config.WAVE1_SIZE
     assert output["personas_scored"] == config.WAVE1_SIZE
     assert output["personas_failed"] == []
+    assert output["complete"] is True
+    assert scored["complete"] is True
+    assert scored["gate_passed"] is False
+    assert scored["final_score"] == 2
+    assert scored["reach_tier"] == "Low"
+    assert scored["tier_note"] == "stays in test audience"
+
+
+def test_gate_pass_with_wave2_failure_is_incomplete(monkeypatch):
+    people = load_personas()
+    selected = people[:config.WAVE1_SIZE]
+    monkeypatch.setattr(waves, "choose_wave1", lambda brief, personas: (selected, None))
+    calls = iter([
+        ([{"persona_id": p["id"], "score": 5, "sound_on": reaction(), "sound_off": reaction()}
+          for p in selected], []),
+        ([{"persona_id": p["id"], "score": 5, "sound_on": reaction(), "sound_off": reaction()}
+          for p in people[config.WAVE1_SIZE:-1]],
+         [{"persona_id": people[-1]["id"], "error": "RuntimeError: mock failure"}]),
+    ])
+    monkeypatch.setattr(waves, "run_wave", lambda *args, **kwargs: next(calls))
+    output = waves.simulate({}, personas=people)
+    scored = scoring.score_result(output)
+    assert output["gate_passed"] is True
+    assert output["waves_run"] == [1, 2]
+    assert output["personas_intended"] == len(people)
+    assert output["personas_scored"] == len(people) - 1
     assert output["complete"] is False
+    assert scored["complete"] is False
     assert scored["reach_tier"] == "Incomplete - rerun"
     assert scored["final_score"] is None
+
+
+def test_gate_pass_with_all_personas_scored_is_complete(monkeypatch):
+    people = load_personas()
+    selected = people[:config.WAVE1_SIZE]
+    monkeypatch.setattr(waves, "choose_wave1", lambda brief, personas: (selected, None))
+    monkeypatch.setattr(waves, "run_wave", lambda selected_people, brief, audio_available: (
+        [{"persona_id": p["id"], "score": 5, "sound_on": reaction(), "sound_off": reaction()}
+         for p in selected_people], []))
+    output = waves.simulate({}, personas=people)
+    scored = scoring.score_result(output)
+    assert output["gate_passed"] is True
+    assert output["waves_run"] == [1, 2]
+    assert output["personas_intended"] == len(people)
+    assert output["personas_scored"] == len(people)
+    assert output["complete"] is True
+    assert scored["complete"] is True
+    assert scored["final_score"] == 5
+    assert scored["reach_tier"] == "Medium"
 
 
 def test_reaction_cache_skips_successful_condition_on_resume(monkeypatch):
@@ -208,7 +256,7 @@ def test_reaction_cache_skips_successful_condition_on_resume(monkeypatch):
 
 
 def test_suggestions_validate_and_retry_invalid_json(monkeypatch):
-    valid = {"suggestions": [{"suggestion": f"Improve {i}", "evidence": "slow opening", "persona_id": "p1", "quote": "slow opening"} for i in range(3)]}
+    valid = {"suggestions": [{"suggestion": f"Improve {i}", "evidence": "slow opening", "persona_id": "p1", "quote": "slow opening", "criterion": "hook"} for i in range(3)]}
     calls = iter([{"suggestions": []}, valid])
     monkeypatch.setattr(llm, "ask_json", lambda *a, **k: next(calls))
     result, errors = suggestions.generate({}, [{"persona_id": "p1", "sound_on": reaction()}])
@@ -218,7 +266,7 @@ def test_suggestions_validate_and_retry_invalid_json(monkeypatch):
 
 def test_suggestions_reject_unknown_persona_and_unquoted_evidence(monkeypatch):
     valid = {"suggestions": [{"suggestion": f"Improve {i}", "evidence": "some evidence",
-                              "persona_id": "p1", "quote": "not in the persona text"} for i in range(3)]}
+                              "persona_id": "p1", "quote": "not in the persona text", "criterion": "hook"} for i in range(3)]}
     calls = iter([valid, valid])
     monkeypatch.setattr(llm, "ask_json", lambda *a, **k: next(calls))
     result, errors = suggestions.generate({}, [{"persona_id": "p1", "sound_on": reaction()}])
@@ -228,7 +276,7 @@ def test_suggestions_reject_unknown_persona_and_unquoted_evidence(monkeypatch):
 
 def test_suggestions_reject_persona_id_absent_from_this_run(monkeypatch):
     payload = {"suggestions": [{"suggestion": "Change it", "evidence": "because", "persona_id": "outsider",
-                                "quote": "specific reason"} for _ in range(3)]}
+                                "quote": "specific reason", "criterion": "hook"} for _ in range(3)]}
     calls = iter([payload, payload])
     monkeypatch.setattr(llm, "ask_json", lambda *a, **k: next(calls))
     result, errors = suggestions.generate({}, [{"persona_id": "p1", "sound_on": reaction()}])
@@ -238,12 +286,12 @@ def test_suggestions_reject_persona_id_absent_from_this_run(monkeypatch):
 
 def test_suggestions_accept_case_insensitive_quote_from_named_persona(monkeypatch):
     payload = {"suggestions": [{"suggestion": f"Change {i}", "evidence": "reaction reason",
-                                "persona_id": "p1", "quote": "SPECIFIC REASON"} for i in range(3)]}
+                                "persona_id": "p1", "quote": "SPECIFIC REASON", "criterion": "hook"} for i in range(3)]}
     monkeypatch.setattr(llm, "ask_json", lambda *a, **k: payload)
     result, errors = suggestions.generate({}, [{"persona_id": "p1", "sound_on": reaction()}])
     assert len(result) == 3 and not errors
     prompt = suggestions.PROMPT_PATH.read_text(encoding="utf-8")
-    assert "do not add numbers, quantities, or techniques" in prompt
+    assert "Do not invent numbers, quantities, tools or techniques" in prompt
 
 
 def test_cache_hit_skips_calls(monkeypatch):

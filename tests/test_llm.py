@@ -214,6 +214,72 @@ def test_server_errors_backoff_and_fallback(monkeypatch, status):
     assert waits == [2, 4]
 
 
+def test_503_without_fallback_retries_configured_count_and_reports_waits(monkeypatch, capsys):
+    class Busy(Exception):
+        code = 503
+    calls, waits = [], []
+    class FakeModels:
+        def generate_content(self, **kwargs):
+            calls.append(kwargs["model"])
+            if len(calls) <= 3:
+                raise Busy("temporary busy")
+            return type("Response", (), {"text": "recovered"})()
+    monkeypatch.setenv("GEMINI_MODEL", "busy-primary")
+    monkeypatch.setenv("GEMINI_FALLBACK_MODEL", "")
+    monkeypatch.setattr(config, "RETRY_503_MAX", 8)
+    monkeypatch.setattr(llm, "_get_client", lambda: type("Client", (), {"models": FakeModels()})())
+    monkeypatch.setattr(llm.time, "sleep", waits.append)
+    monkeypatch.setattr(llm.random, "uniform", lambda *_: 0)
+    assert llm.ask("x") == "recovered"
+    assert len(calls) == 4  # initial request plus three retries
+    assert waits == [5, 10, 20]
+    assert capsys.readouterr().err.splitlines() == [
+        "Gemini busy (503), waiting 5s, attempt 1 of 8",
+        "Gemini busy (503), waiting 10s, attempt 2 of 8",
+        "Gemini busy (503), waiting 20s, attempt 3 of 8",
+    ]
+
+
+def test_504_without_fallback_caps_wait_at_60_seconds(monkeypatch):
+    class Busy(Exception):
+        code = 504
+    waits = []
+    class FakeModels:
+        def generate_content(self, **kwargs):
+            raise Busy("temporary busy")
+    monkeypatch.setenv("GEMINI_MODEL", "busy-cap-primary")
+    monkeypatch.setenv("GEMINI_FALLBACK_MODEL", "")
+    monkeypatch.setattr(config, "RETRY_503_MAX", 8)
+    monkeypatch.setattr(llm, "_get_client", lambda: type("Client", (), {"models": FakeModels()})())
+    monkeypatch.setattr(llm.time, "sleep", waits.append)
+    monkeypatch.setattr(llm.random, "uniform", lambda *_: 0)
+    with pytest.raises(RuntimeError, match="temporary Google service overload"):
+        llm.ask("x")
+    assert waits == [5, 10, 20, 40, 60, 60, 60, 60]
+    assert all(delay <= 60 for delay in waits)
+
+
+def test_503_exhaustion_explains_safe_rerun_and_original_error(monkeypatch):
+    class Busy(Exception):
+        code = 503
+    class FakeModels:
+        def generate_content(self, **kwargs):
+            raise Busy("high demand")
+    monkeypatch.setenv("GEMINI_MODEL", "busy-final-primary")
+    monkeypatch.setenv("GEMINI_FALLBACK_MODEL", "")
+    monkeypatch.setattr(config, "RETRY_503_MAX", 2)
+    monkeypatch.setattr(llm, "_get_client", lambda: type("Client", (), {"models": FakeModels()})())
+    monkeypatch.setattr(llm.time, "sleep", lambda _: None)
+    monkeypatch.setattr(llm.random, "uniform", lambda *_: 0)
+    with pytest.raises(RuntimeError) as caught:
+        llm.ask("x")
+    message = str(caught.value)
+    assert "temporary Google service overload" in message
+    assert "Rerunning later is safe" in message
+    assert "successful steps are cached" in message
+    assert "Busy: high demand" in message
+
+
 def test_daily_quota_stops_without_retry_or_fallback(monkeypatch):
     class DailyLimit(Exception):
         code = 429

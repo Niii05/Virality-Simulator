@@ -6,6 +6,7 @@ import math
 import os
 import random
 import re
+import sys
 import threading
 import time
 from contextlib import contextmanager
@@ -269,7 +270,8 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
     if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
         raise ValueError("timeout_sec must be a positive number.")
     attempts = min(max(1, int(retries)), 3)
-    if model is not None:
+    explicit_model = model is not None
+    if explicit_model:
         models = [str(model)]
     else:
         models = [_model_name()]
@@ -284,7 +286,8 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
     for model_index, model in enumerate(models):
         if _circuit_open(model):
             continue
-        for attempt in range(attempts):
+        attempt = 0
+        while True:
             call_started = time.perf_counter()
             try:
                 global API_CALL_COUNT
@@ -310,6 +313,15 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                     _raise_provider_error(error)
                 if status == 429 and _daily_quota_exhausted(error):
                     raise RuntimeError(f"Gemini daily quota is exhausted; stopping retries. Original error: {type(error).__name__}: {_redact_error(error)}") from error
+                no_fallback = len(models) == 1 and not explicit_model
+                long_overload_retry = status in (503, 504) and no_fallback
+                if long_overload_retry and attempt >= max(0, int(config.RETRY_503_MAX)):
+                    raise RuntimeError(
+                        "Gemini is experiencing temporary Google service overload "
+                        f"(HTTP {status}) after {attempt} retries. Rerunning later is safe "
+                        "because successful steps are cached. Original error: "
+                        f"{type(error).__name__}: {_redact_error(error)}"
+                    ) from error
                 if _is_timeout(error) and attempt == attempts - 1:
                     raise RuntimeError(
                         f"Gemini request timed out after {timeout_seconds:g} seconds. "
@@ -318,21 +330,29 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                     ) from error
                 if not _is_retryable(error):
                     _raise_provider_error(error)
-                if attempt == attempts - 1:
+                if not long_overload_retry and attempt == attempts - 1:
                     if model_index + 1 < len(models):
                         break
                     _raise_provider_error(error)
                 retry_after = _retry_after_seconds(error) if status == 429 else None
                 if retry_after is not None:
                     delay = min(retry_after, config.LLM_RETRY_MAX_SECONDS)
+                elif long_overload_retry:
+                    backoff = min(config.RETRY_503_BASE_SECONDS * (2 ** attempt),
+                                  config.RETRY_503_MAX_WAIT_SECONDS)
+                    jitter = random.uniform(0, min(5, backoff * 0.1))
+                    delay = min(config.RETRY_503_MAX_WAIT_SECONDS, backoff + jitter)
+                    retry_number = attempt + 1
+                    print(f"Gemini busy ({status}), waiting {math.ceil(delay)}s, "
+                          f"attempt {retry_number} of {config.RETRY_503_MAX}",
+                          file=sys.stderr, flush=True)
                 else:
                     backoff = min(config.LLM_RETRY_INITIAL_SECONDS * (2 ** attempt),
                                   config.LLM_RETRY_MAX_SECONDS)
                     delay = min(config.LLM_RETRY_MAX_SECONDS,
                                 backoff + random.uniform(0, config.LLM_RETRY_JITTER_SECONDS))
                 time.sleep(delay)
-        else:
-            continue
+                attempt += 1
     raise RuntimeError("No available Gemini model remains after retries or circuit-breaker checks.")
 
 

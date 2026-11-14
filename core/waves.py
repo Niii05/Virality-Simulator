@@ -151,9 +151,11 @@ def simulate(brief, audio_available=True, personas=None, reaction_cache=None):
         errors.append({"stage": "audience_match", "error": selection_error})
     scored_ids = {item["persona_id"] for item in wave1 + wave2}
     failed_ids = sorted({item["persona_id"] for item in errors + wave2_errors if "persona_id" in item})
-    intended = len(all_personas)
+    waves_run = [1, 2] if passed else [1]
+    intended = len(all_personas) if passed else len(wave1_people)
     scored = len(scored_ids)
     return {"wave1": wave1, "wave2": wave2, "gate_passed": passed,
+            "waves_run": waves_run,
             "wave1_selection": selection_type, "wave1_raw_ids": raw_ids,
             "dimension_means": means_by_wave,
             "personas_intended": intended, "personas_scored": scored,

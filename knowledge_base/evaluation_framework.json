@@ -1,0 +1,374 @@
+{
+  "meta": {
+    "name": "Virality Simulator evaluation framework",
+    "version": "0.1-draft",
+    "created": "2026-11-14",
+    "status": "research-informed, NOT performance-calibrated",
+    "purpose": "Tells the personas what tends to make people stop, watch and send a short video in each niche, so that feedback is specific instead of generic. It does not predict views.",
+    "how_to_use": [
+      "Inject only the rules of the detected niche (plus the common criteria) into the persona prompt and the suggestions prompt.",
+      "Personas still judge as real scrollers. The rules explain what matters in the niche. A missing rule is not an automatic penalty.",
+      "Never say a sound or format is 'trending'. The simulator cannot detect that.",
+      "Suggestions must cite a persona quote from this run. They may name a rule id from this file as the reason, but must not invent numbers, tools or techniques that are not in the brief, the persona text or this file."
+    ],
+    "limitations": [
+      "Sources are platform statements, platform ad-creative guides and one academic study. None of them was validated against our own reels.",
+      "TikTok and Meta guidance in this file is written for ADS and for other platforms. Applying it to organic Instagram Reels is an extrapolation.",
+      "The Guo et al. study is about minutes-long MOOC videos, not 30-second reels. Applying it to education reels is an extrapolation.",
+      "Comedy and fitness have no niche-specific source. Their rules are reasoning from the common criteria and need validation.",
+      "Meta's multipliers (1.5x, 1.7x, 2.0x...) are the platform's own correlational ad-study numbers, reported second-hand. Do not use them as weights.",
+      "Scoring weights are deliberately NOT in this file. They stay in core/config.py until they are fitted on real reels."
+    ],
+    "quote_check_status": "All quotes were returned by a page-fetch summarizer, not copied by a human. quote_verified is false everywhere. Open the url and check at least 5 quotes before relying on them.",
+    "claim_type_values": {
+      "platform_statement": "A named person at the platform said it (reported by an article).",
+      "platform_guide": "Platform's own creator or ad guide.",
+      "academic_study": "Peer-reviewed or conference paper.",
+      "inference": "Our reasoning built on a cited source, not stated by the source.",
+      "no_source": "Our reasoning only. Needs validation."
+    }
+  },
+
+  "sources": [
+    {
+      "id": "ig_mosseri_smt",
+      "title": "Instagram shares algorithm tips for 2025 (Social Media Today, Andrew Hutchinson)",
+      "speaker": "Adam Mosseri, head of Instagram (first video of a new series)",
+      "platform": "Instagram",
+      "url": "https://www.socialmediatoday.com/news/instagram-shares-algorithm-2025/738034/",
+      "article_date": "2025-01-22",
+      "claim_type": "platform_statement",
+      "quotes": [
+        "The top three signals that matter most for ranking are watch time, likes and sends.",
+        "So when looking at your insights, pay close attention to average watch time, likes per reach, and sends per reach.",
+        "Likes are slightly more important for connected content, and sends are slightly more important for unconnected content."
+      ],
+      "corroborated_by": ["ig_mosseri_samosa"],
+      "quote_verified": false,
+      "caveats": [
+        "Comments and originality are not mentioned in this statement.",
+        "The article author's own interpretations (comments count inside watch time, carousels rank higher) are NOT Instagram statements and are not used here."
+      ]
+    },
+    {
+      "id": "ig_mosseri_samosa",
+      "title": "Instagram reveals key factors for boosting reach (Social Samosa)",
+      "speaker": "Adam Mosseri, head of Instagram",
+      "platform": "Instagram",
+      "url": "https://www.socialsamosa.com/news-2/instagram-reveals-key-factors-for-boosting-reach-8646916",
+      "article_date": "2025-01-23",
+      "claim_type": "platform_statement",
+      "quotes": [
+        "The top three signals that matter most for ranking are watch time, likes and sends."
+      ],
+      "corroborated_by": ["ig_mosseri_smt"],
+      "quote_verified": false,
+      "caveats": ["Same statement as ig_mosseri_smt, reported by a second outlet."]
+    },
+    {
+      "id": "ig_reels_guide_smt",
+      "title": "Instagram shares Reels creation tips in new guide (Social Media Today)",
+      "speaker": "Instagram's own Reels guide, quoted by the article",
+      "platform": "Instagram",
+      "url": "https://www.socialmediatoday.com/news/instagram-shares-reels-creation-tips-in-new-guide/831551/",
+      "article_date": "unknown",
+      "claim_type": "platform_guide",
+      "quotes": [
+        "Text overlays highlight key moments you choose, while captions make your entire spoken audio visible.",
+        "keep it high-quality, original and engaging from the first second.",
+        "The sweet spot for tutorials, day-in-my-life clips and most creative formats.",
+        "Reels are built for reach beyond your existing followers."
+      ],
+      "quote_verified": false,
+      "caveats": [
+        "The 'sweet spot' quote refers to Reels of 15 to 60 seconds.",
+        "The article author says the guide has no new information. Audio advice in the guide is minimal."
+      ]
+    },
+    {
+      "id": "yt_sherman_techcrunch",
+      "title": "YouTube demystifies the Shorts algorithm, views and answers other creator questions (TechCrunch, Sarah Perez)",
+      "speaker": "Todd Sherman, YouTube Shorts product lead",
+      "platform": "YouTube Shorts",
+      "url": "https://techcrunch.com/2023/08/25/youtube-demystifies-the-shorts-algorithm-views-and-answers-other-creator-questions/",
+      "article_date": "2023-08-25",
+      "claim_type": "platform_statement",
+      "quotes": [
+        "There are parts of the algorithm that try and find people, find creators an audience",
+        "And depending on how that goes, it may get a lot more traffic or it may taper off"
+      ],
+      "paraphrased_points": [
+        "A Shorts view counts only with some intent to watch, not every swipe (threshold not published).",
+        "No video length is inherently better; use what the story needs (Shorts max 60 seconds at the time).",
+        "Posting time and posting volume are not factors; quality matters more than quantity."
+      ],
+      "quote_verified": false,
+      "caveats": [
+        "From 2023. Most points are the journalist's paraphrase of Sherman, only the two quotes are his words.",
+        "The test-then-expand behaviour described here is the reason Wave 1 / gate / Wave 2 is a reasonable design, but it is not proof that our simulator matches it."
+      ]
+    },
+    {
+      "id": "guo_2014_mooc",
+      "title": "How Video Production Affects Student Engagement: An Empirical Study of MOOC Videos",
+      "speaker": "Philip J. Guo, Juho Kim, Rob Rubin (Learning at Scale 2014)",
+      "platform": "edX MOOC videos (not social media)",
+      "url": "https://up.csail.mit.edu/other-pubs/las2014-pguo-engagement.pdf",
+      "article_date": "2014",
+      "claim_type": "academic_study",
+      "quotes": [
+        "shorter videos are much more engaging",
+        "informal talking-head videos are more engaging",
+        "Students generally engaged more with videos where instructors spoke faster.",
+        "Khan-style tablet drawings are more engaging",
+        "even high-quality pre-recorded classroom lectures might not make for engaging online videos"
+      ],
+      "quote_verified": false,
+      "caveats": [
+        "Videos were minutes long and watched by enrolled students. Engagement = watch time and problem attempts, not learning.",
+        "The authors say faster speech probably reflects instructor enthusiasm, not speed itself.",
+        "Several comparisons rest on one pair of courses, so instructor and subject may confound results."
+      ]
+    },
+    {
+      "id": "tiktok_ads_video_guide",
+      "title": "TikTok video advertising guide",
+      "speaker": "TikTok for Business",
+      "platform": "TikTok (ads)",
+      "url": "https://ads.tiktok.com/business/en/guides/video-advertising-guide",
+      "article_date": "unknown",
+      "claim_type": "platform_guide",
+      "quotes": [
+        "Strong openings get higher watch-through rates.",
+        "Jump straight into the value.",
+        "Skip long intros or logo animations.",
+        "TikTok is built for sound.",
+        "The right audio boosts recall and engagement.",
+        "use captions for clarity",
+        "Quick demos with captions often outperform talking-head promos.",
+        "TikTok recommends 21–34 seconds for most ads.",
+        "scripted ads feel fake",
+        "Your CTA should feel like the obvious next step.",
+        "Show the CTA visually and in your voiceover"
+      ],
+      "quote_verified": false,
+      "caveats": ["Advertising guidance for TikTok, not organic Instagram Reels."]
+    },
+    {
+      "id": "meta_reels_playbook_bmi",
+      "title": "Want Reels ads that actually work? Meta just revealed the playbook (BestMediaInfo)",
+      "speaker": "Meta's Reels ads playbook, as reported by the article",
+      "platform": "Instagram and Facebook Reels (ads)",
+      "url": "https://bestmediainfo.com/insights/want-reels-ads-that-actually-work-meta-just-revealed-the-playbook-10866888",
+      "article_date": "unknown",
+      "claim_type": "platform_guide",
+      "quotes": [
+        "using both visual elements and sound to grab attention at the start of the Reel",
+        "Using both speech and music in the same creative doubles (2.0x)",
+        "Delivering the message through both sound and on-screen text or visuals makes it 1.8x more likely",
+        "Creatives that show both the brand and the main message within the first five seconds",
+        "vertical 9:16, sound-on viewing and fast hooks"
+      ],
+      "quote_verified": false,
+      "caveats": [
+        "Multipliers are Meta's own correlational ad-study results (chance of ranking in the top 20% for brand interest or purchase intent), reported second-hand.",
+        "Ad creative, not organic reels."
+      ]
+    },
+    {
+      "id": "tiktok_cc_food",
+      "title": "TikTok Creative Center: creative tips for food and beverage",
+      "speaker": "TikTok for Business",
+      "platform": "TikTok (ads)",
+      "url": "https://ads.tiktok.com/business/creativecenter/quicktok/online/creative-tips-for-food-and-Beverage/pc/en",
+      "article_date": "unknown",
+      "claim_type": "platform_guide",
+      "quotes": [
+        "To capture attention, videos should always include audio.",
+        "To leave an impression and deliver information, videos should always be above 10s.",
+        "The first 3-6 seconds of your ad are precious.",
+        "Include your calls to action in the video itself, either through text or audio - or both."
+      ],
+      "quote_verified": false,
+      "caveats": ["Advertising guidance for TikTok. Also used here as the nearest source for food-style recipe reels."]
+    },
+    {
+      "id": "tiktok_cc_beauty",
+      "title": "TikTok Creative Center: creative tips for beauty and personal care",
+      "speaker": "TikTok for Business",
+      "platform": "TikTok (ads)",
+      "url": "https://ads.tiktok.com/business/creativecenter/quicktok/online/creative-tips-for-beauty-personal-care/pc/en",
+      "article_date": "unknown",
+      "claim_type": "platform_guide",
+      "quotes": [
+        "The first 3-6 seconds of your ad are precious.",
+        "Don't be afraid to do side-by-side comparisons with competitors.",
+        "Sound is powerful, especially on TikTok!",
+        "keep it conversational and casual",
+        "End with a simple and straightforward CTA to continue the momentum"
+      ],
+      "quote_verified": false,
+      "caveats": ["Advertising guidance for TikTok. The page does not address captions or overall length."]
+    }
+  ],
+
+  "common_criteria": [
+    {
+      "id": "hook",
+      "name": "Hook",
+      "maps_to_pipeline_dimension": "stop_scrolling",
+      "question_for_persona": "In the first 1-3 seconds, is there a clear reason to stop scrolling (a visible result, a question, a surprise, a promise)?",
+      "look_for": ["Something concrete on screen in the first second", "Text or speech that states the promise or setup", "No slow intro, logo animation or throat-clearing"],
+      "red_flags": ["Generic opening shot with no stated payoff", "Long intro or logo before the point"],
+      "evidence": "platform_statement",
+      "sources": ["ig_reels_guide_smt", "tiktok_ads_video_guide", "tiktok_cc_food"]
+    },
+    {
+      "id": "clarity",
+      "name": "Clarity",
+      "maps_to_pipeline_dimension": "watch_to_end",
+      "question_for_persona": "Can a first-time viewer understand what this is and what is going on, with and without sound?",
+      "look_for": ["One main idea", "Spoken content also visible as captions or text", "The visual makes sense even if the viewer misses a word"],
+      "red_flags": ["Key information only in audio", "Several ideas competing in a few seconds"],
+      "evidence": "platform_guide",
+      "sources": ["ig_reels_guide_smt", "tiktok_ads_video_guide"]
+    },
+    {
+      "id": "retention",
+      "name": "Retention (watch time)",
+      "maps_to_pipeline_dimension": "watch_to_end",
+      "question_for_persona": "Is there a reason to keep watching until the end (payoff, next step, progress, a promise kept)?",
+      "look_for": ["A payoff that arrives and is worth waiting for", "Pace that matches the length", "Variety (cuts, angles, steps) instead of a static shot"],
+      "red_flags": ["Payoff arrives too late or never", "Static or repetitive middle"],
+      "evidence": "platform_statement",
+      "sources": ["ig_mosseri_smt", "ig_mosseri_samosa", "yt_sherman_techcrunch"],
+      "note": "Instagram names watch time as a top ranking signal. YouTube says a view needs some intent to watch."
+    },
+    {
+      "id": "shareability",
+      "name": "Shareability (sends) and resonance (likes)",
+      "maps_to_pipeline_dimension": "share_likelihood",
+      "question_for_persona": "Would a viewer send this to a specific friend, or like it because it matches who they are?",
+      "look_for": ["Relatable or useful enough to send to someone", "A feeling or identity the viewer recognises"],
+      "red_flags": ["Interesting but nothing to send to anyone", "Only makes sense to the creator"],
+      "evidence": "inference",
+      "sources": ["ig_mosseri_smt"],
+      "note": "Mosseri says sends matter more for unconnected content (reach beyond followers) and likes more for connected content. That reach beyond followers needs sends is OUR inference."
+    },
+    {
+      "id": "sound_and_text",
+      "name": "Sound and on-screen text",
+      "maps_to_pipeline_dimension": "stop_scrolling",
+      "question_for_persona": "Does the video work with sound on AND with sound off? Do sound and text support each other?",
+      "look_for": ["Message carried by both audio and text or visuals", "Captions for spoken content", "Audio that fits the tone"],
+      "red_flags": ["Punchline or key step only in audio", "Audio that clashes with the visuals"],
+      "evidence": "platform_guide",
+      "sources": ["meta_reels_playbook_bmi", "ig_reels_guide_smt", "tiktok_ads_video_guide"],
+      "note": "Do not claim a sound is trending. The simulator cannot detect trends."
+    },
+    {
+      "id": "cta",
+      "name": "Call to action",
+      "maps_to_pipeline_dimension": "comment_likelihood",
+      "question_for_persona": "Is there a natural next step (try it, send it, follow, comment), and does it feel like a natural ending?",
+      "look_for": ["A simple next step stated in text or voice", "CTA that matches the video's promise"],
+      "red_flags": ["Forced or generic CTA", "No next step in a video that clearly wants one"],
+      "evidence": "platform_guide",
+      "sources": ["tiktok_ads_video_guide", "tiktok_cc_food", "tiktok_cc_beauty"]
+    }
+  ],
+
+  "niche_category_enum": ["education", "comedy", "beauty", "fitness", "product_marketing", "general"],
+  "niche_detection": {
+    "how": "Add a niche_category field (one of niche_category_enum) to the existing brief call, so no extra API call is needed. If the model is unsure or the video fits none, it must answer general.",
+    "note": "The brief's free-text topic_niche stays as it is. niche_category is only used to pick rules from this file."
+  },
+
+  "niches": {
+    "education": {
+      "label": "Education",
+      "detect_hints": ["explains a concept", "tutorial", "tips", "how to", "study", "career advice", "facts"],
+      "rules": [
+        {"criterion": "hook", "rule": "Open with the question, problem or surprising fact the video will answer, in the first second, in text and speech.", "evidence": "platform_guide", "sources": ["ig_reels_guide_smt"]},
+        {"criterion": "clarity", "rule": "One idea per video. An informal, face-to-camera explanation, or a hand-drawn or step-by-step visual, tends to hold attention better than dense slides or screen text.", "evidence": "inference", "sources": ["guo_2014_mooc"], "extrapolation_warning": "Study is on minutes-long MOOC videos."},
+        {"criterion": "retention", "rule": "Keep it short and moving. Energy and enthusiasm in the speaker matter more than speaking fast. Reels of 15-60 seconds are described by Instagram as the sweet spot for tutorials.", "evidence": "inference", "sources": ["guo_2014_mooc", "ig_reels_guide_smt"]},
+        {"criterion": "shareability", "rule": "Would a viewer send this to someone who needs the answer? Useful and specific beats general.", "evidence": "inference", "sources": ["ig_mosseri_smt"]},
+        {"criterion": "sound_and_text", "rule": "Spoken explanation should also appear as captions so it works with sound off.", "evidence": "platform_guide", "sources": ["ig_reels_guide_smt"]},
+        {"criterion": "cta", "rule": "A natural next step: save, send to a friend, or follow for the next part. Keep it short.", "evidence": "no_source", "sources": []}
+      ],
+      "common_mistakes": ["Starts with a greeting or channel intro instead of the question", "Reads dense text off slides", "Key step only in audio"]
+    },
+
+    "comedy": {
+      "label": "Comedy",
+      "detect_hints": ["meme", "skit", "relatable humour", "joke", "reaction", "parody"],
+      "rules": [
+        {"criterion": "hook", "rule": "The setup must be visible in the first second (situation, caption or character). The viewer should know what the joke is about before the punchline.", "evidence": "no_source", "sources": []},
+        {"criterion": "clarity", "rule": "Check the joke twice: with sound on and with sound off. If the punchline only works in audio, flag it. If it works through on-screen text, sound adds less.", "evidence": "inference", "sources": ["meta_reels_playbook_bmi"]},
+        {"criterion": "retention", "rule": "Punchline timing: the payoff should arrive before attention drops. A short video with one clear payoff beats a longer one with a late payoff.", "evidence": "no_source", "sources": []},
+        {"criterion": "shareability", "rule": "Relatable humour is often sent to a specific friend ('this is you'). Judge: who would this be sent to, and why?", "evidence": "inference", "sources": ["ig_mosseri_smt"]},
+        {"criterion": "sound_and_text", "rule": "Reused audio or a familiar clip may be recognised by the audience. Judge whether it adds to the joke. Never claim a sound is trending.", "evidence": "no_source", "sources": []},
+        {"criterion": "cta", "rule": "Comedy usually needs no explicit CTA. A forced CTA can hurt the joke.", "evidence": "no_source", "sources": []}
+      ],
+      "common_mistakes": ["Joke needs context the viewer does not have", "Punchline arrives late", "Relies only on a borrowed template with nothing of the creator's own"],
+      "evidence_note": "No comedy-specific source was found. These rules are reasoning and need validation on real reels."
+    },
+
+    "beauty": {
+      "label": "Beauty",
+      "detect_hints": ["makeup", "skincare", "hair", "grooming", "product demo", "before and after"],
+      "rules": [
+        {"criterion": "hook", "rule": "Show or promise the result in the first seconds (the look, the instant effect, a before shot).", "evidence": "platform_guide", "sources": ["tiktok_cc_beauty"], "extrapolation_warning": "TikTok ad guidance."},
+        {"criterion": "clarity", "rule": "Show how the product is used, step by step, from the viewer's point of view. Application should look easy.", "evidence": "platform_guide", "sources": ["tiktok_cc_beauty"]},
+        {"criterion": "retention", "rule": "Before/after or side-by-side comparisons give a reason to wait for the reveal.", "evidence": "platform_guide", "sources": ["tiktok_cc_beauty"]},
+        {"criterion": "shareability", "rule": "Would a viewer send this to a friend who wants this look or product?", "evidence": "inference", "sources": ["ig_mosseri_smt"]},
+        {"criterion": "sound_and_text", "rule": "Conversational, casual voice and audio that fits the mood. Add text for product names and steps so it works silently.", "evidence": "platform_guide", "sources": ["tiktok_cc_beauty", "ig_reels_guide_smt"]},
+        {"criterion": "cta", "rule": "A simple, direct next step at the end.", "evidence": "platform_guide", "sources": ["tiktok_cc_beauty"]}
+      ],
+      "common_mistakes": ["Result is shown too late", "Steps and product names not visible as text", "Overly scripted or salesy tone"]
+    },
+
+    "fitness": {
+      "label": "Fitness",
+      "detect_hints": ["workout", "exercise", "gym", "diet", "transformation", "form tips"],
+      "rules": [
+        {"criterion": "hook", "rule": "Show the movement or the result, or state the promise, in the first second.", "evidence": "no_source", "sources": []},
+        {"criterion": "clarity", "rule": "The viewer should be able to copy the move: form visible, reps or sets stated as text, one exercise or idea at a time.", "evidence": "no_source", "sources": []},
+        {"criterion": "retention", "rule": "A visible progression (rep count, steps, transformation reveal) gives a reason to watch to the end. Tutorials of 15-60 seconds are described by Instagram as a sweet spot.", "evidence": "inference", "sources": ["ig_reels_guide_smt"]},
+        {"criterion": "shareability", "rule": "Would a viewer send this to a gym or workout partner, or save it for later?", "evidence": "inference", "sources": ["ig_mosseri_smt"]},
+        {"criterion": "sound_and_text", "rule": "Many people watch with sound off. Exercise names and reps should appear as text.", "evidence": "inference", "sources": ["ig_reels_guide_smt"]},
+        {"criterion": "cta", "rule": "A natural next step: save, send to a partner, or follow for the full routine.", "evidence": "no_source", "sources": []}
+      ],
+      "common_mistakes": ["Form hard to see", "No text for reps or sets", "Claims about results with no visible proof"],
+      "evidence_note": "No fitness-specific source was found. Safety or health claims are not evaluated by this framework."
+    },
+
+    "product_marketing": {
+      "label": "Product Marketing",
+      "detect_hints": ["brand", "product demo", "offer", "ad", "launch", "promotion"],
+      "rules": [
+        {"criterion": "hook", "rule": "Jump straight into the value. Skip long intros and logo animations. Use both a strong visual and sound at the start.", "evidence": "platform_guide", "sources": ["tiktok_ads_video_guide", "meta_reels_playbook_bmi"]},
+        {"criterion": "clarity", "rule": "Show the brand and the main message within the first five seconds.", "evidence": "platform_guide", "sources": ["meta_reels_playbook_bmi"]},
+        {"criterion": "retention", "rule": "Quick demos with captions, quick cuts and varied angles tend to beat static talking-head promos. TikTok suggests 21-34 seconds for most ads.", "evidence": "platform_guide", "sources": ["tiktok_ads_video_guide"], "extrapolation_warning": "TikTok ad guidance."},
+        {"criterion": "shareability", "rule": "Would a viewer send this for the product's usefulness or fun, without feeling sold to?", "evidence": "inference", "sources": ["ig_mosseri_smt", "tiktok_ads_video_guide"]},
+        {"criterion": "sound_and_text", "rule": "Carry the message through both sound and on-screen text or visuals. Pairing speech with music is linked with better brand interest in Meta's playbook.", "evidence": "platform_guide", "sources": ["meta_reels_playbook_bmi"], "extrapolation_warning": "Meta's own correlational ad-study numbers."},
+        {"criterion": "cta", "rule": "The CTA should feel like the obvious next step and be shown both visually and in the voiceover.", "evidence": "platform_guide", "sources": ["tiktok_ads_video_guide"]}
+      ],
+      "common_mistakes": ["Brand or message appears very late", "Scripted, ad-like tone that does not feel native", "CTA only in audio"]
+    },
+
+    "general": {
+      "label": "General (fallback for any other topic, including food and recipe reels)",
+      "detect_hints": ["anything that does not fit the niches above"],
+      "rules": [
+        {"criterion": "hook", "rule": "Be engaging from the first second. The opening should show or state what the video is about.", "evidence": "platform_guide", "sources": ["ig_reels_guide_smt", "tiktok_cc_food"]},
+        {"criterion": "clarity", "rule": "One main idea. Spoken content also visible as captions or text.", "evidence": "platform_guide", "sources": ["ig_reels_guide_smt"]},
+        {"criterion": "retention", "rule": "Watch time is a top ranking signal. Use the length the story needs. Instagram calls 15-60 seconds the sweet spot for most creative formats; YouTube says no length is inherently better.", "evidence": "platform_statement", "sources": ["ig_mosseri_smt", "ig_reels_guide_smt", "yt_sherman_techcrunch"]},
+        {"criterion": "shareability", "rule": "Sends and likes per reach matter. Would a viewer send it to a specific person?", "evidence": "platform_statement", "sources": ["ig_mosseri_smt"]},
+        {"criterion": "sound_and_text", "rule": "Include audio that fits the content, and make sure the message also reaches viewers with sound off. For food-style content, appetising close-ups plus clear voiceover or text are common.", "evidence": "platform_guide", "sources": ["tiktok_cc_food", "ig_reels_guide_smt"], "extrapolation_warning": "Food content: TikTok ad guidance."},
+        {"criterion": "cta", "rule": "If there is a CTA, put it in the video itself, as text or audio or both.", "evidence": "platform_guide", "sources": ["tiktok_cc_food"]}
+      ],
+      "common_mistakes": ["Opening shot does not show what the video is about", "Key information only in audio", "No payoff"]
+    }
+  }
+}

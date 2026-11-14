@@ -3,7 +3,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from core import llm
+from core import framework, llm
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "suggestions.txt"
 
@@ -17,6 +17,9 @@ def _valid(data, persona_evidence):
             raise ValueError("each suggestion needs non-empty suggestion text")
         if not isinstance(item.get("evidence"), str) or not item["evidence"].strip():
             raise ValueError("each suggestion needs non-empty evidence")
+        criterion_ids = {item["id"] for item in framework._load()["common_criteria"]}
+        if item.get("criterion") not in criterion_ids:
+            raise ValueError("each suggestion needs a valid criterion id")
         persona_id = item.get("persona_id")
         quote = item.get("quote")
         if not isinstance(persona_id, str) or persona_id not in persona_evidence:
@@ -47,7 +50,9 @@ def generate(brief, persona_results):
                 reasons[reaction["reason"]] += 1
                 sources.append(str(reaction["reason"]))
     evidence = {"common_biggest_issues": issues.most_common(5), "common_reasons": reasons.most_common(5)}
-    prompt = (PROMPT_PATH.read_text(encoding="utf-8") + "\nBRIEF:\n" + json.dumps(brief, ensure_ascii=False)
+    niche = framework.normalize_niche(brief.get("niche_category"))
+    prompt = (PROMPT_PATH.read_text(encoding="utf-8") + "\n\nEVALUATION FRAMEWORK (selected niche only):\n"
+              + framework.render_rules(niche) + "\nBRIEF:\n" + json.dumps(brief, ensure_ascii=False)
               + "\nPERSONA EVIDENCE BY ID:\n" + json.dumps(persona_evidence, ensure_ascii=False)
               + "\nCOMMON ISSUES AND REASONS:\n" + json.dumps(evidence, ensure_ascii=False))
     errors = []

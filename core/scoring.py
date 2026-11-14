@@ -12,7 +12,7 @@ def score_result(waves):
     intended = waves.get("personas_intended", len(values))
     scored = waves.get("personas_scored", len(values))
     complete = waves.get("complete", scored == intended)
-    incomplete = intended > 0 and scored / intended < config.MIN_COMPLETE_FRACTION
+    incomplete = not complete
     capped = not waves.get("gate_passed", False)
     if capped:
         tier = "Low"

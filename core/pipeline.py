@@ -13,6 +13,7 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 from core import audio, brief, llm
+from core import framework
 from core.extract import extract_all
 from core.scoring import score_result
 from core.suggestions import generate
@@ -49,19 +50,32 @@ class _ReactionCache:
         temporary.replace(path)
 
 
-def _key(video, model):
+def _key_parts(video, model, root=ROOT):
     digest = hashlib.sha256()
+    parts = {}
     with Path(video).open("rb") as source:
         for block in iter(lambda: source.read(1024 * 1024), b""):
             digest.update(block)
-    digest.update(model.encode("utf-8"))
-    return digest.hexdigest()
+    parts["video"] = digest.hexdigest()
+    hashed_files = sorted((Path(root) / "prompts").glob("*.txt"))
+    hashed_files += [Path(root) / "data" / "personas.json", Path(root) / "knowledge_base" / "evaluation_framework.json"]
+    for path in hashed_files:
+        parts[str(path.relative_to(root)).replace("\\", "/")] = hashlib.sha256(path.read_bytes()).hexdigest()
+    parts["model"] = hashlib.sha256(model.encode("utf-8")).hexdigest()
+    return parts
+
+
+def _key(video, model, root=ROOT):
+    parts = _key_parts(video, model, root)
+    return hashlib.sha256(json.dumps(parts, sort_keys=True).encode("utf-8")).hexdigest()
 
 
 def run(video_path, out_path, use_cache=True, retry_failed=None):
     video_path, out_path = Path(video_path), Path(out_path)
     model = llm._model_name()
-    video_model_key = _key(video_path, model)
+    key_parts = _key_parts(video_path, model)
+    video_model_key = hashlib.sha256(json.dumps(key_parts, sort_keys=True).encode("utf-8")).hexdigest()
+    logging.getLogger(__name__).info("cache key parts: %s", json.dumps(key_parts, ensure_ascii=False, sort_keys=True))
     cache_file = CACHE_DIR / (video_model_key + ".json")
     if retry_failed is None:
         retry_failed = use_cache
@@ -96,7 +110,11 @@ def run(video_path, out_path, use_cache=True, retry_failed=None):
         suggestions, suggestion_errors = generate(full, all_scores)
         errors.extend(waves["errors"])
         errors.extend({"stage": "suggestions", "error": item} for item in suggestion_errors)
-        result = {"brief": full, "wave1": waves["wave1"], "wave2": waves["wave2"],
+        niche_category = framework.normalize_niche(full.get("niche_category"))
+        result = {"framework_version": framework.get_version(), "niche_category": niche_category,
+                  "niche_reason": full.get("niche_reason", "The video did not clearly fit a specific niche based on its purpose."),
+                  "brief": full, "wave1": waves["wave1"], "wave2": waves["wave2"],
+                  "waves_run": waves.get("waves_run", [1, 2] if waves.get("gate_passed") else [1]),
                   "wave1_selection": waves["wave1_selection"], "wave1_raw_ids": waves["wave1_raw_ids"],
                   "dimension_means": waves["dimension_means"],
                   "per_persona_scores": {item["persona_id"]: item["score"] for item in all_scores},
