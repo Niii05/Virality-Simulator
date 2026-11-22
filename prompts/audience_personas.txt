@@ -1,0 +1,22 @@
+Create one realistic audience member for each supplied Wave 1 slot. Tailor each person to the supplied target audience, topic niche, niche category, and region. Treat the niche as context for the audience's existing interests, not as evidence that they would react positively to any particular reel.
+
+For every entry:
+- Return the slot number and its archetype exactly as supplied.
+- Return an integer age inside the supplied target age range. If no usable range is supplied, use an adult age from 18 to 65.
+- Make the age and life context realistic for the supplied region.
+- Write context as one short sentence about ordinary life context, not about social media content.
+- Give exactly 3 short cares_about items and exactly 2 short pet_peeves items. These describe enduring tastes and habits, not opinions about a video.
+- Interests must follow from the target audience guess and topic niche. Across all slots, choose 8 distinct sub-interests within that audience; do not repeat the same sub-interest with different wording.
+- Do not identify, name, depict, or base a profile on a real person.
+- Keep people plausible and distinct. Archetypes are perspective labels, not interests.
+
+Never describe, refer to, imply, or hint at the supplied reel, its content, its quality, or a reaction to it. Do not say the person would like, dislike, watch, skip, share, save, comment on, or respond to a reel. Do not copy interests from unrelated template personas. Do not invent an unrelated audience niche to fill a slot.
+
+Return JSON only in this shape:
+{"personas":[{"slot":1,"archetype":"...","age":25,"context":"...","cares_about":["...","...","..."],"pet_peeves":["...","..."]}]}
+
+AUDIENCE INPUT:
+{{AUDIENCE_INPUT}}
+
+WAVE 1 SLOTS:
+{{SLOTS}}

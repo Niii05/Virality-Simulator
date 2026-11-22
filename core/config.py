@@ -21,6 +21,14 @@ TRANSCRIPT_SOURCE = os.getenv("TRANSCRIPT_SOURCE", "gemini").strip().lower()
 SCALE_MAX = 10
 PERSONA_TEMPERATURE = 0.3
 WAVE1_SIZE = 8
+WAVE2_SIZE = 16
+AUDIENCE_PERSONA_TEMPERATURE = 0.3
+WAVE1_SLOT_ARCHETYPES = [
+    "gen_z_scroller", "gen_z_scroller",
+    "casual_viewer", "casual_viewer",
+    "niche_fan", "niche_fan",
+    "skeptic", "creator_peer",
+]
 SCORE_WEIGHTS = {"stop_scrolling": 0.35, "share_likelihood": 0.25,
                  "watch_to_end": 0.25, "comment_likelihood": 0.15}
 SOUND_MODE = "mixed"

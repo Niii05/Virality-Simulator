@@ -1,31 +1,31 @@
-﻿# Wave Completion Handoff
+﻿# Virality Simulator Handoff
 
-## Confirmed cause
+## History naming, thumbnails, and result layout
 
-`tmp\result5.json` has `gate_passed: false`, 8 scored Wave 1 personas, no Wave 2 results, no failed personas, and an empty `errors` list. `core/waves.py` nevertheless set `personas_intended` to all 24 personas. The scoring layer then classified the valid gate-stopped run as incomplete because it compared 8 scored against 24 intended.
+- `data/history_names.json`: editable legacy result-name map with boundary-aware prefixes.
+- `ui_helpers.py`: longest-prefix title lookup, metadata-name priority, and date-based fallbacks for old result filenames.
+- `run_helpers.py`: best-effort legacy `testN.mp4` thumbnail extraction with ffmpeg and optional OpenCV fallback.
+- `app.py`: reads the name map, shows `Niche not recorded` when absent, generates missing legacy thumbnails outside Demo mode, removes saved-result stage pills, and orders result sections as cards, suggestions, Audience Wall, archetype heat strip, Details, Limitations, then footer.
+- `ui_theme.py`: uses the new missing-niche fallback in History tiles while escaping display strings.
+- `tests/test_ui_helpers.py`, `tests/test_run_helpers.py`: cover prefix boundaries and priority, fallback titles, absent niche, display-name placeholder, section order, saved-result pills, and mocked thumbnail extraction.
 
-## Files changed for this task
+## PowerShell commands
 
-- `core/waves.py`: intended count is the Wave 1 size when the gate fails and all personas when it passes; adds `waves_run` as `[1]` or `[1, 2]`.
-- `core/scoring.py`: marks a run incomplete only when its intended personas are not all scored. Failed Wave 1 or Wave 2 personas therefore retain the rerun status.
-- `core/pipeline.py`: includes `waves_run` in the saved result JSON.
-- `tests/test_phase3.py`: covers a complete gate failure, an incomplete Wave 2, and a fully scored two-wave run.
-- `tests/test_framework.py`: updates the mocked simulation payload with `waves_run`.
-
-## Run and test (PowerShell)
-
-```powershell
-.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider
-```
-
-To rerun the prior video and write an updated result:
+Launch the app:
 
 ```powershell
-.\venv\Scripts\python.exe -m core.pipeline tmp\<video-file> --out tmp\result5.json
+.\venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-## Verification and gaps
+Run the full project suite:
 
-- Mock test suite: `113 passed in 31.83s`.
-- No real model/API calls were made. `.env` and API keys were not opened or printed.
-- The old `tmp\result5.json` was inspected but not edited; rerun the source video to produce a result with the corrected fields and scoring.
+```powershell
+.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider tests
+```
+
+## Verification and limits
+
+- Full pytest suite passed: 240 tests (`.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider tests`).
+- Thumbnail extraction was tested with a mocked extractor; ffmpeg/OpenCV were not used on project videos.
+- The app and pipeline were not launched. No LLM/API calls were made, and `.env` was not opened.
+- No changes were made under `core/`, `prompts/`, or `knowledge_base/`.

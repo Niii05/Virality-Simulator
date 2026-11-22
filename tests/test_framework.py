@@ -65,6 +65,114 @@ def test_brief_missing_reason_gets_general_fallback(monkeypatch):
     assert result["niche_reason"] == "The video did not clearly fit a specific niche based on its purpose."
 
 
+def test_creator_context_is_separated_in_brief_prompt_and_saved(monkeypatch):
+    captured = {}
+    monkeypatch.setattr(llm, "ask_json", lambda prompt, **kwargs: (captured.update(prompt=prompt) or {}))
+    context = "Raw Mango iPhone promotion featuring a well-known actress."
+    result = brief.build_brief({"frames": []}, creator_context=context)
+    assert "Creator-provided context (this is what a viewer would know from the caption, the account and recognisable people; it is NOT visible in the video)" in captured["prompt"]
+    assert "Treat this context as true for purpose, product, audience and niche" in captured["prompt"]
+    assert context in captured["prompt"]
+    assert result["creator_context"] == context
+
+
+def test_audience_persona_prompt_receives_creator_context(monkeypatch):
+    from core import waves
+    captured = {}
+    monkeypatch.setattr(llm, "ask_json", lambda prompt, **kwargs: (captured.update(prompt=prompt) or {}))
+    waves._dynamic_prompt({"creator_context": "iPhone campaign by Raw Mango", "topic_niche": "fashion"})
+    assert '"creator_context": "iPhone campaign by Raw Mango"' in captured["prompt"]
+    assert "never describe, refer to, imply, or hint at the supplied reel" in captured["prompt"].lower()
+
+
+def test_context_hash_separates_all_cache_layers(tmp_path):
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+    assert pipeline._key(video, "model") != pipeline._key(video, "model", context="iPhone ad")
+    from core.pipeline import _ReactionCache, _Wave1PersonaCache
+    persona = {"id": "p1"}
+    assert _ReactionCache(tmp_path, "video")._path(persona, "sound_on") != _ReactionCache(tmp_path, "video", "ctx")._path(persona, "sound_on")
+    brief_value = {"creator_context": "iPhone ad"}
+    assert _Wave1PersonaCache(tmp_path, "video", "prompt")._path(brief_value)[0] != _Wave1PersonaCache(tmp_path, "video", "prompt", "ctx")._path(brief_value)[0]
+
+
+def test_reaction_cache_is_separated_by_niche(tmp_path):
+    from core.pipeline import _ReactionCache
+    persona = {"id": "p1"}
+    assert _ReactionCache(tmp_path, "video", niche="education")._path(persona, "sound_on") != \
+        _ReactionCache(tmp_path, "video", niche="comedy")._path(persona, "sound_on")
+
+
+def _mock_pipeline_run(monkeypatch):
+    monkeypatch.setattr(pipeline, "audio", type("Audio", (), {"audio_brief": staticmethod(lambda *_: {"available": False})}))
+    monkeypatch.setattr(pipeline, "extract_all", lambda *args, **kwargs: {})
+    monkeypatch.setattr(pipeline.brief, "build_full_brief", lambda *args, **kwargs: {
+        "niche_category": "general", "niche_reason": "detected by mock"})
+    captured = {}
+    def simulate(*args, **kwargs):
+        captured["reaction_cache"] = kwargs.get("reaction_cache")
+        return {"wave1": [], "wave2": [], "wave1_selection": "fallback", "wave1_raw_ids": [],
+                "wave1_personas": [], "dimension_means": {}, "errors": [], "gate_passed": False, "waves_run": [1]}
+    monkeypatch.setattr(pipeline, "simulate", simulate)
+    monkeypatch.setattr(pipeline, "score_result", lambda *_: {})
+    monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: ([], []))
+    monkeypatch.setattr(pipeline.llm, "CALL_EVENTS", [])
+    return captured
+
+
+def test_pipeline_valid_niche_override(monkeypatch, tmp_path):
+    captured = _mock_pipeline_run(monkeypatch)
+    monkeypatch.setattr(pipeline, "CACHE_DIR", tmp_path / "cache")
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+    output = pipeline.run(video, tmp_path / "result.json", use_cache=True, niche="education")
+    assert output["niche_category"] == "education"
+    assert output["niche_reason"] == "user override"
+    assert captured["reaction_cache"].niche == "education"
+
+
+def test_pipeline_rejects_invalid_niche_before_model_access(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline.llm, "_model_name", lambda: pytest.fail("model must not be accessed"))
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+    with pytest.raises(ValueError, match="Invalid niche.*Allowed values"):
+        pipeline.run(video, tmp_path / "result.json", niche="technology")
+
+
+def test_context_truncation_warns_and_result_fields(monkeypatch, tmp_path, caplog):
+    monkeypatch.setattr(pipeline, "audio", type("Audio", (), {"audio_brief": staticmethod(lambda *_: {"available": False})}))
+    monkeypatch.setattr(pipeline, "extract_all", lambda *args, **kwargs: {})
+    captured = {}
+    monkeypatch.setattr(pipeline.brief, "build_full_brief", lambda *args, **kwargs: (captured.update(kwargs) or {"niche_category": "general"}))
+    monkeypatch.setattr(pipeline, "simulate", lambda *args, **kwargs: {"wave1": [], "wave2": [], "wave1_selection": "fallback", "wave1_raw_ids": [], "wave1_personas": [], "dimension_means": {}, "errors": [], "gate_passed": False, "waves_run": [1]})
+    monkeypatch.setattr(pipeline, "score_result", lambda *_: {})
+    monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: ([], []))
+    monkeypatch.setattr(pipeline.llm, "CALL_EVENTS", [])
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+    output = pipeline.run(video, tmp_path / "result.json", use_cache=False, context="x" * 601)
+    assert captured["creator_context"] == "x" * 600
+    assert "truncating" in caplog.text
+    assert output["user_context"] == "x" * 600 and output["context_used"] is True
+
+
+def test_pipeline_cli_context_options_and_absent_context(monkeypatch, tmp_path):
+    import sys
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+    context_file = tmp_path / "context.txt"
+    context_file.write_text("UTF-8 café", encoding="utf-8")
+    captured = {}
+    monkeypatch.setattr(pipeline, "run", lambda *args, **kwargs: captured.update(args=args, kwargs=kwargs))
+    monkeypatch.setattr(sys, "argv", ["pipeline", str(video), "--context-file", str(context_file)])
+    pipeline.main()
+    assert captured["kwargs"]["context"] == "UTF-8 café"
+    monkeypatch.setattr(sys, "argv", ["pipeline", str(video), "--context", "caption details"])
+    pipeline.main()
+    assert captured["kwargs"]["context"] == "caption details"
+    assert pipeline._normalize_context(None) is None
+
+
 def test_persona_drops_invalid_criteria_cited(monkeypatch):
     response = {"stop_scrolling": 5, "watch_to_end": 5, "share_likelihood": 5,
                 "comment_likelihood": 5, "reason": "reason", "biggest_issue": "issue",
@@ -111,6 +219,7 @@ def test_result_fields_are_added_by_pipeline(monkeypatch, tmp_path):
         "framework_version": framework.get_version()})
     monkeypatch.setattr(pipeline, "simulate", lambda *args, **kwargs: {
         "wave1": [], "wave2": [], "wave1_selection": "fallback", "wave1_raw_ids": [],
+        "wave1_personas": [{"id": "genz_dyn_1", "context": "mock audience member"}],
         "dimension_means": {}, "errors": [], "gate_passed": False, "waves_run": [1]})
     monkeypatch.setattr(pipeline, "score_result", lambda *_: {"label": "Virality potential estimate"})
     monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: ([], []))
@@ -120,4 +229,7 @@ def test_result_fields_are_added_by_pipeline(monkeypatch, tmp_path):
     output = pipeline.run(video, tmp_path / "result.json", use_cache=False)
     assert output["niche_category"] == "comedy"
     assert output["niche_reason"] == "The clip is a short skit."
+    assert output["wave1_personas"] == [{"id": "genz_dyn_1", "context": "mock audience member"}]
     assert output["framework_version"] == framework.get_version()
+    assert output["user_context"] is None
+    assert output["context_used"] is False
