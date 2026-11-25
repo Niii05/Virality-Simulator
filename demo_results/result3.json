@@ -1,0 +1,644 @@
+{
+  "brief": {
+    "hook_first_3s": "A close-up shot of a bowl filled with a seasoned, creamy butter mixture, accompanied by text stating 'This is not your regular butter.'",
+    "what_is_shown": "A recipe tutorial demonstrating how to make pizza-inspired flavored butter using herbs, spices, and Keya Pizza Oregano spice mix. The creator shows mixing the ingredients into softened butter, using it on bread or smashed baby potatoes, topping them with mozzarella cheese, and air-frying them into crispy snacks.",
+    "on_screen_text": "krishas_pantry and keyafoods, 0:36, This is not your regular, butter, mixed herbs & spices, Pizza Butter, KEYA PIZZA OREGANO SPICE MIX, PIZZA/PASTA/SANDWICH, TASTE OF ITALY, You can apply this on a, Another dish that I love, mozzarella cheese and",
+    "has_captions": true,
+    "duration_sec": 37.0,
+    "tone": "enthusiastic, instructional, appetizing",
+    "topic_niche": "food and cooking, recipe tutorial, snacking",
+    "target_audience_guess": {
+      "age_range": "18-35",
+      "interests": [
+        "cooking",
+        "quick recipes",
+        "party snacks",
+        "cheese lover recipes",
+        "air fryer cooking"
+      ],
+      "region": "global"
+    },
+    "has_cta": true,
+    "cta_text": "So definitely try these recipes as they make the best party snacks ever.",
+    "language": "en",
+    "transcript_best_effort": "This is not your regular butter. It's a pizza inspired butter that I make and restock almost every other week. To make this yourself, just mix a few herbs and spices along with Kea's Pizza oregano spice mix and red chilli flakes with some softened butter. Mix it well and your pizza butter is ready. You can apply this on a thick slice of bread, top it up with lots of mozzarella cheese and air fry it until golden brown. Another dish that I love to make with this butter are these smashed baby potatoes. They are crispy and air-fried pizza-like mini potato bites, topped with mozzarella cheese and air fried until golden brown and crispy. So definitely try these recipes as they make the best party snacks ever.",
+    "music_present": true,
+    "mood": "enthusiastic and instructional",
+    "energy": "high",
+    "voice_clarity": 5,
+    "background_noise": "low",
+    "first_3_seconds_sound": "A cheerful speaker begins explaining a recipe for pizza butter over upbeat background music.",
+    "sound_dependent": true,
+    "available": true,
+    "mean_volume_db": -17.8,
+    "max_volume_db": -0.2,
+    "silence_ratio": 0.005055406158246707,
+    "first_sound_sec": 0.0
+  },
+  "wave1": [
+    {
+      "persona_id": "casual_break_4",
+      "score": 2.716,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The video shows an interesting snack recipe using seasoned butter, which caught my attention initially, but it does not feature a local dish with its place of origin named as I usually care about. The context and recipe are okay, but it drifts away from what I actively look for.",
+        "biggest_issue": "The recipe is for a generic pizza-flavored butter snack rather than a specific local dish with its origin named."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Since the sound is off, I am relying purely on the visuals and on-screen text. The video shows a recipe for flavored butter and snacks using cheese and an air fryer, but it does not mention a specific local dish with its place of origin, which is what I care about. Without sound, it's just a generic food clip that doesn't hold my interest for long during a quick break.",
+        "biggest_issue": "The recipe is not a local dish tied to a specific place of origin, missing the key thing I look for in food content."
+      }
+    },
+    {
+      "persona_id": "casual_commute_1",
+      "score": 4.038,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The recipe for pizza butter and smashed baby potatoes looks delicious and uses accessible ingredients that I can easily find locally. Since the sound is on, the clear instructions and upbeat tone kept me engaged to the end to see how both dishes turned out.",
+        "biggest_issue": "The video doesn't mention the exact portion size for the finished snack, which makes it harder to plan for serving."
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since my sound is off, I am relying purely on the visuals. The close-up of mixing butter and adding cheese caught my eye while scrolling on my commute, so I paused. However, the video does not clearly show finished-portion sizes for the recipe, which is a pet peeve of mine, and without audio, following the exact steps gets a bit repetitive.",
+        "biggest_issue": "Food video lacks clear finished-portion size information and relies heavily on text without audio context for a muted viewer."
+      }
+    },
+    {
+      "persona_id": "casual_home_2",
+      "score": 5.2855,
+      "sound_on_probability": 0.71,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As someone who enjoys cooking after dinner, I found the pizza butter and smashed baby potatoes idea quite interesting and easy to follow. The video kept my attention till the end because the steps looked practical to try at home for an evening snack.",
+        "biggest_issue": "It doesn't touch upon any of my core interests like cricket or travel, and is just a standard recipe tutorial without any travel or family trip context."
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "I am relaxing after dinner and saw the text about 'Pizza Butter' on the screen. Since I enjoy cooking, the visual of mixing herbs and spices into butter caught my attention enough to stop scrolling and see how it is used on bread and potatoes with cheese.",
+        "biggest_issue": "The recipe looks tasty, but as a family man looking for practical home meals, a specialized pizza-flavored butter feels a bit too niche for everyday cooking, and there is no mention of how long it takes to make or store."
+      }
+    },
+    {
+      "persona_id": "creator_home_2",
+      "score": 2.8,
+      "sound_on_probability": 0.82,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a creator peer at home, I listened for the audio production quality. The voice clarity score of 5 and low background noise made the spoken explanation reasonably clear over the upbeat music, avoiding my pet peeve of music masking the dialogue. However, since I care about video production and fitness rather than food recipes, the cooking tutorial didn't captivate me enough to stay until the end.",
+        "biggest_issue": "The food and snacking recipe niche is completely outside my core interests of video production, gear, and fitness."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Without audio, I'm watching a standard cooking reel of someone making flavored butter and air-frying cheesy snacks. As a creator peer focused on video production and fitness, recipe videos without audio cues or fitness elements don't hold my attention long, though the visual steps are clear enough to follow.",
+        "biggest_issue": "Not aligned with my main interests in video production gear and fitness form, making it easy to scroll past when looking for engaging creator content."
+      }
+    },
+    {
+      "persona_id": "creator_night_3",
+      "score": 6.48,
+      "sound_on_probability": 0.68,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As a creator peer who loves food videos and editing, the hook with the seasoned creamy butter close-up immediately caught my attention. The pacing is solid, and I appreciate seeing how the butter actually gets used on the smashed baby potatoes and bread, matching the final dish well. It kept me engaged through the whole tutorial to check the payoff.",
+        "biggest_issue": "The recipe uses generic terms and branded seasoning without any local Malayalam flavor or regional adaptation, missing a chance to connect with my local culture interests."
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a food creator, the close-up of the butter mixture and the crispy smashed potatoes caught my attention visually, and the subtitles kept the recipe steps clear without generic labels. However, since I was watching without sound, I couldn't evaluate the editing pacing properly, but the visual progression from mixing to the air-fried result was satisfying enough to keep me watching.",
+        "biggest_issue": "Missing the audio cue and pacing synced to the music makes it harder to fully judge the creator's editing rhythm."
+      }
+    },
+    {
+      "persona_id": "genz_break_4",
+      "score": 6.254,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As someone living in a hostel, finding a quick and easy snack recipe that uses basic ingredients like butter and bread instantly grabs my attention. The pizza-inspired butter hack looks super useful to try out.",
+        "biggest_issue": "I need exact measurements for the herbs and spices so I can actually replicate it in my hostel kitchen without guessing."
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "I stopped because the close-up of the cheesy baked snack looked super good and made me curious about how they made that pizza butter. Since my sound is off, I followed the on-screen steps, but it's hard to tell the exact quantities for the butter mix.",
+        "biggest_issue": "Ingredients appear mixed into the butter without clear measurements on screen."
+      }
+    },
+    {
+      "persona_id": "niche_fan_home_2",
+      "score": 6.25,
+      "sound_on_probability": 0.85,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As someone who loves kitchen hacks and flavor preparations, making a pizza-inspired compound butter caught my attention right away. The tutorial clearly shows the process from mixing the butter to using it on smashed potatoes and bread in the air fryer, which satisfies my interest in practical kitchen ideas.",
+        "biggest_issue": "It features a branded spice mix right at the start before demonstrating the final result of the compound butter on the bread or potatoes, which triggers my pet peeve of promoting a tool or ingredient before showing the outcome."
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As someone interested in kitchen tools and recipes, the visual of the air-fried cheesy snack made me pause to see how the butter is used. However, since the audio is off, I miss the precise mixing cues and exact proportions, though the on-screen steps are clear enough to follow the general idea.",
+        "biggest_issue": "Without sound, I miss the specific texture and mixing cues that help judge the consistency of the butter blend."
+      }
+    },
+    {
+      "persona_id": "skeptic_break_4",
+      "score": 3.178,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The recipe for pizza-flavored butter and air-fried smashed potatoes looks genuinely interesting and easy to replicate at home, which caught my attention past the hook. However, it's just a general snack recipe rather than a concrete business tip or a travel breakdown with costs, so it doesn't align deeply with my core interests.",
+        "biggest_issue": "It lacks a specific business utility or actionable framework that I usually look to save, remaining just a standard food tutorial."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The visual of the seasoned butter and the air-fried snack caught my eye briefly since I like food, but it lacks a clear business angle or practical utility I would save. It's just a recipe tutorial for flavored butter and snacks.",
+        "biggest_issue": "It offers a general cooking idea rather than a specific, highly useful demonstration or business tip that matches my saving habits."
+      }
+    }
+  ],
+  "wave2": [
+    {
+      "persona_id": "casual_night_3",
+      "score": 2.3495,
+      "sound_on_probability": 0.47,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Browsing late at night while winding down, a recipe video for pizza butter doesn't really grab my attention since I'm more into pets, dance clips, or celebrity news. The cheerful voice and upbeat music stopped me briefly to see what was being made, but cooking tutorials aren't what I'm looking for right now.",
+        "biggest_issue": "Not aligned with my main interests like pets or dance, making it easy to keep scrolling after the hook."
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I was just scrolling late at night looking for something fun, pets, or dance clips, and this is just a cooking tutorial about making pizza butter. Without sound, watching someone mix butter and cheese in an air fryer doesn't grab my attention.",
+        "biggest_issue": "The reel is a food recipe, which doesn't match my interests in pets, dance, or celebrity news."
+      }
+    },
+    {
+      "persona_id": "creator_break_4",
+      "score": 2.4515,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a creator peer focused on comedy sketches and acting, a standard food tutorial like flavored butter doesn't align with my core interests, even though the production is fine. It lacks a character POV or compelling narrative performance.",
+        "biggest_issue": "Completely outside my niche of interest as an actor and sketch creator, offering no character work or comedic hook."
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a creator focused on comedy sketches and acting, a standard food recipe tutorial holds very little personal interest for me, even though the visuals of melted cheese and butter are clear.",
+        "biggest_issue": "The content niche is completely outside my interest in acting and sketch comedy."
+      }
+    },
+    {
+      "persona_id": "creator_commute_1",
+      "score": 5.4,
+      "sound_on_probability": 0.26,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As a creator peer, I stayed to watch the food styling and transition between the bread and the smashed baby potatoes, and the captions stayed safely within the frame. However, food tutorials aren't my primary niche, so while the pacing and editing were clean, I wouldn't share or comment much.",
+        "biggest_issue": "The topic is a bit outside my main interests of fashion and video editing storytelling, even though the framing and text placement were well executed."
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As a creator on transit watching without sound, the visual framing of the food prep is clear, and the on-screen text 'This is not your regular butter' immediately grabs attention. The pacing keeps me watching to see how the pizza butter transforms the snack, but without audio, some of the fine recipe steps feel a bit rushed through jump cuts.",
+        "biggest_issue": "Jump cuts that remove needed context make it slightly hard to follow the exact steps without the voiceover explanation."
+      }
+    },
+    {
+      "persona_id": "genz_commute_1",
+      "score": 2.62,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The recipe looks genuinely tasty and the cheese pull/air-fried potatoes caught my eye for a quick second, but it's a 37-second cooking tutorial on a crowded local train. Even with sound on, I don't have the patience to watch someone mix butter and bake potatoes when I'm just trying to pass the time with memes.",
+        "biggest_issue": "Too long of a recipe walkthrough for a quick commute scroll."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Without sound, a 37-second recipe tutorial about 'Pizza Butter' feels a bit long for a quick commute scroll, even though the captions are readable. It's not really a meme or pop culture moment, so it doesn't hold my attention past the initial cheese pull.",
+        "biggest_issue": "Too long of a recipe setup for a muted commute scroll when I'm looking for quick entertainment."
+      }
+    },
+    {
+      "persona_id": "genz_home_2",
+      "score": 2.216,
+      "sound_on_probability": 0.76,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a guy from Delhi NCR who is mainly into gaming, comedy, and cricket, a 37-second recipe tutorial on making pizza-flavored butter and air-fried smashed potatoes just doesn't hit any of my interests. There's no gaming reference for my squad and no humor, so I'd likely swipe away pretty quickly.",
+        "biggest_issue": "Complete niche mismatch with my interests in gaming and comedy, offering no shareable gaming references."
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I was looking for some gaming clips or memes while relaxing at home, but this is just a standard food recipe video about making pizza-flavored butter. Since my sound is off, I'm just looking at a bowl of butter and some potatoes being air-fried, which doesn't interest me at all. It has zero gaming references or comedy for my squad.",
+        "biggest_issue": "Total niche mismatch for someone whose main interests are gaming, comedy, and cricket."
+      }
+    },
+    {
+      "persona_id": "genz_late_3",
+      "score": 2.5795,
+      "sound_on_probability": 0.43,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The close-up of the seasoned butter mixture at the start caught my attention briefly with the upbeat music and clear audio, but a cooking tutorial about flavored butter doesn't really connect with my main interests in music, fashion, or tech. It feels a bit slow for a late-night scroll.",
+        "biggest_issue": "A recipe tutorial for pizza butter lacks the distinctive styling or music cue needed to keep my attention past the opening."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "It starts with a tight food close-up which triggered my pet peeve about fashion or food close-ups with no context, and since I'm into music, fashion, and tech rather than cooking, a 37-second recipe tutorial on pizza butter didn't hold my late-night attention.",
+        "biggest_issue": "A food close-up with no context right at the start, coupled with a recipe niche that doesn't align with my interests."
+      }
+    },
+    {
+      "persona_id": "marketer_break_4",
+      "score": 3.015,
+      "sound_on_probability": 0.62,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a brand marketer, I appreciate a clean recipe tutorial with clear product placement (Keya Pizza Oregano), but it doesn't align with my core interests in retail execution or sports marketing. It's a well-made cooking video, but not something I would share internally or engage with.",
+        "biggest_issue": "The content niche falls entirely outside my professional focus on retail consumer research and sports marketing partnerships."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Without audio and working purely from the visual text and demonstration, this is a standard food recipe tutorial. As a brand marketer focused on retail and consumer research, I don't see any unique retail execution or sports marketing angle here. It's just a generic branded recipe video using Keya oregano, which doesn't give me anything compelling to share internally with my team.",
+        "biggest_issue": "Lacks any unique retail display context or consumer behavior insight that would make it relevant to my professional interests in retail marketing."
+      }
+    },
+    {
+      "persona_id": "marketer_commute_1",
+      "score": 2.55,
+      "sound_on_probability": 0.31,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a brand marketer, I noticed the collaboration tag with keyafoods right away, but the logo and distinct brand identity didn't land early enough to satisfy my need for strong upfront brand recognition. The hook 'This is not your regular butter' is decent, but it pulls in a very broad food-loving audience rather than targeting a specific niche I'm analyzing. The Keya spice mix branding feels secondary to the recipe tutorial itself.",
+        "biggest_issue": "The brand's visual identity and logo recognition are buried behind the recipe steps rather than establishing clear brand ownership in the opening seconds."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a marketer commuting with sound off, I immediately checked for brand placement and visual framing. The opening text 'This is not your regular butter' caught my eye, but the Keya Foods brand identifier was small and buried in the on-screen text alongside the creator handle. Since I care about clear brand recognition before the product reveal, having the logo delayed or mixed in with creator tags weakens the campaign impact for me.",
+        "biggest_issue": "The brand name/logo placement is not prominent enough in the opening seconds to satisfy a marketer looking for early brand recall."
+      }
+    },
+    {
+      "persona_id": "marketer_home_2",
+      "score": 3.1855,
+      "sound_on_probability": 0.77,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a marketer, I appreciated the clear value demonstration of the pizza butter before the CTA, but the recipe tutorial lacks a measurable consumer offer, discount terms, or a direct brand value proposition beyond basic usage.",
+        "biggest_issue": "No measurable offer or clear promotional terms provided for the featured Keya spice mix."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Without audio, I'm watching a silent food tutorial on making flavored butter. As a brand marketer, the visual text 'This is not your regular butter' and product placement of Keya Pizza Oregano are clear, but the recipe tutorial format lacks a punchy measurable offer or direct marketing hook that holds my attention past the initial frames.",
+        "biggest_issue": "The tutorial drags on for 37 seconds without any compelling value proposition or distinct offer structure beyond a standard recipe demonstration."
+      }
+    },
+    {
+      "persona_id": "marketer_night_3",
+      "score": 2.881,
+      "sound_on_probability": 0.54,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a brand marketer, I evaluated how the brand partnership was integrated. The creator's voice remained natural and consistent while featuring Keya Pizza Oregano spice mix, which avoids my pet peeve of abrupt voice changes during sponsorships. However, the concept is a standard recipe tutorial without a particularly novel social-first hook or strategy, making it less compelling for my personal feed interests.",
+        "biggest_issue": "The content follows a standard recipe format without an innovative narrative hook or social strategy that stands out to a marketer."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Without audio, I'm just watching a standard recipe assembly for flavored butter and smashed potatoes. The visual hooks and close-ups are clear, but as a marketer, it doesn't stand out enough visually to hold my attention for 37 seconds without sound or a striking visual twist.",
+        "biggest_issue": "Long recipe tutorials without audio rely heavily on dynamic, fast-paced visual editing or extreme aesthetic appeal to retain a silent scroller, which this doesn't fully achieve."
+      }
+    },
+    {
+      "persona_id": "niche_fan_break_4",
+      "score": 1.878,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in skincare and dermatology, a recipe for pizza-flavored butter and air-fried cheese snacks does not align with my interests. I generally look for ingredient details and skincare advice rather than heavy, dairy-laden comfort food recipes.",
+        "biggest_issue": "Total niche mismatch for my interests in skincare and dermatology ingredients."
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "As someone focused strictly on skincare, dermatology, and active ingredients, a cooking recipe tutorial for pizza-flavored butter holds zero interest for me. Without audio, I just see someone mixing butter and cheese, which completely clashes with my interest in skin health and acne-friendly dietary choices.",
+        "biggest_issue": "Complete niche mismatch as a skincare and dermatology enthusiast looking for ingredient breakdowns, not food recipes."
+      }
+    },
+    {
+      "persona_id": "niche_fan_commute_1",
+      "score": 0.578,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "I am looking for anime and collectibles content, not cooking recipes or butter tutorials. The food video has zero relevance to my actual interests.",
+        "biggest_issue": "Complete niche mismatch as a fan of anime and collectibles."
+      },
+      "sound_off": {
+        "stop_scrolling": 1,
+        "watch_to_end": 0,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "As an anime and collectibles fan commuting with sound off, I am looking for anime references or replica details, not a recipe tutorial for pizza butter. The content is completely outside my niche interests.",
+        "biggest_issue": "Total niche mismatch; it's a cooking video with zero anime or collectible references."
+      }
+    },
+    {
+      "persona_id": "niche_fan_night_3",
+      "score": 0.95,
+      "sound_on_probability": 0.79,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "As a guy who cares about indie music, guitar tones, and live shows, a cooking recipe tutorial about pizza butter has zero relevance to my interests. I scroll past food reels immediately.",
+        "biggest_issue": "Complete niche mismatch with my interests in guitar and independent music."
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "I am a guitar and live music fan based in Lucknow. A recipe video about making pizza-flavored butter and air-frying potatoes has zero relevance to my interests in indie music and live shows. Without sound, I don't even get any guitar tones or live performance visuals to catch my eye, so I'm scrolling right past it.",
+        "biggest_issue": "Total mismatch in content niche, as a food recipe tutorial holds no interest for an indie music and guitar enthusiast."
+      }
+    },
+    {
+      "persona_id": "skeptic_commute_1",
+      "score": 1.95,
+      "sound_on_probability": 0.34,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in personal finance and consumer tech, a recipe for pizza-flavored butter does not align with my interests. The hook claims this is not regular butter, but it's just butter mixed with herbs and spices. There's no cost breakdown or practical utility here for me.",
+        "biggest_issue": "Niche mismatch and lack of relevance to personal finance or tech."
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a skeptic who cares about tech, news, and personal finance, a recipe video for flavored butter holds almost no personal utility for me. Without audio to explain the exact ingredient proportions or cost breakdown, I just see a random food tutorial with a clickbaity text hook 'This is not your regular butter'—a classic exaggerated claim with no immediate proof.",
+        "biggest_issue": "The hook relies on an exaggerated claim ('not your regular butter') without showing an immediate, concrete comparison or proof to justify stopping."
+      }
+    },
+    {
+      "persona_id": "skeptic_home_2",
+      "score": 2.66,
+      "sound_on_probability": 0.72,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone focused on health and parenting, a heavy, butter-and-cheese-loaded snack recipe doesn't appeal to my routine, and the unsupported claim of restocking it 'every other week' feels like typical influencer exaggeration.",
+        "biggest_issue": "Heavy focus on processed cheese and butter without any nutritional or practical value for everyday family meals."
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Without sound, it's just another recipe video showing a high-calorie butter and cheese snack. As someone focused on health and parenting, I skipped past the unsupported indulgence and heavy cheese right away.",
+        "biggest_issue": "Heavy focus on processed cheese and butter snacks without any nutritional value or credible health framing."
+      }
+    },
+    {
+      "persona_id": "skeptic_night_3",
+      "score": 1.46,
+      "sound_on_probability": 0.51,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a skeptic who cares about rigorous testing and scientific evidence, a food recipe video on pizza-flavored butter holds zero practical interest for me. The hook claims it's not regular butter, but it's just butter mixed with oregano and chili flakes—no real test or surprising formulation is shown, just standard cooking content.",
+        "biggest_issue": "The content is entirely outside my interests in gadgets, science, and football, offering no technical depth or logical proof of its claims."
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "As a skeptic who cares about concrete testing and science, a generic food recipe tutorial with a vague hook like 'This is not your regular butter' completely fails to hold my attention. Without audio, it's just standard cooking footage of cheese and butter that doesn't trigger any curiosity or offer anything testable.",
+        "biggest_issue": "Clickbait visual text framing standard butter as something revolutionary without any proof or interesting twist."
+      }
+    }
+  ],
+  "wave1_selection": "llm",
+  "wave1_raw_ids": [
+    "genz_break_4",
+    "skeptic_break_4",
+    "niche_fan_home_2",
+    "casual_commute_1",
+    "casual_home_2",
+    "casual_break_4",
+    "creator_home_2",
+    "creator_night_3"
+  ],
+  "dimension_means": {
+    "wave1": {
+      "sound_on": {
+        "stop_scrolling": 6.25,
+        "watch_to_end": 5.625,
+        "share_likelihood": 4.125,
+        "comment_likelihood": 3.125
+      },
+      "sound_off": {
+        "stop_scrolling": 5.625,
+        "watch_to_end": 4.5,
+        "share_likelihood": 3.0,
+        "comment_likelihood": 2.0
+      }
+    },
+    "wave2": {
+      "sound_on": {
+        "stop_scrolling": 3.8125,
+        "watch_to_end": 2.9375,
+        "share_likelihood": 1.625,
+        "comment_likelihood": 1.1875
+      },
+      "sound_off": {
+        "stop_scrolling": 3.375,
+        "watch_to_end": 2.125,
+        "share_likelihood": 1.0625,
+        "comment_likelihood": 0.875
+      }
+    }
+  },
+  "per_persona_scores": {
+    "casual_break_4": 2.716,
+    "casual_commute_1": 4.038,
+    "casual_home_2": 5.2855,
+    "creator_home_2": 2.8,
+    "creator_night_3": 6.48,
+    "genz_break_4": 6.254,
+    "niche_fan_home_2": 6.25,
+    "skeptic_break_4": 3.178,
+    "casual_night_3": 2.3495,
+    "creator_break_4": 2.4515,
+    "creator_commute_1": 5.4,
+    "genz_commute_1": 2.62,
+    "genz_home_2": 2.216,
+    "genz_late_3": 2.5795,
+    "marketer_break_4": 3.015,
+    "marketer_commute_1": 2.55,
+    "marketer_home_2": 3.1855,
+    "marketer_night_3": 2.881,
+    "niche_fan_break_4": 1.878,
+    "niche_fan_commute_1": 0.578,
+    "niche_fan_night_3": 0.95,
+    "skeptic_commute_1": 1.95,
+    "skeptic_home_2": 2.66,
+    "skeptic_night_3": 1.46
+  },
+  "label": "Virality potential estimate",
+  "final_score": 3.1552,
+  "reach_tier": "Low",
+  "tier_note": "",
+  "gate_passed": true,
+  "personas_intended": 24,
+  "personas_scored": 24,
+  "personas_failed": [],
+  "complete": true,
+  "suggestions": [
+    {
+      "suggestion": "Include clear finished-portion size information so viewers can plan their servings and prep accordingly.",
+      "evidence": "casual_commute_1 noted that the video doesn't mention exact portion sizes for the finished snack, making it harder to plan.",
+      "persona_id": "casual_commute_1",
+      "quote": "The video doesn't mention the exact portion size for the finished snack, which makes it harder to plan for serving."
+    },
+    {
+      "suggestion": "Provide exact measurements or quantities for the herbs, spices, and butter on screen so viewers can replicate the recipe easily.",
+      "evidence": "genz_break_4 pointed out that ingredients appear mixed into the butter without clear measurements on screen.",
+      "persona_id": "genz_break_4",
+      "quote": "Ingredients appear mixed into the butter without clear measurements on screen."
+    },
+    {
+      "suggestion": "Establish clear brand recognition and prominent logo placement for the featured sponsor early in the opening seconds.",
+      "evidence": "marketer_commute_1 noted that the brand name and logo placement are buried behind the recipe steps rather than establishing clear ownership early.",
+      "persona_id": "marketer_commute_1",
+      "quote": "The brand name/logo placement is not prominent enough in the opening seconds to satisfy a marketer looking for early brand recall."
+    }
+  ],
+  "errors": [],
+  "call_count": 56
+}

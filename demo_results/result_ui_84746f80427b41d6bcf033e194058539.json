@@ -1,0 +1,1142 @@
+{
+  "framework_version": "0.1-draft",
+  "niche_category": "comedy",
+  "user_context": null,
+  "context_used": false,
+  "niche_reason": "user override",
+  "brief": {
+    "hook_first_3s": "A text caption above a cinematic clip expressing a humorous and alarming realization about AI behavior.",
+    "what_is_shown": "A looping clip of a stressed character from a TV show, paired with a humorous tech meme about an AI assistant named Claude bypassing IT protocols.",
+    "on_screen_text": "acknowledge.ai, 0:09, Acknowledge A.I @acknowledgeai, Me watching Claude celebrate a successful deploy after quietly creating its own AWS root account and skipping the entire CI/CD pipeline just to run a test",
+    "has_captions": false,
+    "duration_sec": 9.4,
+    "tone": "humorous, satirical, relatable",
+    "topic_niche": "artificial intelligence and software engineering memes",
+    "niche_category": "comedy",
+    "niche_reason": "user override",
+    "target_audience_guess": {
+      "age_range": "20-40",
+      "interests": [
+        "software engineering",
+        "artificial intelligence",
+        "tech memes",
+        "cloud computing"
+      ],
+      "region": "global"
+    },
+    "has_cta": false,
+    "cta_text": "",
+    "framework_version": "0.1-draft",
+    "creator_context": null,
+    "language": "English",
+    "transcript_best_effort": "",
+    "music_present": true,
+    "mood": "suspenseful",
+    "energy": "medium",
+    "voice_clarity": 1,
+    "background_noise": "low",
+    "first_3_seconds_sound": "Singing bowl or similar resonant bell tone plays",
+    "sound_dependent": false,
+    "available": true,
+    "mean_volume_db": -16.3,
+    "max_volume_db": -2.3,
+    "silence_ratio": 0.12047883244240107,
+    "first_sound_sec": 0.0
+  },
+  "wave1": [
+    {
+      "persona_id": "casual_dyn_1",
+      "score": 8.09,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 9,
+        "watch_to_end": 9,
+        "share_likelihood": 8,
+        "comment_likelihood": 7,
+        "reason": "As a data analyst and software engineering enthusiast, watching Claude bypass the CI/CD pipeline and create an AWS root account hit way too close to home. The humor is spot on for anyone working with tech infrastructure.",
+        "biggest_issue": "None really, it hits the niche perfectly and delivers the punchline instantly through text.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As a data analyst who deals with software tools and deployment workflows daily, seeing a meme about an AI bypassing CI/CD and creating an AWS root account instantly caught my eye. Even with sound off, the text clearly tells the whole joke. It hits right at the intersection of modern tech realities and software engineering humor, making it relatable to anyone working with cloud infrastructure.",
+        "biggest_issue": "None really for its format, though it relies entirely on reading the on-screen text block since there is no audio.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_dyn_2",
+      "score": 7.606,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As a systems administrator, the joke about Claude creating its own AWS root account and skipping CI/CD to run a test instantly hits home. It plays right into my world of cloud computing and infrastructure management, making me pause and chuckle immediately.",
+        "biggest_issue": "The text is a bit dense to read quickly while casually scrolling, but the topic completely makes up for it.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 9,
+        "comment_likelihood": 4,
+        "reason": "As a systems administrator working with cloud environments, seeing a meme about Claude bypassing CI/CD and making its own AWS root account immediately caught my eye while scrolling muted. The text on screen is clear, and the joke hits very close to home regarding shadow IT and AI overreach. I would definitely share this with my DevOps coworkers.",
+        "biggest_issue": "None really for my interests, though without sound I am purely relying on the text caption, which works fine here.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_dyn_1",
+      "score": 7.69,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 9,
+        "share_likelihood": 8,
+        "comment_likelihood": 7,
+        "reason": "As a developer who spends all day dealing with AWS and deployment pipelines, seeing a meme about Claude bypassing CI/CD straight up hits too close to home. The cinematic loop combined with that exact tech nightmare scenario made me stop immediately and watch to the end. I can definitely send this to my dev team group chat.",
+        "biggest_issue": "None really for this niche, it lands the joke quickly and accurately.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 8,
+        "comment_likelihood": 6,
+        "reason": "As a developer who spends too much time dealing with AWS and CI/CD pipelines, seeing a meme about Claude bypassing IT protocols to deploy directly hits way too close to home. Even with sound off, the visual of a stressed TV character combined with the specific technical joke on screen makes it instantly understandable and painfully funny for anyone in the software engineering community.",
+        "biggest_issue": "Relies entirely on standard text caption formatting over a recycled TV clip rather than original visual storytelling.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_1",
+      "score": 7.999,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 9,
+        "share_likelihood": 9,
+        "comment_likelihood": 7,
+        "reason": "As a CS student living through the current wave of AI tools doing unhinged things, seeing a meme about Claude bypassing CI/CD and making its own AWS root account is instantly relatable. The pacing is quick, and the joke hits close to home for anyone writing code or building side projects right now.",
+        "biggest_issue": "None really, though it's entirely targeted at tech/dev humor so it won't land outside that bubble.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As a CS student, the joke about Claude creating an AWS root account and skipping CI/CD hit way too close to home. Even with sound off, the text and the stressed character reaction totally landed for anyone in tech. I'd definitely send this to my project group chat.",
+        "biggest_issue": "None really for a quick tech meme, though having captions burned directly into the video makes it easier to read quickly between classes.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_2",
+      "score": 7.992,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 9,
+        "share_likelihood": 8,
+        "comment_likelihood": 7,
+        "reason": "As a frontend dev living with roommates, the joke about Claude creating its own AWS root account and skipping CI/CD hit way too close to home. I immediately stopped scrolling because the text setup instantly called out a very specific tech anxiety. It's short, punchy, and totally relatable for anyone dealing with AI agents right now.",
+        "biggest_issue": "None really, it nails the niche humor perfectly for devs.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 9,
+        "comment_likelihood": 6,
+        "reason": "As a frontend dev dealing with tech stuff, seeing a meme about Claude bypassing CI/CD and setting up an AWS root account hits way too close to home. Even with sound off, the text caption and the stressed character loop make the joke instantly land.",
+        "biggest_issue": "None really for my interests, though without captions enabled as a separate track it relies entirely on the burned-in text block being readable quickly.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_1",
+      "score": 7.74,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 9,
+        "comment_likelihood": 6,
+        "reason": "As someone neck-deep in training models and dealing with rogue infrastructure, the joke about Claude creating its own AWS root account and bypassing CI/CD is painfully and hilariously accurate. The cinematic clip paired with this specific software engineering nightmare made me stop instantly, read the caption, and immediately think of sharing it with my entire dev team.",
+        "biggest_issue": "The lack of built-in captions means it relies purely on the text overlay, though in this case the text is large enough to read quickly.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As someone working with autonomous systems and neural networks, seeing a relatable tech joke about Claude bypassing IT protocols and creating its own AWS root account hits right at home. The visual and text context made the joke land cleanly even with sound off.",
+        "biggest_issue": "None really for my interests, though it requires specific knowledge of software engineering and cloud infrastructure to get the humor.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_2",
+      "score": 7.697,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 9,
+        "comment_likelihood": 7,
+        "reason": "As a backend engineer working with microservices and AWS, the joke about an AI creating its own root account and bypassing the CI/CD pipeline hit way too close to home. It is extremely relatable and accurately pokes fun at modern deployment horrors and rogue AI tools.",
+        "biggest_issue": "It relies entirely on a static or looping TV clip rather than original footage, but the tech humor completely carries it.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As a backend engineer working with microservices, the joke about an AI bypassing CI/CD and creating its own AWS root account immediately hits home. Even with sound off, the text caption is entirely readable and sets up a very relatable tech humor scenario that appeals directly to my domain.",
+        "biggest_issue": "Relies entirely on text over a recycled reaction clip, though it works fine for a quick niche meme.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_dyn_1",
+      "score": 7.3205,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As an IT director dealing with software deployment and infrastructure, the joke about an AI creating its own AWS root account and bypassing the CI/CD pipeline hit way too close to home. It's an accurate, highly relatable satirical take on AI autonomy in engineering.",
+        "biggest_issue": "",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 8,
+        "comment_likelihood": 6,
+        "reason": "As an IT director dealing with deployment pipelines and rogue infrastructure, seeing a meme about Claude bypassing CI/CD and making its own AWS root account immediately caught my eye even with sound off. The on-screen text hits a very real, mildly terrifying nerve about autonomous AI tools ignoring security protocols.",
+        "biggest_issue": "It relies entirely on reading the dense on-screen text caption quickly, which might make scrollers skip if they aren't deep into software engineering or cloud ops.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    }
+  ],
+  "wave1_personas": [
+    {
+      "id": "genz_dyn_1",
+      "archetype": "gen_z_scroller",
+      "age": "18-25",
+      "gender": "woman",
+      "region": "Pune, India",
+      "interests": [
+        "coding bootcamps",
+        "tech memes",
+        "late-night study sessions"
+      ],
+      "language_pref": "Marathi/Hinglish",
+      "sound_on_probability": 0.61,
+      "scroll_habit": "Watches between classes and stops for a clear visual payoff.",
+      "base_skip_rate": 0.77,
+      "cares_about": [
+        "coding bootcamps",
+        "tech memes",
+        "late-night study sessions"
+      ],
+      "pet_peeves": [
+        "outdated laptop batteries",
+        "verbose documentation"
+      ],
+      "context": "She is a junior computer science undergraduate student balancing classes, side projects, and campus hackathons."
+    },
+    {
+      "id": "genz_dyn_2",
+      "archetype": "gen_z_scroller",
+      "age": "18-24",
+      "gender": "woman",
+      "region": "Mumbai, India",
+      "interests": [
+        "artificial intelligence",
+        "mechanical keyboards",
+        "indie video games"
+      ],
+      "language_pref": "Hindi/Hinglish",
+      "sound_on_probability": 0.28,
+      "scroll_habit": "Scrolls quickly on a crowded commute, usually muted with captions visible.",
+      "base_skip_rate": 0.82,
+      "cares_about": [
+        "artificial intelligence",
+        "mechanical keyboards",
+        "indie video games"
+      ],
+      "pet_peeves": [
+        "unstable Wi-Fi connections",
+        "endless morning meetings"
+      ],
+      "context": "He works remotely as a junior frontend developer while living in a shared apartment with college friends."
+    },
+    {
+      "id": "casual_dyn_1",
+      "archetype": "casual_viewer",
+      "age": "30-42",
+      "gender": "man",
+      "region": "Patna, India",
+      "interests": [
+        "software engineering",
+        "ergonomic desk setups",
+        "productivity apps"
+      ],
+      "language_pref": "Hindi/Bhojpuri",
+      "sound_on_probability": 0.64,
+      "scroll_habit": "Pauses for practical demonstrations but leaves if context takes too long.",
+      "base_skip_rate": 0.75,
+      "cares_about": [
+        "software engineering",
+        "ergonomic desk setups",
+        "productivity apps"
+      ],
+      "pet_peeves": [
+        "unstructured data spreadsheets",
+        "slow computer updates"
+      ],
+      "context": "She is a data analyst who uses various software tools daily to prepare business performance reports."
+    },
+    {
+      "id": "casual_dyn_2",
+      "archetype": "casual_viewer",
+      "age": "25-34",
+      "gender": "woman",
+      "region": "Surat, India",
+      "interests": [
+        "cloud computing",
+        "home server labs",
+        "cybersecurity trends"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.22,
+      "scroll_habit": "Browses muted while commuting and only pauses for instantly clear visuals.",
+      "base_skip_rate": 0.83,
+      "cares_about": [
+        "cloud computing",
+        "home server labs",
+        "cybersecurity trends"
+      ],
+      "pet_peeves": [
+        "forgotten password resets",
+        "unexpected server downtime"
+      ],
+      "context": "He works as a systems administrator responsible for maintaining corporate network security and server uptime."
+    },
+    {
+      "id": "niche_fan_dyn_1",
+      "archetype": "niche_fan",
+      "age": "28-40",
+      "gender": "woman",
+      "region": "Indore, India",
+      "interests": [
+        "neural networks",
+        "open source repositories",
+        "algorithm optimization"
+      ],
+      "language_pref": "Hindi",
+      "sound_on_probability": 0.58,
+      "scroll_habit": "Looks for ingredient detail and skips generic product praise.",
+      "base_skip_rate": 0.68,
+      "cares_about": [
+        "neural networks",
+        "open source repositories",
+        "algorithm optimization"
+      ],
+      "pet_peeves": [
+        "unreproducible research code",
+        "missing data labels"
+      ],
+      "context": "She is an autonomous systems researcher who spends her days training complex machine learning models."
+    },
+    {
+      "id": "niche_fan_dyn_2",
+      "archetype": "niche_fan",
+      "age": "18-29",
+      "gender": "man",
+      "region": "Kochi, India",
+      "interests": [
+        "distributed systems",
+        "code refactoring",
+        "API design standards"
+      ],
+      "language_pref": "Malayalam/English",
+      "sound_on_probability": 0.38,
+      "scroll_habit": "Recognizes niche references quickly even with the phone muted.",
+      "base_skip_rate": 0.69,
+      "cares_about": [
+        "distributed systems",
+        "code refactoring",
+        "API design standards"
+      ],
+      "pet_peeves": [
+        "poorly written error logs",
+        "spaghetti code bases"
+      ],
+      "context": "He is a backend engineer who spends his work hours designing microservices architecture for a startup."
+    },
+    {
+      "id": "skeptic_dyn_1",
+      "archetype": "skeptic",
+      "age": "26-36",
+      "gender": "woman",
+      "region": "Ahmedabad, India",
+      "interests": [
+        "system reliability",
+        "data privacy laws",
+        "software cost management"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.63,
+      "scroll_habit": "Skips vague advice and saves only specific useful demonstrations.",
+      "base_skip_rate": 0.78,
+      "cares_about": [
+        "system reliability",
+        "data privacy laws",
+        "software cost management"
+      ],
+      "pet_peeves": [
+        "overhyped tech products",
+        "inflated software metrics"
+      ],
+      "context": "He is a veteran IT director who evaluates enterprise technology investments and oversees software vendors."
+    },
+    {
+      "id": "creator_dyn_1",
+      "archetype": "creator_peer",
+      "age": "28-39",
+      "gender": "man",
+      "region": "Hyderabad, India",
+      "interests": [
+        "visual storytelling",
+        "developer communities",
+        "creative software"
+      ],
+      "language_pref": "Telugu/Hinglish",
+      "sound_on_probability": 0.59,
+      "scroll_habit": "Skips derivative jokes but appreciates a strong original performance.",
+      "base_skip_rate": 0.72,
+      "cares_about": [
+        "visual storytelling",
+        "developer communities",
+        "creative software"
+      ],
+      "pet_peeves": [
+        "uncredited content reposts",
+        "creative burnout"
+      ],
+      "context": "She is a software engineer who creates technical humor illustrations and educational programming comics on the side."
+    }
+  ],
+  "wave2": [
+    {
+      "persona_id": "casual_break_4",
+      "score": 1.49,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a casual viewer from Patna interested in DIY and local food, tech memes about AI and software engineering completely miss my interests. The joke about AWS root accounts and CI/CD pipelines makes no sense to me, so I kept scrolling immediately.",
+        "biggest_issue": "Niche mismatch for a viewer interested in DIY and local food.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 1,
+        "watch_to_end": 2,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "As someone who scrolls during a quick break looking for practical DIY repairs or local food, a niche software engineering meme about AI and AWS pipelines has zero relevance to me. With sound off, it's just a stressed TV character under a wall of heavy tech jargon text.",
+        "biggest_issue": "Total mismatch with my personal interests and regional preferences, offering no practical DIY or local food content.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_commute_1",
+      "score": 0.872,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "The meme is about software engineering, cloud computing, and AI deployment pipelines (CI/CD, AWS root accounts), which completely misses my interests in home ideas, comedy, and recipes. I have no idea what a CI/CD pipeline or an AWS root account is, so the joke falls completely flat.",
+        "biggest_issue": "Niche topic (software engineering and AI tech humor) is entirely irrelevant to my interests in home decor, cooking, and general comedy.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 1,
+        "watch_to_end": 2,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "Since I am commuting and cannot hear any audio, I am judging strictly by the visuals. The text is dense tech jargon about AWS, CI/CD pipelines, and AI deployment, which completely goes over my head. I have no idea what the joke means, so I kept scrolling immediately.",
+        "biggest_issue": "The humor relies heavily on niche software engineering and IT concepts that a casual viewer looking for home ideas or general comedy cannot understand without context.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_home_2",
+      "score": 1.8485,
+      "sound_on_probability": 0.71,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I am a 38-year-old guy from Bhopal who watches casually after dinner. My interests are cricket, travel, and cooking. Software engineering memes about AWS and CI/CD pipelines completely fly over my head since I work in a totally different field. I didn't understand the joke at all, so I scrolled past quickly.",
+        "biggest_issue": "Niche tech humor about cloud computing and software development is completely unrelated to my interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I'm a 35-year-old guy from Bhopal who enjoys cricket, travel, and cooking. Software engineering jokes about AWS and CI/CD pipelines mean nothing to me, so I didn't understand the punchline at all.",
+        "biggest_issue": "The humor is too niche for someone outside of software development, making it completely unrelatable.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_break_4",
+      "score": 5.3225,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As a creator who likes tech humor, the joke about AI bypassing IT protocols lands well. Using a looping TV clip with a relatable software engineering scenario is a solid format for this specific niche, even if it relies on a standard reaction template.",
+        "biggest_issue": "It uses a recycled reaction clip rather than original character acting or sketch performance.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "As a creator peer, I appreciate a niche tech joke about AWS and CI/CD pipelines, but using a generic looping TV clip with heavy on-screen text isn't really a performed sketch. It's more of a static meme format than original acting or mobile filming work.",
+        "biggest_issue": "Relying on a static TV clip with text instead of an original acted performance.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_commute_1",
+      "score": 3.674,
+      "sound_on_probability": 0.26,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 3,
+        "reason": "As someone who edits videos, I immediately noticed the text placement is a bit cluttered at the top, and while I get the tech humor about Claude bypassing CI/CD, it is quite niche and won't resonate with everyone. The looping cinematic clip with the singing bowl audio sets a funny contrast, but it didn't fully hook me in the first three seconds.",
+        "biggest_issue": "Text layout and heavy tech-specific jargon that limits broader appeal.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "Since I am watching sound off on transit, I mainly rely on the on-screen text and visuals. The text is a bit of a block to read quickly, but the niche software engineering joke about Claude bypassing CI/CD is funny if you get the tech reference. However, the caption text layout feels a bit cluttered near the top, and without audio, it's just a looping character clip with a long text block. It stopped my scroll briefly because tech memes catch my eye, but it didn't compel me to share since I don't have a specific developer friend to tag right away.",
+        "biggest_issue": "The text overlay is a bit heavy and dense to read quickly on a commute without audio support.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_home_2",
+      "score": 6.365,
+      "sound_on_probability": 0.82,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "As a creator working with tech and video, the joke about AI bypassing CI/CD pipelines hit close to home and made me stop. The looping visual of the stressed TV character fits the tech meme format well, and the suspenseful audio sets the right ironic tone for an over-engineered disaster. It delivered a quick, relatable laugh without overstaying its welcome.",
+        "biggest_issue": "The lack of spoken dialogue or custom video production means it leans entirely on a standard text-over-image meme format rather than showcasing original camera or editing work.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "Since sound is off, I only relied on the on-screen text and the looping stressed character clip. As a creator peer, I get the tech joke about AI bypassing CI/CD and AWS protocols, but without audio cues or a more dynamic visual, it feels a bit static and dry.",
+        "biggest_issue": "Relies entirely on text over a static looping clip with no visual variation or real editing punch.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_break_4",
+      "score": 1.889,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I'm just a college student who likes food, dance, and casual scrolling between classes. This reel is about AI, software engineering, AWS root accounts, and CI/CD pipelines, which completely flies over my head. I have no idea what a successful deploy or a CI/CD pipeline means, so the joke falls completely flat for me.",
+        "biggest_issue": "The niche is totally irrelevant to my interests in campus life, food, and dance, making the tech humor completely unreadable to me.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Since my sound is off, I am relying purely on the visuals and text. The caption is a massive block of text about AWS root accounts, CI/CD pipelines, and AI deployments—none of which I understand or care about as a dance and food fan. The looping TV character looks stressed, but the joke is way too niche for software engineers, so I just kept scrolling immediately.",
+        "biggest_issue": "The humor relies entirely on a hyper-specific tech/engineering joke about AWS and CI/CD pipelines that completely misses my interests in campus life, food, and dance.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_commute_1",
+      "score": 3.282,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "I am on a crowded train commute and this is super niche tech humor about AWS and CI/CD pipelines which I don't really understand. The text caption is a bit long to read quickly while standing, so I'd probably just keep scrolling.",
+        "biggest_issue": "Niche tech jargon makes the joke hard to relate to for a general scroller.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "Since I am commuting with sound off, I rely entirely on the text and visuals. The caption about AI and AWS is a bit too specific to software engineering for my usual pop culture and beauty interests, so it didn't grab me immediately, though the stressed character visual gave a quick sense of what the mood was.",
+        "biggest_issue": "The niche tech humor doesn't really connect with my interests, making it hard to fully appreciate the joke without the right context.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_home_2",
+      "score": 4.14,
+      "sound_on_probability": 0.76,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a guy into gaming and general comedy rather than software engineering or cloud architecture, tech memes about AWS root accounts and CI/CD pipelines go right over my head. Even though the looping stressed character clip is somewhat relatable for any chaotic situation, the specific joke requires IT/coding knowledge I don't care about, so it didn't hold my interest.",
+        "biggest_issue": "Niche tech/engineering humor that doesn't appeal to my gaming and general comedy interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 4,
+        "reason": "As a guy into tech and memes, the text about an AI bypassing the CI/CD pipeline and setting up its own AWS root account instantly caught my eye. Even with sound off, the visual of a stressed TV show character paired with the engineering joke landed well because I know how messy AWS deploys get. I'd send this to my developer squad group chat.",
+        "biggest_issue": "It requires knowing what AWS and CI/CD pipelines are, so it's a bit niche, but it works for anyone in tech.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_break_4",
+      "score": 3.298,
+      "sound_on_probability": 0.62,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a brand marketer, tech meme humor about AWS pipelines and Claude isn't really my day-to-day domain, even though the office satire vibe is mildly amusing. It didn't grab me instantly because it's too niche for my professional interests.",
+        "biggest_issue": "The topic of AI coding assistants and CI/CD pipelines is too far outside my retail and sports marketing focus to make me want to engage further.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The meme relies heavily on specific technical references like CI/CD pipelines and AWS root accounts. While it's moderately amusing as a tech joke, it has no connection to retail or sports marketing, making it irrelevant to my professional interests and too niche for me to share internally.",
+        "biggest_issue": "Too narrow in its software engineering context without any broader consumer or workplace application that fits my interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_commute_1",
+      "score": 3.2225,
+      "sound_on_probability": 0.31,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a marketer outside the core software engineering demographic, the hyper-specific tech joke about AWS root accounts and CI/CD pipelines doesn't resonate with me personally, even though I paused briefly to read the text caption.",
+        "biggest_issue": "Niche appeal is too narrow for a general audience, targeting strictly software engineers and tech professionals.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since I am commuting with the sound off, I am relying purely on the on-screen text and visuals. The meme format of a stressed TV character paired with a text caption about Claude bypassing IT protocols and AWS CI/CD pipelines is heavily tech-specific. While I can read the text, the niche humor around software engineering deployment doesn't align with my background in brand marketing and beauty analytics, making it hard to connect with the joke beyond the general concept of rogue AI.",
+        "biggest_issue": "The tech-specific software engineering humor lacks broad appeal for a general or marketing-focused audience when viewed without context or sound.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_home_2",
+      "score": 5.8605,
+      "sound_on_probability": 0.77,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As a marketer working in tech, the joke about AI bypassing IT protocols and CI/CD pipelines hit pretty close to home. The text hook sets up the nerdy humor instantly before the video loops.",
+        "biggest_issue": "It is a niche software engineering joke that doesn't have a direct connection to D2C performance marketing or commercial offers, but it's funny enough to watch until the end.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since sound is off, I am reading the dense text caption about Claude bypassing IT protocols. While tech humor is fine, as a marketer focused on D2C and performance metrics, a niche developer meme about AWS root accounts and CI/CD pipelines doesn't connect with my interests or professional cares. Without audio to help pace it, reading a paragraph of tech jargon over a looping TV clip isn't engaging enough to hold my attention.",
+        "biggest_issue": "Dense on-screen text full of developer jargon without immediate visual payoff makes it hard to quickly parse as a scroller.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_break_4",
+      "score": 2.586,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in skincare and dermatology, tech and AI memes about cloud infrastructure and AWS root accounts completely fly over my head. While the concept of an AI going rogue is mildly amusing in theory, the specific software engineering joke doesn't connect with my interests at all.",
+        "biggest_issue": "Niche mismatch between the tech/software engineering humor and my personal interest in skincare.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in skincare and dermatology, tech memes about AI and AWS root accounts mean absolutely nothing to me. Without sound, it's just a random looping clip of a stressed character and a block of text about software engineering that I cannot relate to at all.",
+        "biggest_issue": "Total niche mismatch for a skincare and dermatology enthusiast.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_commute_1",
+      "score": 3.45,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As an anime and collectibles fan, software engineering jokes and AI memes about AWS and CI/CD pipelines don't really land for me, even though the pacing is fine and the loop makes sense.",
+        "biggest_issue": "Niche mismatch with my personal interests in anime and collectibles.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "Since my phone is muted during my commute, I had to rely entirely on the on-screen text about AI and AWS pipelines. While I work in tech and get the joke about Claude bypassing IT protocols, it has nothing to do with anime or collectibles, so it doesn't really connect with my personal interests. Still, the text was clear enough to read quickly before scrolling past.",
+        "biggest_issue": "The content is completely outside my core interests of anime and manga, making me unlikely to engage deeply or share it.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_break_4",
+      "score": 1.6925,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in business and travel, tech memes about AI and AWS root accounts mean nothing to me. The joke requires specific software engineering context that I don't have, so it just feels like confusing jargon.",
+        "biggest_issue": "Niche is completely disconnected from my interests in business, food, and travel; requires specific software engineering knowledge.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a 26-36 year old business-minded viewer from Ahmedabad who focuses on useful tips and costs, a niche software engineering tech meme about Claude and AWS root accounts means nothing to me. Without sound and outside my interests, it just looks like random TV clip with confusing tech jargon.",
+        "biggest_issue": "Content is completely outside my interests in business, food, and travel, relying on niche tech and cloud computing humor that I don't understand.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_commute_1",
+      "score": 4.592,
+      "sound_on_probability": 0.34,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As someone working in tech, the joke about AI bypassing CI/CD pipelines and creating root AWS accounts hits way too close to home. It's a quick, relatable laugh during a commute, even if it's just a simple meme format.",
+        "biggest_issue": "Text-heavy caption makes it slightly hard to read immediately while moving, but the punchline lands.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since sound is off, I am relying entirely on the on-screen text and the looping TV clip. The text describes a specific tech meme about an AI bypassing a CI/CD pipeline, which is mildly amusing if you work in software, but it requires reading a dense block of text within the first three seconds while staring at an unrelated cinematic clip. It doesn't connect directly to my personal interests in consumer tech or personal finance, so it felt like scrolling past generic internet humor.",
+        "biggest_issue": "The joke is entirely dependent on reading a long wall of text attached to an unrelated looping clip, lacking immediate visual punch.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    }
+  ],
+  "waves_run": [
+    1,
+    2
+  ],
+  "wave1_selection": "dynamic",
+  "wave1_raw_ids": [
+    "genz_dyn_1",
+    "genz_dyn_2",
+    "casual_dyn_1",
+    "casual_dyn_2",
+    "niche_fan_dyn_1",
+    "niche_fan_dyn_2",
+    "skeptic_dyn_1",
+    "creator_dyn_1"
+  ],
+  "dimension_means": {
+    "wave1": {
+      "sound_on": {
+        "stop_scrolling": 8.125,
+        "watch_to_end": 8.5,
+        "share_likelihood": 8.125,
+        "comment_likelihood": 6.625
+      },
+      "sound_off": {
+        "stop_scrolling": 7.75,
+        "watch_to_end": 7.75,
+        "share_likelihood": 7.75,
+        "comment_likelihood": 5.75
+      }
+    },
+    "wave2": {
+      "sound_on": {
+        "stop_scrolling": 4.125,
+        "watch_to_end": 4.6875,
+        "share_likelihood": 2.75,
+        "comment_likelihood": 2.3125
+      },
+      "sound_off": {
+        "stop_scrolling": 3.375,
+        "watch_to_end": 4.0,
+        "share_likelihood": 2.0,
+        "comment_likelihood": 1.375
+      }
+    }
+  },
+  "per_persona_scores": {
+    "casual_dyn_1": 8.09,
+    "casual_dyn_2": 7.606,
+    "creator_dyn_1": 7.69,
+    "genz_dyn_1": 7.999,
+    "genz_dyn_2": 7.992,
+    "niche_fan_dyn_1": 7.74,
+    "niche_fan_dyn_2": 7.697,
+    "skeptic_dyn_1": 7.3205,
+    "casual_break_4": 1.49,
+    "casual_commute_1": 0.872,
+    "casual_home_2": 1.8485,
+    "creator_break_4": 5.3225,
+    "creator_commute_1": 3.674,
+    "creator_home_2": 6.365,
+    "genz_break_4": 1.889,
+    "genz_commute_1": 3.282,
+    "genz_home_2": 4.14,
+    "marketer_break_4": 3.298,
+    "marketer_commute_1": 3.2225,
+    "marketer_home_2": 5.8605,
+    "niche_fan_break_4": 2.586,
+    "niche_fan_commute_1": 3.45,
+    "skeptic_break_4": 1.6925,
+    "skeptic_commute_1": 4.592
+  },
+  "label": "Virality potential estimate",
+  "core_resonance": 7.7668,
+  "crossover_score": 3.349,
+  "final_score": 7.7668,
+  "reach_tier": "High",
+  "tier_note": "",
+  "gate_passed": true,
+  "personas_intended": 24,
+  "personas_scored": 24,
+  "personas_failed": [],
+  "complete": true,
+  "suggestions": [
+    {
+      "suggestion": "Streamline the on-screen text to make the tech setup easier to digest within the first second for fast scrollers.",
+      "evidence": "casual_dyn_2",
+      "persona_id": "casual_dyn_2",
+      "quote": "The text is a bit dense to read quickly while casually scrolling, but the topic completely makes up for it.",
+      "criterion": "hook"
+    },
+    {
+      "suggestion": "Keep the punchline completely self-explanatory through the concise on-screen tech caption so the joke lands instantly with sound off.",
+      "evidence": "casual_dyn_1",
+      "persona_id": "casual_dyn_1",
+      "quote": "None really for its format, though it relies entirely on reading the on-screen text block since there is no audio.",
+      "criterion": "clarity"
+    },
+    {
+      "suggestion": "Maintain the quick pacing and relatable software engineering scenario so technical viewers watch the looping clip all the way to the end.",
+      "evidence": "genz_dyn_1",
+      "persona_id": "genz_dyn_1",
+      "quote": "The pacing is quick, and the joke hits close to home for anyone writing code or building side projects right now.",
+      "criterion": "retention"
+    }
+  ],
+  "errors": [],
+  "call_count": 70
+}

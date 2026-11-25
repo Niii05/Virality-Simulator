@@ -1,0 +1,1132 @@
+{
+  "framework_version": "0.1-draft",
+  "niche_category": "general",
+  "user_context": "Creator describes the niche as food.",
+  "context_used": true,
+  "niche_reason": "user override",
+  "brief": {
+    "hook_first_3s": "A close-up shot of crispy, golden-brown hash browns being served alongside dipping sauce, immediately followed by the cooking and preparation process.",
+    "what_is_shown": "A recipe tutorial demonstrating how to make crispy cheesy hash browns, starting with grating potatoes, mixing ingredients, shaping them into patties, frying them in hot oil, and showing the final crispy result.",
+    "on_screen_text": "Crispy Cheesy HASHBROWNS, ashcafee",
+    "has_captions": false,
+    "duration_sec": 13.1,
+    "tone": "Warm, inviting, and appetizing",
+    "topic_niche": "Food and Cooking",
+    "niche_category": "general",
+    "niche_reason": "user override",
+    "target_audience_guess": {
+      "age_range": "18-45",
+      "interests": [
+        "cooking",
+        "recipes",
+        "comfort food",
+        "foodie culture"
+      ],
+      "region": "Global"
+    },
+    "has_cta": false,
+    "cta_text": "",
+    "framework_version": "0.1-draft",
+    "creator_context": "Creator describes the niche as food.",
+    "language": "unknown",
+    "transcript_best_effort": "",
+    "music_present": true,
+    "mood": "dramatic",
+    "energy": "medium",
+    "voice_clarity": 1,
+    "background_noise": "low",
+    "first_3_seconds_sound": "A cinematic whoosh sound effect plays, followed by dramatic orchestral music.",
+    "sound_dependent": true,
+    "available": true,
+    "mean_volume_db": -18.2,
+    "max_volume_db": -0.0,
+    "silence_ratio": 0.01396638866637442,
+    "first_sound_sec": 0.0
+  },
+  "wave1": [
+    {
+      "persona_id": "casual_dyn_1",
+      "score": 7.246,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "The close-up of crispy hash browns right at the start immediately caught my attention as someone who likes planning quick and comforting meals. It gets straight to the point without dragging out the intro, showing the cooking process clearly so I can actually follow along for a future meal prep idea.",
+        "biggest_issue": "There are no captions, which makes it harder to catch exact measurements or steps without replaying.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start immediately caught my attention since I'm always looking for practical meal prep and snack ideas. Since I'm watching with sound off, I appreciated that the visual preparation steps—grating, shaping, and frying—were clear enough to follow without needing audio. It looks easy and appetizing for a quick homemade snack.",
+        "biggest_issue": "There are no captions detailing measurements or ingredients on screen, meaning I'd have to guess the proportions if I wanted to recreate it myself.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_dyn_2",
+      "score": 6.533,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The close-up of crispy golden hash browns right at the start instantly grabbed my attention, as I love making comforting weekend meals. Seeing the whole process from grating to frying kept me hooked till the end to see how crunchy they turned out.",
+        "biggest_issue": "It lacks captions, which makes it slightly harder to catch exact measurements or steps without relying entirely on the visual prep.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 3,
+        "reason": "The close-up of crispy, golden-brown hash browns right at the start instantly caught my attention while scrolling muted. Since I love hearty comfort food and weekend cooking, seeing the frying process made me stay to see the final result. The visuals were clear enough without sound, though having text steps would have been nice.",
+        "biggest_issue": "Lack of on-screen text or captions explaining the recipe steps since I am viewing this muted.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_dyn_1",
+      "score": 7.122,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "The close-up of the crispy hash browns right at the start immediately grabbed my attention as someone who loves food styling. The preparation steps were clear and appetizing, though I would have liked some captions for the exact ingredients.",
+        "biggest_issue": "Lack of on-screen text or captions detailing the ingredient proportions.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As a food creator testing fusion and comfort dishes in a studio kitchen, the immediate close-up of golden-brown crispy hash browns caught my eye instantly. Since I am viewing with sound off, the visual execution is critical; the lighting is clean and the frying process looks genuinely appetizing. The pacing keeps you hooked to see the final texture, though the lack of on-screen text breakdown for measurements means I wouldn't comment asking for a recipe, but I'd happily watch the full 13 seconds for styling inspiration.",
+        "biggest_issue": "No captions or text steps on screen, which makes it harder to follow the exact recipe details when viewing without sound.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_1",
+      "score": 7.3025,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 9,
+        "share_likelihood": 7,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start instantly caught my attention because I love savory sweet treats and comfort food. Watching them get fried to a crisp was super satisfying, and the pacing kept me hooked till the end.",
+        "biggest_issue": "It lacks captions, which is a bit annoying since I prefer having text on screen even with sound on, and there's no clear CTA to save or try the recipe.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start instantly caught my attention since I love savory snacks and comfort food, even though I'm usually into baking. Watching them get fried and crispy kept me hooked till the end visually, especially without needing sound to see how good they looked.",
+        "biggest_issue": "There were no captions or text steps explaining the exact recipe ingredients on screen, so I'd have to guess the measurements if I wanted to actually try making them.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_2",
+      "score": 6.748,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 3,
+        "reason": "The close-up of golden crispy hash browns in the first three seconds instantly grabbed my attention since I love quick comfort food. The cooking process is clear and satisfying to watch, keeping me hooked until the end. I'd definitely save this to try making later, though I missed having on-screen captions for the measurements.",
+        "biggest_issue": "No on-screen captions or measurements listed for the ingredients.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start instantly caught my attention even with sound off. Since I like quick snacks and comfort food, seeing the whole frying and cheesy process kept me hooked till the end. However, the lack of text captions or on-screen measurements makes it a bit hard to follow the exact recipe without audio.",
+        "biggest_issue": "No captions showing ingredient amounts or steps, making it harder to replicate the recipe silently on a commute.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_1",
+      "score": 5.65,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "The close-up of crispy, golden-brown hash browns immediately caught my attention in the first second, and seeing the preparation process kept me watching till the end. However, it's a fried comfort food rather than the sourdough or fermentation science I usually focus on, so while I enjoyed the satisfying visuals, I wouldn't share or comment on it.",
+        "biggest_issue": "Not aligned with my specific baking and fermentation interests.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "The close-up of crispy hash browns caught my eye immediately, and even without sound, the visual steps of grating, shaping, and frying made it easy to follow. However, since my main interest is sourdough and baking science rather than quick fried snacks, it didn't compel me to share or comment.",
+        "biggest_issue": "Lack of ingredient details or measurements on-screen makes it less useful for someone looking for precise baking science.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_2",
+      "score": 5.376,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up shot of golden-brown hash browns right at the start instantly caught my attention, and the cooking process was satisfying to watch. However, it's just a standard comfort food recipe rather than an heirloom dish or a deep dive into global spices, so while I enjoyed watching it to the end, it's not something I feel compelled to share or comment on.",
+        "biggest_issue": "The recipe content is too mainstream and lacks the unique culinary history or spice depth that interests me.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "The close-up of golden-brown hash browns caught my eye immediately, and even with sound off, the visual of the cooking process was clear. However, it's just a standard comfort food recipe rather than an heirloom recipe or a deep dive into global spices, so it doesn't fully align with my specific culinary interests.",
+        "biggest_issue": "Lacks connection to heirloom recipes or culinary history.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_dyn_1",
+      "score": 4.114,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The crispy hash browns caught my eye immediately with the close-up shot, and I stayed to see the steps since it's a home cooking tutorial. However, deep-fried cheesy potatoes aren't something I'd make for family health or traditional cooking, so it's not very useful for my household.",
+        "biggest_issue": "Uses processed or deep-fried elements that don't fit traditional, health-focused whole food cooking.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up of golden-brown hash browns caught my eye immediately, and since I look for practical food ideas for the family, I watched the steps. However, it's just processed-style potato patties fried in oil, which isn't quite the traditional whole-food cooking I usually prefer. Still, the visual demonstration was clear enough without sound.",
+        "biggest_issue": "Uses processed snack ingredients and frying methods that don't align with wholesome family health cooking.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    }
+  ],
+  "wave1_personas": [
+    {
+      "id": "genz_dyn_1",
+      "archetype": "gen_z_scroller",
+      "age": "18-25",
+      "gender": "woman",
+      "region": "Pune, India",
+      "interests": [
+        "baking",
+        "sweet treats",
+        "aesthetics"
+      ],
+      "language_pref": "Marathi/Hinglish",
+      "sound_on_probability": 0.61,
+      "scroll_habit": "Watches between classes and stops for a clear visual payoff.",
+      "base_skip_rate": 0.77,
+      "cares_about": [
+        "baking",
+        "sweet treats",
+        "aesthetics"
+      ],
+      "pet_peeves": [
+        "dry sponge cakes",
+        "overpriced pastries"
+      ],
+      "context": "She balances her university coursework in London with a part-time job at a local bakery."
+    },
+    {
+      "id": "genz_dyn_2",
+      "archetype": "gen_z_scroller",
+      "age": "18-24",
+      "gender": "woman",
+      "region": "Mumbai, India",
+      "interests": [
+        "quick meals",
+        "kitchen gadgets",
+        "spicy food"
+      ],
+      "language_pref": "Hindi/Hinglish",
+      "sound_on_probability": 0.28,
+      "scroll_habit": "Scrolls quickly on a crowded commute, usually muted with captions visible.",
+      "base_skip_rate": 0.82,
+      "cares_about": [
+        "quick meals",
+        "kitchen gadgets",
+        "spicy food"
+      ],
+      "pet_peeves": [
+        "missing ingredients",
+        "messy countertops"
+      ],
+      "context": "He shares a small apartment in Toronto and cooks quick meals between remote work shifts."
+    },
+    {
+      "id": "casual_dyn_1",
+      "archetype": "casual_viewer",
+      "age": "30-42",
+      "gender": "man",
+      "region": "Patna, India",
+      "interests": [
+        "meal prep",
+        "budget dinners",
+        "fresh produce"
+      ],
+      "language_pref": "Hindi/Bhojpuri",
+      "sound_on_probability": 0.64,
+      "scroll_habit": "Pauses for practical demonstrations but leaves if context takes too long.",
+      "base_skip_rate": 0.75,
+      "cares_about": [
+        "meal prep",
+        "budget dinners",
+        "fresh produce"
+      ],
+      "pet_peeves": [
+        "wasted groceries",
+        "burnt toast"
+      ],
+      "context": "She works as a nurse in Sydney and plans weekly menus to save time on busy shifts."
+    },
+    {
+      "id": "casual_dyn_2",
+      "archetype": "casual_viewer",
+      "age": "25-34",
+      "gender": "woman",
+      "region": "Surat, India",
+      "interests": [
+        "family dinners",
+        "barbecue",
+        "hearty stews"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.22,
+      "scroll_habit": "Browses muted while commuting and only pauses for instantly clear visuals.",
+      "base_skip_rate": 0.83,
+      "cares_about": [
+        "family dinners",
+        "barbecue",
+        "hearty stews"
+      ],
+      "pet_peeves": [
+        "tough meat",
+        "cold gravy"
+      ],
+      "context": "He commutes daily to an office in Chicago and grills dinner for his family on weekends."
+    },
+    {
+      "id": "niche_fan_dyn_1",
+      "archetype": "niche_fan",
+      "age": "28-40",
+      "gender": "woman",
+      "region": "Indore, India",
+      "interests": [
+        "sourdough",
+        "fermentation",
+        "baking science"
+      ],
+      "language_pref": "Hindi",
+      "sound_on_probability": 0.58,
+      "scroll_habit": "Looks for ingredient detail and skips generic product praise.",
+      "base_skip_rate": 0.68,
+      "cares_about": [
+        "sourdough",
+        "fermentation",
+        "baking science"
+      ],
+      "pet_peeves": [
+        "dense bread",
+        "inaccurate measurements"
+      ],
+      "context": "She experiments with artisanal sourdough techniques in her Berlin kitchen every weekend."
+    },
+    {
+      "id": "niche_fan_dyn_2",
+      "archetype": "niche_fan",
+      "age": "18-29",
+      "gender": "man",
+      "region": "Kochi, India",
+      "interests": [
+        "heirloom recipes",
+        "global spices",
+        "culinary history"
+      ],
+      "language_pref": "Malayalam/English",
+      "sound_on_probability": 0.38,
+      "scroll_habit": "Recognizes niche references quickly even with the phone muted.",
+      "base_skip_rate": 0.69,
+      "cares_about": [
+        "heirloom recipes",
+        "global spices",
+        "culinary history"
+      ],
+      "pet_peeves": [
+        "bland seasoning",
+        "fake authenticity"
+      ],
+      "context": "He curates a collection of heirloom cookbooks in his Dublin home and sources local organic spices."
+    },
+    {
+      "id": "skeptic_dyn_1",
+      "archetype": "skeptic",
+      "age": "26-36",
+      "gender": "woman",
+      "region": "Ahmedabad, India",
+      "interests": [
+        "whole foods",
+        "family health",
+        "traditional cooking"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.63,
+      "scroll_habit": "Skips vague advice and saves only specific useful demonstrations.",
+      "base_skip_rate": 0.78,
+      "cares_about": [
+        "whole foods",
+        "family health",
+        "traditional cooking"
+      ],
+      "pet_peeves": [
+        "food trends",
+        "processed snacks"
+      ],
+      "context": "She manages household expenses in Auckland and insists on traditional cooking methods."
+    },
+    {
+      "id": "creator_dyn_1",
+      "archetype": "creator_peer",
+      "age": "28-39",
+      "gender": "man",
+      "region": "Hyderabad, India",
+      "interests": [
+        "food styling",
+        "fusion cuisine",
+        "culinary trends"
+      ],
+      "language_pref": "Telugu/Hinglish",
+      "sound_on_probability": 0.59,
+      "scroll_habit": "Skips derivative jokes but appreciates a strong original performance.",
+      "base_skip_rate": 0.72,
+      "cares_about": [
+        "food styling",
+        "fusion cuisine",
+        "culinary trends"
+      ],
+      "pet_peeves": [
+        "bad lighting",
+        "unstirred sauces"
+      ],
+      "context": "He tests new fusion recipes in a shared studio kitchen in New York for his own food channel."
+    }
+  ],
+  "wave2": [
+    {
+      "persona_id": "casual_break_4",
+      "score": 5.894,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The crispy hashbrowns frying in hot oil immediately caught my attention in the first three seconds, and since it's a quick 13-second video showing the whole cooking process from grating to the final cheesy result, I stayed until the end. However, it didn't name any specific place of origin for the dish, which is something I care about for local food content.",
+        "biggest_issue": "The video shows a nice recipe but doesn't mention any place of origin or local context for the dish.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 5,
+        "comment_likelihood": 3,
+        "reason": "The crisp frying hashbrowns right at the start caught my attention immediately even without sound. It clearly showed how to make crispy cheesy hashbrowns step-by-step up to the final cooked dish with dipping sauce, which kept me watching till the end. However, since it's just a general recipe and not a local dish or a DIY repair, it doesn't quite hit my specific personal interests.",
+        "biggest_issue": "Lacks connection to local food origins or DIY repair content that fits my personal taste.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_commute_1",
+      "score": 6.481,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "The opening shot of crispy hashbrowns frying in hot oil immediately grabbed my attention because it looked appetizing and clearly showed what the video was about. Since I like quick and easy recipes, watching the steps to make crispy cheesy hashbrowns kept me hooked until the end to see the final dish with the dipping sauce.",
+        "biggest_issue": "The video ends abruptly without mentioning a specific finished-portion size or exact ingredient measurements, making it a bit hard to replicate directly.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 5,
+        "comment_likelihood": 3,
+        "reason": "The close-up of golden-brown hash browns right at the start instantly grabbed my attention while scrolling muted. It's clear what's being made without needing sound, and the visual of the frying and final product kept me watching. However, without finished-portion sizes specified, it didn't completely hit all my recipe needs for sharing.",
+        "biggest_issue": "No portion size mentioned for the recipe.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_home_2",
+      "score": 5.2515,
+      "sound_on_probability": 0.71,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up of the golden-brown hash browns right at the start caught my eye since I enjoy cooking simple snacks after dinner. The video is short and straightforward, showing the steps clearly without dragging. However, it's just a standard recipe tutorial and doesn't offer anything unique for a travel or cricket fan like me to share.",
+        "biggest_issue": "Lack of any practical family travel tips or cricket content to match my core interests, making it just a quick casual watch.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up of crispy hash browns right at the start caught my attention while scrolling after dinner. Since sound is off, I relied on the visuals and text. The visuals clearly showed how to make cheesy hash browns from grating potatoes to frying, and the text confirmed what it was. It kept me till the end to see the final crispy result, but since I am more into practical family travel or cricket, I wouldn't share or comment on it.",
+        "biggest_issue": "Lack of captions meant I missed any ingredient measurements or extra cooking tips on screen.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_break_4",
+      "score": 4.48,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "The sizzling hashbrowns in the opening oil grab attention immediately, and the short 13-second runtime makes it easy to watch the whole process through. As a creator peer, I appreciate clean pacing and how appetizing the food looks, even though it is a standard recipe video rather than a comedy sketch or performance piece I'd normally engage with.",
+        "biggest_issue": "It lacks a distinct character or creative point of view, feeling more like a standard aesthetic food clip than a creator-driven piece.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since I have sound off, I am just looking at a fast-paced cooking video of hashbrowns frying. The opening visual of hot oil and frying potatoes is mildly appetizing, but as a creator looking for sketches or interesting performances, standard recipe footage doesn't do much for me. It is clear what is being made thanks to the on-screen text, but it's just a standard food clip with no character, dialogue, or comedic element.",
+        "biggest_issue": "Completely outside my usual interest in character-driven comedy or sketches, leaving no personal hook for me to engage further.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_commute_1",
+      "score": 5.91,
+      "sound_on_probability": 0.26,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start immediately caught my attention as a fellow creator, and the pacing kept me watching until the end. However, the lack of captions makes it harder to follow the exact steps quickly.",
+        "biggest_issue": "No captions provided for the recipe steps",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 3,
+        "reason": "The opening close-up of crispy hash browns caught my attention immediately even without sound. The visuals clearly showed the recipe steps from grating to frying. However, without proper captions or text explaining the ingredients during the process, it's a bit hard to follow exact measurements, but the pacing kept me watching till the end.",
+        "biggest_issue": "Lack of step-by-step text/captions explaining the ingredients and process since I am watching without sound.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_home_2",
+      "score": 6.156,
+      "sound_on_probability": 0.82,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "The close-up of the crispy hash browns right at the start instantly grabbed my attention, and the editing with the cinematic whoosh and orchestral music stood out nicely. Even without captions or dialogue, the cooking steps are visually clear, though as someone who notices audio production, the dramatic orchestral music felt a bit intense for a simple hash brown recipe. Still, the visuals kept me hooked till the end to see the final result.",
+        "biggest_issue": "The dramatic orchestral music feels slightly mismatched for a casual food recipe and there are no captions or voiceover to explain the steps.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up shot of the golden-brown hash browns right at the start successfully grabbed my attention visually. Since I am viewing with sound off, I appreciated that the steps—grating potatoes, shaping, and frying—were clearly demonstrated through the visuals. The 13-second runtime kept it concise, though without captions or audio, some specific ingredient ratios are missing, which is expected for a quick food clip.",
+        "biggest_issue": "Lack of on-screen captions or text for the ingredient measurements makes it hard to follow the recipe fully without audio.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_break_4",
+      "score": 6.65,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The crispy hashbrowns frying in hot oil right at the start instantly caught my attention since I'm always looking for easy hostel kitchen snacks. Watching it through was satisfying because it showed the whole process quickly in just 13 seconds. However, I didn't see exact measurements for the ingredients on screen, which is a bit annoying when you actually want to make it.",
+        "biggest_issue": "Ingredients appearing without measurements makes it harder to replicate in a hostel room.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The sizzling hashbrowns in hot oil immediately caught my eye while scrolling between classes. Since I'm in a hostel, quick snack ideas are always nice to see visually, though I'd have liked to see the measurements clearly on screen since my pet peeve is missing quantities.",
+        "biggest_issue": "Ingredients appear without any measurements shown on screen, which makes it harder to actually try making it in a hostel kitchen.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_commute_1",
+      "score": 6.55,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The close-up of the crispy hash browns right at the start instantly caught my attention on my commute, and since I didn't have to wait through a long intro to see the food, I stayed until the end to watch the whole recipe process.",
+        "biggest_issue": "There are no captions, so if I actually wanted to follow the recipe steps I'd have to guess the ingredients since it relies entirely on visuals without text overlays for the steps.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The close-up of golden-brown hash browns right at the start immediately caught my eye on my commute, and since I had sound off, the clear visual of making crispy cheesy hash browns kept me hooked to see the final result. It's short, appetizing, and easy to watch without audio.",
+        "biggest_issue": "There are no captions explaining the recipe steps on screen, which makes it a bit harder to follow the exact process while muted.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_home_2",
+      "score": 3.414,
+      "sound_on_probability": 0.76,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The crispy hash browns looked pretty good right away, which made me stop for a few seconds to watch the frying process. But since I'm mostly into gaming and comedy, a standard food tutorial doesn't really give me anything to share with my squad.",
+        "biggest_issue": "Not relevant to my interests like gaming or comedy, and has no clever hook or reference for my group chat.",
+        "criteria_cited": [
+          "hook",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The crispy hash browns looked satisfying, but without audio or any gaming/comedy connection, it didn't hold my interest long. It's just a standard recipe video.",
+        "biggest_issue": "Completely outside my interests, no gaming reference or humor to engage with.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_break_4",
+      "score": 4.652,
+      "sound_on_probability": 0.62,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The sizzling hashbrowns in hot oil grabbed my attention right away for a quick break watch, and the 13-second length meant it naturally kept me until the end to see the final product. However, as a brand marketer, this has zero relevance to my professional interests in retail demos or sports partnerships, so I have no urge to share or comment on it.",
+        "biggest_issue": "Completely unrelated to my professional focus or content habits, making it a purely idle watch with no sharing value.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "The frying visuals in the first three seconds immediately caught my eye, and the step-by-step process of making crispy cheesy hashbrowns kept me hooked until the end since it was clear and easy to follow visually. However, as a brand marketer, this doesn't connect to my professional interests or give me anything specific to share with colleagues.",
+        "biggest_issue": "No relevance to my professional focus on retail or sports marketing, making it purely casual viewing.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_commute_1",
+      "score": 5.309,
+      "sound_on_probability": 0.31,
+      "sound_on": {
+        "stop_scrolling": 5,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The opening visual of hashbrowns frying in hot oil immediately grabs attention with appetizing motion and sound. However, as a marketer, I noticed a complete lack of early brand recognition or distinct identity in the first few seconds, missing an opportunity for early impact. The pacing is quick and holds interest through to the final cheesy result, but it feels like standard food content rather than a standout branded campaign.",
+        "biggest_issue": "No brand presence or unique creator identity established in the opening hook.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "The opening visual of hashbrowns frying in hot oil immediately grabs attention visually, which works well for a commute with sound off since the action is clear right away. The text 'Crispy Cheesy HASHBROWNS' clearly labels the topic. However, as a marketer, I notice the brand handle 'ashcafeee' is small and lacks strong upfront branding integration, and the content doesn't align with my core interest in beauty brands or advertising analytics, making sharing unlikely.",
+        "biggest_issue": "Branding is limited to a simple handle watermark rather than a distinct brand identity upfront.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_home_2",
+      "score": 5.75,
+      "sound_on_probability": 0.77,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up of crispy hash browns immediately grabs attention and shows the product benefit/result before any call to action, which fits my expectations well. However, as a recipe tutorial without a measurable offer or business angle, it's just nice to watch rather than something I would actively share or comment on.",
+        "biggest_issue": "Lack of a clear value proposition or hook relevant to my interests beyond just a standard recipe video.",
+        "criteria_cited": [
+          "hook",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The close-up of golden-brown hash browns in the opening seconds immediately caught my eye, and without sound, the visual demonstration of grating potatoes and frying them kept me watching to see the final crispy result. As a marketer, I appreciate how clear the product value is shown visually before any potential ask, even though there's no commercial offer here.",
+        "biggest_issue": "Lack of captions or measurements on screen makes it hard to actually replicate the recipe without audio or text steps.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_break_4",
+      "score": 3.615,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "I am looking for skincare and dermatology tips, so a recipe video for crispy cheesy hashbrowns is completely off my usual radar. Even though the sizzling oil and golden hashbrowns looked appetizing for a split second, it has nothing to do with ingredients or skin barrier health, so I lost interest quickly and kept scrolling.",
+        "biggest_issue": "Total mismatch with my personal interests in skincare and ingredient breakdowns.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 6,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As someone interested in skincare and ingredients, a random cooking recipe for crispy cheesy hashbrowns doesn't align with my usual content. However, the visual of frying food caught my eye for a second, but without any connection to my interests, I quickly lost interest and wouldn't share or comment.",
+        "biggest_issue": "Complete mismatch with my interest in skincare and dermatology, offering nothing relevant to my personal preferences.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_commute_1",
+      "score": 3.3,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The crispy hash browns look appetizing and the opening close-up grabbed my attention briefly, but as someone who is mainly into anime and collectibles, a standard food recipe doesn't really offer me anything to engage with or share.",
+        "biggest_issue": "Completely unrelated to my personal interests in anime and collectibles, so it lacks any rewarding references.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The close-up of the crispy hash browns caught my eye while scrolling on mute during my commute, but as someone mainly into anime and collectibles, a standard food recipe doesn't offer any niche references or collectibles to keep me deeply engaged.",
+        "biggest_issue": "Completely outside my core interests of anime and collectibles, offering no niche crossover or references.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_break_4",
+      "score": 6.1185,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 4,
+        "comment_likelihood": 2,
+        "reason": "The crisp sound of hashbrowns frying right at the start caught my attention immediately, and watching the step-by-step process kept me hooked till the end. It is clear and appetizing, though as someone looking for practical business tips or travel details, a simple food recipe doesn't give me much to share or comment on.",
+        "biggest_issue": "No specific takeaway or reason to engage beyond enjoying the quick recipe visual.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 8,
+        "share_likelihood": 5,
+        "comment_likelihood": 3,
+        "reason": "The opening visual of hashbrowns frying in hot oil immediately caught my attention, and since I enjoy food content, I watched the whole process. The step-by-step cooking demonstration is clear even with sound off because of the on-screen text and good visual pacing. However, it's just a standard recipe video without any specific travel costs or business tips, so I wouldn't share or comment on it.",
+        "biggest_issue": "Lacks any connection to business or travel interests, making it a passive watch rather than something actionable.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_commute_1",
+      "score": 3.504,
+      "sound_on_probability": 0.34,
+      "sound_on": {
+        "stop_scrolling": 5,
+        "watch_to_end": 6,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The close-up of golden hash browns immediately caught my eye, making me stop to see how they are made. However, since I care about clear product or practical claims with actual metrics, a recipe video doesn't trigger much engagement beyond a quick watch. There are no hidden costs or exaggerated product claims here, just standard cooking, but it's not something I'd interact with or share.",
+        "biggest_issue": "Lack of practical utility or personal finance context makes it forgettable for my specific interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The close-up of crispy hash browns caught my attention initially, but without sound or explicit text breaking down the recipe steps or exact ingredients, it's just another standard food video. Since it doesn't involve personal finance or tech claims to scrutinize, I watched the short clip to see the final product, but had no reason to engage further.",
+        "biggest_issue": "Lack of clear ingredient measurements or on-screen text instructions makes it hard to evaluate the actual recipe utility.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    }
+  ],
+  "waves_run": [
+    1,
+    2
+  ],
+  "wave1_selection": "dynamic",
+  "wave1_raw_ids": [
+    "genz_dyn_1",
+    "genz_dyn_2",
+    "casual_dyn_1",
+    "casual_dyn_2",
+    "niche_fan_dyn_1",
+    "niche_fan_dyn_2",
+    "skeptic_dyn_1",
+    "creator_dyn_1"
+  ],
+  "dimension_means": {
+    "wave1": {
+      "sound_on": {
+        "stop_scrolling": 7.25,
+        "watch_to_end": 7.375,
+        "share_likelihood": 5.5,
+        "comment_likelihood": 3.5
+      },
+      "sound_off": {
+        "stop_scrolling": 7.5,
+        "watch_to_end": 7.25,
+        "share_likelihood": 5.5,
+        "comment_likelihood": 3.375
+      }
+    },
+    "wave2": {
+      "sound_on": {
+        "stop_scrolling": 6.25,
+        "watch_to_end": 6.875,
+        "share_likelihood": 4.0,
+        "comment_likelihood": 2.5
+      },
+      "sound_off": {
+        "stop_scrolling": 6.1875,
+        "watch_to_end": 6.625,
+        "share_likelihood": 3.8125,
+        "comment_likelihood": 2.3125
+      }
+    }
+  },
+  "per_persona_scores": {
+    "casual_dyn_1": 7.246,
+    "casual_dyn_2": 6.533,
+    "creator_dyn_1": 7.122,
+    "genz_dyn_1": 7.3025,
+    "genz_dyn_2": 6.748,
+    "niche_fan_dyn_1": 5.65,
+    "niche_fan_dyn_2": 5.376,
+    "skeptic_dyn_1": 4.114,
+    "casual_break_4": 5.894,
+    "casual_commute_1": 6.481,
+    "casual_home_2": 5.2515,
+    "creator_break_4": 4.48,
+    "creator_commute_1": 5.91,
+    "creator_home_2": 6.156,
+    "genz_break_4": 6.65,
+    "genz_commute_1": 6.55,
+    "genz_home_2": 3.414,
+    "marketer_break_4": 4.652,
+    "marketer_commute_1": 5.309,
+    "marketer_home_2": 5.75,
+    "niche_fan_break_4": 3.615,
+    "niche_fan_commute_1": 3.3,
+    "skeptic_break_4": 6.1185,
+    "skeptic_commute_1": 3.504
+  },
+  "label": "Virality potential estimate",
+  "core_resonance": 6.2614,
+  "crossover_score": 5.1897,
+  "final_score": 6.2614,
+  "reach_tier": "Medium",
+  "tier_note": "",
+  "gate_passed": true,
+  "personas_intended": 24,
+  "personas_scored": 24,
+  "personas_failed": [],
+  "complete": true,
+  "suggestions": [
+    {
+      "suggestion": "Include the recipe title and a clear textual hook immediately in the opening seconds to instantly confirm the recipe topic for viewers scrolling on mute.",
+      "evidence": "The opening visual of hashbrowns frying in hot oil immediately grabs attention visually, which works well for a commute with sound off since the action is clear right away. The text 'Crispy Cheesy HASHBROWNS' clearly labels the topic.",
+      "persona_id": "marketer_commute_1",
+      "quote": "The opening visual of hashbrowns frying in hot oil immediately grabs attention visually, which works well for a commute with sound off since the action is clear right away. The text 'Crispy Cheesy HASHBROWNS' clearly labels the topic.",
+      "criterion": "hook"
+    },
+    {
+      "suggestion": "Add on-screen text overlays and step-by-step captions detailing ingredient proportions and measurements so viewers can follow along without relying entirely on audio or guessing.",
+      "evidence": "There are no captions, which makes it harder to catch exact measurements or steps without replaying.",
+      "persona_id": "casual_dyn_1",
+      "quote": "There are no captions, which makes it harder to catch exact measurements or steps without replaying.",
+      "criterion": "clarity"
+    },
+    {
+      "suggestion": "Keep the concise 13-second runtime that successfully highlights the preparation process from grating to frying to maintain viewer engagement through the payoff.",
+      "evidence": "The close-up of crispy, golden-brown hash browns right at the start instantly caught my attention while scrolling muted. Since I love hearty comfort food and weekend cooking, seeing the frying process made me stay to see the final result.",
+      "persona_id": "casual_dyn_2",
+      "quote": "The close-up of crispy, golden-brown hash browns right at the start instantly caught my attention while scrolling muted. Since I love hearty comfort food and weekend cooking, seeing the frying process made me stay to see the final result. The visuals were clear enough without sound, though having text steps would have been nice.",
+      "criterion": "retention"
+    }
+  ],
+  "errors": [],
+  "call_count": 41
+}

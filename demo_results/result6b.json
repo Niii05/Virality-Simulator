@@ -1,0 +1,1165 @@
+{
+  "framework_version": "0.1-draft",
+  "niche_category": "product_marketing",
+  "user_context": "This is an Apple iPhone launch promotion shot by Raw Mango, an Indian fashion label, featuring the well-known Indian actress Juhi Chawla. It is a brand collaboration post.",
+  "context_used": true,
+  "niche_reason": "The video is a promotional brand campaign collaboration between Apple and fashion label Raw Mango.",
+  "brief": {
+    "hook_first_3s": "A cinematic shot featuring traditional Indian aesthetics, intricate lighting, and models in vibrant ethnic attire.",
+    "what_is_shown": "A stylized promotional brand collaboration video featuring an ensemble cast including Juhi Chawla in ethnic wear by Raw Mango, set against traditional architectural backdrops with warm lighting, shot on an iPhone.",
+    "on_screen_text": "apple and raw_mango, 0:42, 0:41, 0:40, 0:39, 0:31, 0:23, 0:15, 0:07, Additional Hardware and software used.",
+    "has_captions": false,
+    "duration_sec": 42.3,
+    "tone": "Cinematic, elegant, and cultural",
+    "topic_niche": "fashion and technology brand collaboration",
+    "niche_category": "product_marketing",
+    "niche_reason": "The video is a promotional brand campaign collaboration between Apple and fashion label Raw Mango.",
+    "target_audience_guess": {
+      "age_range": "20-45",
+      "interests": [
+        "fashion",
+        "ethnic wear",
+        "technology",
+        "cinematic videography",
+        "Indian cinema"
+      ],
+      "region": "India"
+    },
+    "has_cta": false,
+    "cta_text": "",
+    "framework_version": "0.1-draft",
+    "creator_context": "This is an Apple iPhone launch promotion shot by Raw Mango, an Indian fashion label, featuring the well-known Indian actress Juhi Chawla. It is a brand collaboration post.",
+    "language": "hi",
+    "transcript_best_effort": "Roop suhana lagta hai, chand purana lagta hai, tere aage o janam, o tu bhi kya cheez hai, har dil azeez hai, dil chahe dekhe tujhe hum har dam",
+    "music_present": true,
+    "mood": "romantic",
+    "energy": "medium",
+    "voice_clarity": 5,
+    "background_noise": "low",
+    "first_3_seconds_sound": "The audio begins with an upbeat, rhythmic instrumental track with a slight tropical feel.",
+    "sound_dependent": false,
+    "available": true,
+    "mean_volume_db": -17.3,
+    "max_volume_db": -0.0,
+    "silence_ratio": 0.05190496579893994,
+    "first_sound_sec": 0.0
+  },
+  "wave1": [
+    {
+      "persona_id": "casual_dyn_1",
+      "score": 7.2,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "The combination of classic Bollywood icon Juhi Chawla, Raw Mango's stunning festive ethnic attire, and the nostalgic music immediately caught my attention as someone who loves classic cinema and cultural fashion. It is visually gorgeous and smooth, though it runs a bit long without a direct call to action.",
+        "biggest_issue": "Lack of captions and absence of a clear call to action make it feel more like an art piece than a product ad, and it drags slightly toward the end.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "The cinematic opening with traditional Indian aesthetics and Juhi Chawla instantly caught my attention given my interest in classic Bollywood cinema and festive ethnic attire. Even without sound, the visual elegance of the Raw Mango collaboration kept me watching, though the 42-second runtime dragged slightly near the end without captions or clear product utility.",
+        "biggest_issue": "The video lacks captions and clear text pacing to maintain engagement through the entire 42 seconds without sound.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_dyn_2",
+      "score": 6.826,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As an architect who loves traditional textiles and heritage lighting, the collaboration between Raw Mango and Apple immediately caught my eye with its cinematic architectural backdrops and gorgeous ethnic wear. Seeing Juhi Chawla in that setting with warm lighting was visually stunning and made me stay till the end, though the lack of a clear CTA or deeper focus on the handloom details left me wanting a bit more substance.",
+        "biggest_issue": "The video lacks captions and a clear call to action, relying purely on high-end aesthetics without telling me much about the actual product collaboration details.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As an architect who loves traditional textiles and architectural lighting, the cinematic opening featuring Raw Mango's ethnic wear and gorgeous warm lighting immediately caught my eye while scrolling muted. The visuals are stunning, though the random countdown numbers on-screen felt a bit confusing without audio.",
+        "biggest_issue": "The on-screen text with numbers is confusing without audio context, and there is no clear call to action.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_dyn_1",
+      "score": 6.9745,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As someone who runs a digital content studio and cares deeply about visual storytelling and lighting, the cinematic opening caught my eye immediately. The collaboration between Apple and Raw Mango featuring traditional Indian aesthetics and beautiful warm lighting shot on an iPhone is right up my alley. It avoids looking like a cheap ad and leans heavily into high-end editorial styling.",
+        "biggest_issue": "The duration at over 40 seconds without captions makes it drag a bit in the middle, and the lack of a clear CTA leaves you wondering what the exact campaign objective is beyond brand awareness.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone who works in a digital content studio directing fashion lookbooks, the initial cinematic shot with traditional Indian aesthetics and intricate lighting instantly grabbed my attention. Even without sound, the visual storytelling and warm lighting set against traditional architectural backdrops make it clear this is a high-end fashion and tech collaboration. However, the lack of captions and a clear CTA holds back my full engagement.",
+        "biggest_issue": "The absence of captions and on-screen narrative context makes it slightly harder to fully appreciate the exact technical breakdown or hardware details being referenced visually.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_1",
+      "score": 6.894,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "The cinematic styling and collaboration between Apple and Raw Mango immediately caught my eye as a design student who loves smartphone photography and independent Indian labels. Seeing Juhi Chawla in those traditional textiles shot on an iPhone is gorgeous, though at 42 seconds it drags slightly toward the middle without captions or a clear narrative payoff.",
+        "biggest_issue": "It is quite long for a quick scroll and lacks captions or a strong call to action at the end.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The cinematic visuals shot on an iPhone immediately caught my eye as a design student interested in mobile photography and independent fashion labels like Raw Mango. Without sound, the warm lighting, traditional architecture, and vibrant ethnic attire still look stunning and high-end, though the on-screen text with random countdown numbers is a bit confusing to follow.",
+        "biggest_issue": "The on-screen text with countdown timestamps feels messy and lacks clear context without audio.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_2",
+      "score": 2.62,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone into mobile hardware specs and UI design, a cinematic ethnic fashion collab between Apple and Raw Mango doesn't catch my eye right away, even with Juhi Chawla. The pacing is too slow and atmospheric for a quick commute scroll, lacking any real tech breakdown or interesting visual hook related to my interests.",
+        "biggest_issue": "Slow cinematic pacing and lack of immediate relevance to tech specs or design trends.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a UI dev into mobile hardware and design, seeing a cinematic iPhone and Raw Mango collab with traditional aesthetics caught my eye initially for the camera capabilities. However, with sound off, the weird countdown timestamps on screen ('0:42, 0:41...') are confusing, there are no proper captions, and it just feels like a long, slow fashion ad without any actual mobile processor benchmarks or design breakdowns to hold my attention.",
+        "biggest_issue": "Confusing countdown numbers on screen and lack of captions or technical specs make a 42-second fashion video drag completely.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_1",
+      "score": 7.137,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "As a boutique stylist who appreciates cinematic art direction and luxury branding, seeing Raw Mango and Juhi Chawla shot beautifully immediately caught my eye. The aesthetic is stunning and speaks directly to my design sensibilities, though as a brand collaboration it lacks a bit of depth on the textile weaving front.",
+        "biggest_issue": "Lacks detailed focus on the artisanal weave texture, leaning more into cinematic star power.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ],
+        "stop_scrolling_int": 8,
+        "watch_to_end_int": 7,
+        "share_likelihood_int": 7,
+        "comment_likelihood_int": 6
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "As someone working as a boutique stylist curating heirloom sarees, the cinematic art direction and Raw Mango collaboration immediately caught my eye visually, even with sound off. The traditional architecture and gorgeous ethnic wear stand out wonderfully. However, the on-screen text with the random timestamps and hardware notes felt a bit disjointed without any captions to explain the context further.",
+        "biggest_issue": "On-screen text is clunky with timestamps and hardware mentions instead of clean narrative or stylistic cues.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_2",
+      "score": 6.897,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 8,
+        "share_likelihood": 7,
+        "comment_likelihood": 5,
+        "reason": "As someone invested in high-resolution sensors and cinematic aesthetics, seeing an iPhone paired with Raw Mango and traditional lighting immediately caught my eye. The opening cinematic shot with intricate lighting looks remarkably crisp and didn't suffer from overcompression, which appeals directly to my work in documentary filmmaking. Watching Juhi Chawla in that traditional setting kept me engaged to see how they handled the color grading and sensor limitations on a mobile shoot.",
+        "biggest_issue": "The lack of captions or technical behind-the-scenes details about the specific hardware and software used leaves me wanting more depth as a filmmaker.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The cinematic opening shot with traditional Indian aesthetics and beautiful lighting immediately caught my eye as a filmmaker. Even with the sound off, the high visual production value and the presence of Raw Mango and Juhi Chawla set against architectural backdrops made it clear this was a high-end shoot. However, the countdown-style on-screen text was a bit distracting and the lack of captions made it harder to follow the technical details without audio.",
+        "biggest_issue": "The on-screen text felt cluttered with random timestamps and lacked clear captions or BTS camera gear details for a tech-heavy fashion collab.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_dyn_1",
+      "score": 2.328,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone who cares deeply about pragmatic budgeting and functional product longevity, a cinematic celebrity fashion collaboration doesn't tell me anything useful about what the product actually does, how long it lasts, or if it's worth the price. It just looks like high-budget marketing hype for luxury items.",
+        "biggest_issue": "Fails to show any practical utility, durability, or pricing details, relying entirely on cinematic aesthetics and celebrity appeal.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone who cares deeply about pragmatic budgeting and functional utility, a cinematic fashion collaboration between Apple and Raw Mango offers zero practical value for my purchasing decisions. Without sound, it's just a slow, pretty montage of ethnic wear with confusing timestamp-like on-screen text, feeling like superficial marketing hype rather than an honest product review or demonstration of durability.",
+        "biggest_issue": "It relies entirely on high-end cinematic aesthetics and celebrity appearances without showing any practical utility, pricing, or product durability details.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    }
+  ],
+  "wave1_personas": [
+    {
+      "id": "genz_dyn_1",
+      "archetype": "gen_z_scroller",
+      "age": "18-25",
+      "gender": "woman",
+      "region": "Pune, India",
+      "interests": [
+        "contemporary street style",
+        "smartphone photography",
+        "independent design labels"
+      ],
+      "language_pref": "Marathi/Hinglish",
+      "sound_on_probability": 0.61,
+      "scroll_habit": "Watches between classes and stops for a clear visual payoff.",
+      "base_skip_rate": 0.77,
+      "cares_about": [
+        "contemporary street style",
+        "smartphone photography",
+        "independent design labels"
+      ],
+      "pet_peeves": [
+        "blurry low-light camera sensors",
+        "overpriced fast fashion"
+      ],
+      "context": "She is a design student living in Bangalore who spends her afternoons sketching modern silhouettes and testing mobile camera filters."
+    },
+    {
+      "id": "genz_dyn_2",
+      "archetype": "gen_z_scroller",
+      "age": "18-24",
+      "gender": "woman",
+      "region": "Mumbai, India",
+      "interests": [
+        "mobile processor benchmarks",
+        "minimalist streetwear",
+        "graphic design trends"
+      ],
+      "language_pref": "Hindi/Hinglish",
+      "sound_on_probability": 0.28,
+      "scroll_habit": "Scrolls quickly on a crowded commute, usually muted with captions visible.",
+      "base_skip_rate": 0.82,
+      "cares_about": [
+        "mobile processor benchmarks",
+        "minimalist streetwear",
+        "graphic design trends"
+      ],
+      "pet_peeves": [
+        "laggy touch interfaces",
+        "poorly tailored clothing fits"
+      ],
+      "context": "He works as a junior UI developer in Pune and regularly tracks the latest mobile hardware releases and gadget specs."
+    },
+    {
+      "id": "casual_dyn_1",
+      "archetype": "casual_viewer",
+      "age": "30-42",
+      "gender": "man",
+      "region": "Patna, India",
+      "interests": [
+        "classic Bollywood cinema",
+        "festive ethnic attire",
+        "urban cafe culture"
+      ],
+      "language_pref": "Hindi/Bhojpuri",
+      "sound_on_probability": 0.64,
+      "scroll_habit": "Pauses for practical demonstrations but leaves if context takes too long.",
+      "base_skip_rate": 0.75,
+      "cares_about": [
+        "classic Bollywood cinema",
+        "festive ethnic attire",
+        "urban cafe culture"
+      ],
+      "pet_peeves": [
+        "uncomfortable footwear",
+        "clunky software updates"
+      ],
+      "context": "She is a marketing executive based in Mumbai who frequently attends cultural festivals and weekend film screenings."
+    },
+    {
+      "id": "casual_dyn_2",
+      "archetype": "casual_viewer",
+      "age": "25-34",
+      "gender": "woman",
+      "region": "Surat, India",
+      "interests": [
+        "handloom fabrics",
+        "architectural lighting",
+        "heritage conservation"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.22,
+      "scroll_habit": "Browses muted while commuting and only pauses for instantly clear visuals.",
+      "base_skip_rate": 0.83,
+      "cares_about": [
+        "handloom fabrics",
+        "architectural lighting",
+        "heritage conservation"
+      ],
+      "pet_peeves": [
+        "synthetic fabric blends",
+        "short battery life"
+      ],
+      "context": "He is an architect in Delhi who manages residential projects and appreciates clean industrial aesthetics combined with traditional textiles."
+    },
+    {
+      "id": "niche_fan_dyn_1",
+      "archetype": "niche_fan",
+      "age": "28-40",
+      "gender": "woman",
+      "region": "Indore, India",
+      "interests": [
+        "artisanal textile weaving",
+        "cinematic art direction",
+        "luxury branding"
+      ],
+      "language_pref": "Hindi",
+      "sound_on_probability": 0.58,
+      "scroll_habit": "Looks for ingredient detail and skips generic product praise.",
+      "base_skip_rate": 0.68,
+      "cares_about": [
+        "artisanal textile weaving",
+        "cinematic art direction",
+        "luxury branding"
+      ],
+      "pet_peeves": [
+        "machine-printed imitation weaves",
+        "gimmicky tech accessories"
+      ],
+      "context": "She works as a boutique stylist in Jaipur, curating heirloom sarees and styling editorial lookbooks for local publications."
+    },
+    {
+      "id": "niche_fan_dyn_2",
+      "archetype": "niche_fan",
+      "age": "18-29",
+      "gender": "man",
+      "region": "Kochi, India",
+      "interests": [
+        "anamorphic lens optics",
+        "costume design history",
+        "high-resolution sensors"
+      ],
+      "language_pref": "Malayalam/English",
+      "sound_on_probability": 0.38,
+      "scroll_habit": "Recognizes niche references quickly even with the phone muted.",
+      "base_skip_rate": 0.69,
+      "cares_about": [
+        "anamorphic lens optics",
+        "costume design history",
+        "high-resolution sensors"
+      ],
+      "pet_peeves": [
+        "overcompressed video exports",
+        "poorly cut tailoring"
+      ],
+      "context": "He is a documentary filmmaker in Hyderabad who invests heavily in high-end cinema cameras and professional color grading monitors."
+    },
+    {
+      "id": "skeptic_dyn_1",
+      "archetype": "skeptic",
+      "age": "26-36",
+      "gender": "woman",
+      "region": "Ahmedabad, India",
+      "interests": [
+        "product longevity",
+        "pragmatic budgeting",
+        "honest product reviews"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.63,
+      "scroll_habit": "Skips vague advice and saves only specific useful demonstrations.",
+      "base_skip_rate": 0.78,
+      "cares_about": [
+        "product longevity",
+        "pragmatic budgeting",
+        "honest product reviews"
+      ],
+      "pet_peeves": [
+        "overpriced luxury markups",
+        "superficial marketing hype"
+      ],
+      "context": "She is a financial analyst in Chennai who values functional utility and durability over fleeting design trends and celebrity endorsements."
+    },
+    {
+      "id": "creator_dyn_1",
+      "archetype": "creator_peer",
+      "age": "28-39",
+      "gender": "man",
+      "region": "Hyderabad, India",
+      "interests": [
+        "commercial videography lighting",
+        "cross-industry collaborations",
+        "visual storytelling"
+      ],
+      "language_pref": "Telugu/Hinglish",
+      "sound_on_probability": 0.59,
+      "scroll_habit": "Skips derivative jokes but appreciates a strong original performance.",
+      "base_skip_rate": 0.72,
+      "cares_about": [
+        "commercial videography lighting",
+        "cross-industry collaborations",
+        "visual storytelling"
+      ],
+      "pet_peeves": [
+        "uncredited creative work",
+        "restrictive brand guidelines"
+      ],
+      "context": "He operates a digital content studio in Kolkata, directing fashion lookbooks and managing brand partnership campaigns for lifestyle clients."
+    }
+  ],
+  "wave2": [
+    {
+      "persona_id": "casual_break_4",
+      "score": 2.076,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone taking a quick break who cares about practical DIY or local food, this cinematic fashion promo with Juhi Chawla and Apple doesn't offer anything useful or interesting for me to engage with. It's just models in ethnic wear and a slow-moving luxury ad that feels entirely disconnected from my interests.",
+        "biggest_issue": "The content is a high-end fashion and tech collaboration ad that completely lacks practical demonstrations or anything relevant to my interests in DIY or local food.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a guy taking a quick break who cares about practical DIYs and local food, a 42-second cinematic fashion ad with no captions and confusing numbers on screen doesn't hold my interest. Without sound, it just looks like a slow-moving clothing commercial, and I have no idea what is actually being sold or demonstrated.",
+        "biggest_issue": "Very slow cinematic pacing with no captions or clear explanation of what is being promoted, making it easy to scroll past for someone looking for practical content.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_commute_1",
+      "score": 2.638,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "Juhi Chawla caught my eye with the nice traditional look and the music at the start, but at 42 seconds long without captions or any clear practical use for me, I quickly lost interest and scrolled past.",
+        "biggest_issue": "Too long and lacks captions or clear value for a casual viewer looking for quick home or recipe ideas.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "clarity",
+          "sound_and_text",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Since I am browsing silently on my commute, I initially stopped because the traditional aesthetic and Juhi Chawla caught my eye, but the flashing countdown numbers and lack of captions made it confusing. It feels like an artsy ad rather than something practical for home ideas or recipes, so I quickly lost interest and kept scrolling.",
+        "biggest_issue": "Confusing on-screen countdown numbers and lack of captions or clear product context for a muted viewer.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_home_2",
+      "score": 2.445,
+      "sound_on_probability": 0.71,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "The cinematic visuals with Juhi Chawla and traditional ethnic wear are aesthetically pleasing, but as a guy from Bhopal relaxing after dinner who cares about cricket, travel, and cooking, high-end fashion promotional collaborations don't hold my interest for long. It feels more like an artistic mood piece than something practical or engaging for me.",
+        "biggest_issue": "The content is far outside my personal interests like cricket or family travel, lacking practical utility or a clear hook for my demographic.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The cinematic visuals and traditional ethnic wear look nice as I scroll past after dinner, but with sound off, it just feels like a slow fashion ad for expensive clothes. Since I care about practical family travel and cricket, this elegant brand collaboration doesn't hold my attention for long.",
+        "biggest_issue": "Very slow-paced aesthetic fashion promo with no clear practical hook or information for someone not into high-end designer wear.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_break_4",
+      "score": 4.334,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As someone who appreciates mobile filming and aesthetics, the cinematic look shot on an iPhone immediately caught my eye, especially with Juhi Chawla and the Raw Mango collaboration. However, it leans heavily into a high-end commercial vibe rather than a native creator performance or sketch, which makes me lose steam halfway through the 42 seconds since there's no real dialogue or character arc keeping me hooked.",
+        "biggest_issue": "It functions more like a traditional high-fashion ad rather than an engaging mobile-first video with a distinct point of view.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "clarity",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone into mobile filming and visual aesthetics, the cinematic look captured on an iPhone caught my eye initially. However, without sound and relying purely on visuals, it comes across as a high-end fashion ad rather than a sketch or performance with a character point of view. The text on screen is just random timestamps and branding without narrative hook.",
+        "biggest_issue": "Lack of narrative or dialogue-driven content to hook a creator peer interested in acting and sketches.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_commute_1",
+      "score": 6.793,
+      "sound_on_probability": 0.26,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 7,
+        "comment_likelihood": 6,
+        "reason": "The cinematic framing and the presence of Juhi Chawla in Raw Mango ethnic wear immediately caught my eye, and seeing an iPhone collaboration shot with such rich traditional Indian aesthetics is stunning. As someone into video editing and fashion, I loved the visual texture and lighting, though the lack of captions made it a bit harder to follow completely without text support.",
+        "biggest_issue": "The absence of captions means viewers missing the finer context or watching quietly lose out, even though the visuals carry most of the weight.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone who judges framing and pacing on transit with sound off, the cinematic traditional aesthetics and vibrant ethnic attire immediately caught my eye in the first three seconds. The visual quality is striking, though the on-screen text listing various timecodes feels a bit clunky and distracting without proper captioning formatting.",
+        "biggest_issue": "The on-screen text just lists random timecodes and brand names awkwardly without acting as proper readable captions or context clues for a sound-off viewer.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_home_2",
+      "score": 6.137,
+      "sound_on_probability": 0.82,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone into video production, the cinematic opening shot caught my attention immediately with its lighting and traditional aesthetics. The iPhone shoot by Raw Mango featuring Juhi Chawla is visually striking and held my interest across the 42 seconds, though the lack of captions and spoken dialogue meant I was just absorbing the aesthetic rather than learning much about technical production details.",
+        "biggest_issue": "No captions included and missing spoken dialogue or BTS insights that would make a video production enthusiast fully engage with how it was made.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "The cinematic opening with traditional aesthetics and Juhi Chawla caught my eye visually, even with sound off. However, without captions or a clear demonstration of the iPhone's camera capabilities or behind-the-scenes gear setup on screen, it dragged on as a standard luxury fashion ad rather than a compelling tech/video production collab.",
+        "biggest_issue": "Lack of captions or visual text explaining the production details or gear setup makes it feel like a generic fashion commercial rather than a creator-focused collaboration.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_break_4",
+      "score": 2.885,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "The cinematic traditional aesthetics and Juhi Chawla caught my eye for a second between classes, but it is just a high-end fashion and phone promo with zero hostel recipes or dance tutorials. At 42 seconds long with no captions and no clear hook for me, I quickly lost interest and kept scrolling.",
+        "biggest_issue": "It is a slow, cinematic fashion promo with no relevance to hostel cooking or dance tutorials, and it drags on for 42 seconds.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "The cinematic traditional aesthetics and Juhi Chawla in ethnic wear caught my eye for a few seconds because it looks pretty, but at 42 seconds with no captions and just random timestamps on screen, it drags. It is clearly a high-end fashion ad rather than anything related to hostel food or dance, so I lost interest quickly.",
+        "biggest_issue": "Way too long for a silent scroll without captions or a clear payoff for someone into campus life and dance.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_commute_1",
+      "score": 2.118,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "Juhi Chawla showing up in a Raw Mango outfit caught my eye for a second because it looks aesthetic, but it's a 42-second brand film with zero captions and no quick joke or hook. On a crowded local train commute, I'm scrolling fast and this feels way too slow and ad-like to stick around for.",
+        "biggest_issue": "Long cinematic setup with no captions or quick hook to keep a fast scroller interested.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Since my phone is muted on the train, I rely on captions to know what's going on, but this video doesn't have any captions. It just shows cinematic ethnic fashion and random timestamps/numbers on screen. Without audio or captions, I couldn't tell why Apple is involved or what I'm actually looking at, so I kept scrolling.",
+        "biggest_issue": "Missing captions make a muted brand promo completely incomprehensible on a commute.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_home_2",
+      "score": 1.046,
+      "sound_on_probability": 0.76,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 0,
+        "comment_likelihood": 0,
+        "reason": "It's just a slow, cinematic fashion ad with Juhi Chawla. There's no gaming reference, no punchline, and nothing funny or relatable for my squad. It looks pretty, but it's way too long and completely outside my interests.",
+        "biggest_issue": "Targeted entirely at a luxury fashion crowd rather than anyone interested in gaming or comedy.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a Gen Z guy who cares about gaming, comedy, and cricket, a 42-second cinematic fashion collab featuring ethnic wear and Juhi Chawla has zero relevance to me. With sound off, I'm just looking at traditional clothes and random countdown numbers on screen, which is completely boring for my feed.",
+        "biggest_issue": "Target audience mismatch for a Gen Z guy into gaming and comedy, with a slow 42-second runtime and no hook for my interests.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_break_4",
+      "score": 6.11,
+      "sound_on_probability": 0.62,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "The cinematic pairing of Apple and Raw Mango featuring Juhi Chawla immediately catches the eye with high production value and strong cultural resonance. As a marketer, I appreciate seeing how a tech giant adapts its promotional tone for the Indian festive and ethnic fashion market using an iPhone. However, at over 42 seconds with no clear CTA and heavy reliance on the aesthetic vibe, it loses a bit of retail punch by the end.",
+        "biggest_issue": "Long duration without a direct product demonstration or clear call to action.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a brand marketer, the cinematic visual quality and the unexpected collaboration between Apple and Raw Mango immediately caught my attention, especially seeing Juhi Chawla in traditional attire. However, with sound off, the strange on-screen text with raw timestamps made it a bit confusing to fully grasp the marketing intent right away, though the aesthetics kept me watching.",
+        "biggest_issue": "On-screen text contains confusing raw timestamps and lacks a clear message or CTA without audio context.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_commute_1",
+      "score": 6.65,
+      "sound_on_probability": 0.31,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As a brand marketer, the high-profile collaboration between Apple and Raw Mango featuring Juhi Chawla immediately caught my attention. The cinematic aesthetic and traditional Indian set design provide a gorgeous hook, and the branding is established nicely right away with the on-screen text. However, at 42 seconds with no clear CTA or dialogue, it drags a bit toward the end for a pure marketing asset.",
+        "biggest_issue": "The lack of a clear call-to-action or functional product demo leaves it feeling more like a pure artistic mood piece than a performance-driven brand campaign.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As a brand marketer commuting with audio off, the striking traditional Indian aesthetics and high-end cinematic visuals immediately caught my attention in the first three seconds. The on-screen text clearly establishes the Apple and Raw Mango collaboration right at the start, ticking my box for early brand recognition. While I wish there were proper captions for the countdown timer text, the visual execution is elegant and holds interest well.",
+        "biggest_issue": "The on-screen text with the countdown numbers feels a bit cryptic without audio context explaining what the timestamps mean.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_home_2",
+      "score": 6.4545,
+      "sound_on_probability": 0.77,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As a brand marketer, the high-production collaboration between Apple and Raw Mango immediately caught my eye with its cinematic aesthetic and star power. However, while the visual storytelling is gorgeous, it lacks a concrete product benefit demonstration or a measurable offer before ending, which slightly undershoots my preference for actionable D2C content.",
+        "biggest_issue": "No product benefit demonstration or clear call to action regarding the phone or apparel utility.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a brand marketer, the cinematic quality and high-profile collaboration between Apple and Raw Mango immediately caught my eye visually, even with sound off. However, without any clear product benefit, offer, or measurable terms being demonstrated, it leans heavily into pure aesthetic branding rather than performance marketing, leaving me wondering about the exact marketing objective.",
+        "biggest_issue": "Lack of clear product utility or benefit demonstration before relying purely on high-end cinematic visuals and brand prestige.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_break_4",
+      "score": 2.695,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone who cares deeply about skincare ingredients and dermatology, seeing a cinematic fashion collaboration between Apple and Raw Mango with Juhi Chawla didn't give me any practical skincare information or ingredient details to latch onto. It's beautiful and culturally rich, but it feels like a generic luxury brand ad rather than something useful for my routine.",
+        "biggest_issue": "Lack of relevant content regarding skincare or practical product details for my specific interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in skincare and dermatology, seeing a cinematic fashion collaboration with Juhi Chawla and Raw Mango doesn't offer me any useful ingredient details or skin advice. With sound off, I just see traditional Indian aesthetics and models in ethnic wear, which looks like a generic high-end fashion ad rather than anything relevant to my routine.",
+        "biggest_issue": "Completely unrelated to skincare, ingredients, or dermatology, making it irrelevant to my interests.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_commute_1",
+      "score": 2.395,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone who spends their time looking at anime collectibles and manga, a high-end fashion collaboration between Apple and Raw Mango featuring Juhi Chawla holds zero interest for me. While the cinematic shots look nice, it has nothing to do with my actual interests and feels like a standard corporate ad.",
+        "biggest_issue": "Completely disconnected from my niche interests like anime and collectibles, making it feel like irrelevant noise.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As an anime and collectibles fan commuting with the phone muted, traditional ethnic wear and cinematic fashion shots from a brand collaboration like Apple and Raw Mango don't catch my attention at all. The visuals are pretty, but there are no anime references or collectible details to keep me watching.",
+        "biggest_issue": "Complete mismatch with my personal interests in anime and collectibles, making a 42-second fashion promo drag.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_break_4",
+      "score": 2.7095,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As someone focused on business tips and clear value, a high-end fashion and phone brand collab with cinematic shots doesn't give me any practical takeaway or clear utility. It's pretty to look at with Juhi Chawla and traditional clothes, but it feels like a vague aesthetic ad rather than something useful I can save or apply.",
+        "biggest_issue": "Lack of practical utility or clear message for someone looking for concrete business or product details.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone looking for specific business tips or clear travel costs, this cinematic brand collaboration between Apple and Raw Mango doesn't offer me anything practical or actionable. Without sound, it's just a pretty video of models and Juhi Chawla in ethnic wear with confusing timer-like numbers on screen. It drags on for 42 seconds with no clear utility or explanation of what product is actually being sold or why I should care.",
+        "biggest_issue": "The video is too long and vague without sound, offering beautiful visuals of ethnic wear but zero practical information, clear product demonstration, or actionable takeaway.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_commute_1",
+      "score": 2.521,
+      "sound_on_probability": 0.34,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As someone who is naturally skeptical of tech marketing claims and looks for concrete product evidence, seeing a cinematic fashion collaboration with Juhi Chawla and Raw Mango didn't give me any practical reasons to stay. It looks beautiful, but there's no visible product comparison, pricing, or tech breakdown—just a 42-second aesthetic video.",
+        "biggest_issue": "Lack of concrete product details, pricing, or evidence to back up the tech claim, leaving it as just a high-end fashion ad.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone who cares about tech specs, real evidence, and clear value, a 42-second cinematic fashion ad featuring Juhi Chawla and traditional ethnic wear gives me zero reason to stop or stay. Without sound, I'm just looking at models in traditional outfits with a confusing timer countdown text on screen, and no clear product claim or price insight.",
+        "biggest_issue": "A lengthy, purely aesthetic fashion promo with no visible product utility, pricing, or tech evidence to satisfy a skeptical tech consumer.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "cta"
+        ]
+      }
+    }
+  ],
+  "waves_run": [
+    1,
+    2
+  ],
+  "wave1_selection": "dynamic",
+  "wave1_raw_ids": [
+    "genz_dyn_1",
+    "genz_dyn_2",
+    "casual_dyn_1",
+    "casual_dyn_2",
+    "niche_fan_dyn_1",
+    "niche_fan_dyn_2",
+    "skeptic_dyn_1",
+    "creator_dyn_1"
+  ],
+  "dimension_means": {
+    "wave1": {
+      "sound_on": {
+        "stop_scrolling": 7.0,
+        "watch_to_end": 6.25,
+        "share_likelihood": 5.625,
+        "comment_likelihood": 4.5
+      },
+      "sound_off": {
+        "stop_scrolling": 6.875,
+        "watch_to_end": 5.75,
+        "share_likelihood": 5.125,
+        "comment_likelihood": 3.625
+      }
+    },
+    "wave2": {
+      "sound_on": {
+        "stop_scrolling": 5.1875,
+        "watch_to_end": 4.0625,
+        "share_likelihood": 3.0625,
+        "comment_likelihood": 2.3125
+      },
+      "sound_off": {
+        "stop_scrolling": 4.8125,
+        "watch_to_end": 3.4375,
+        "share_likelihood": 2.625,
+        "comment_likelihood": 1.875
+      }
+    }
+  },
+  "per_persona_scores": {
+    "casual_dyn_1": 7.2,
+    "casual_dyn_2": 6.826,
+    "creator_dyn_1": 6.9745,
+    "genz_dyn_1": 6.894,
+    "genz_dyn_2": 2.62,
+    "niche_fan_dyn_1": 7.137,
+    "niche_fan_dyn_2": 6.897,
+    "skeptic_dyn_1": 2.328,
+    "casual_break_4": 2.076,
+    "casual_commute_1": 2.638,
+    "casual_home_2": 2.445,
+    "creator_break_4": 4.334,
+    "creator_commute_1": 6.793,
+    "creator_home_2": 6.137,
+    "genz_break_4": 2.885,
+    "genz_commute_1": 2.118,
+    "genz_home_2": 1.046,
+    "marketer_break_4": 6.11,
+    "marketer_commute_1": 6.65,
+    "marketer_home_2": 6.4545,
+    "niche_fan_break_4": 2.695,
+    "niche_fan_commute_1": 2.395,
+    "skeptic_break_4": 2.7095,
+    "skeptic_commute_1": 2.521
+  },
+  "label": "Virality potential estimate",
+  "core_resonance": 5.8596,
+  "crossover_score": 3.7504,
+  "final_score": 5.8596,
+  "reach_tier": "Medium",
+  "tier_note": "",
+  "gate_passed": true,
+  "personas_intended": 24,
+  "personas_scored": 24,
+  "personas_failed": [],
+  "complete": true,
+  "suggestions": [
+    {
+      "suggestion": "Add clean readable text captions and a visible product call-to-action like 'Shot on iPhone x Raw Mango - Tap to explore the collection' at the very end to guide muted viewers.",
+      "evidence": "casual_dyn_1",
+      "persona_id": "casual_dyn_1",
+      "quote": "The video lacks captions and clear text pacing to maintain engagement through the entire 42 seconds without sound.",
+      "criterion": "clarity"
+    },
+    {
+      "suggestion": "Replace the confusing raw countdown timestamps with descriptive text overlays highlighting the iPhone camera capabilities and ethnic textile details during the middle scenes.",
+      "evidence": "genz_dyn_1",
+      "persona_id": "genz_dyn_1",
+      "quote": "The on-screen text with countdown timestamps feels messy and lacks clear context without audio.",
+      "criterion": "sound_and_text"
+    },
+    {
+      "suggestion": "Trim the runtime down closer to the suggested 21-34 second ad length and include a direct payoff or end screen to prevent the video from dragging.",
+      "evidence": "casual_dyn_1",
+      "persona_id": "casual_dyn_1",
+      "quote": "Lack of captions and absence of a clear call to action make it feel more like an art piece than a product ad, and it drags slightly toward the end.",
+      "criterion": "retention"
+    }
+  ],
+  "errors": [],
+  "call_count": 52
+}

@@ -1,0 +1,1110 @@
+{
+  "framework_version": "0.1-draft",
+  "niche_category": "general",
+  "niche_reason": "The video showcases a software and tech demo at a conference rather than explicitly teaching a concept or promoting a brand's own product.",
+  "brief": {
+    "hook_first_3s": "A young man recording in an audience reacts excitedly while watching a live presentation on a large screen about a new image editing tool.",
+    "what_is_shown": "A person recording a live tech conference presentation where a speaker demonstrates an AI image editing tool that lets users drag and adjust elements like paper dolls.",
+    "on_screen_text": "anikjaindesign, 0:23, this is gonna completely change how we edit our images, Project Hands On, Today only 25% OFF, All pajamas and bedding, learn more...",
+    "has_captions": true,
+    "duration_sec": 23.4,
+    "tone": "enthusiastic, informative",
+    "topic_niche": "technology and design",
+    "niche_category": "general",
+    "niche_reason": "The video showcases a software and tech demo at a conference rather than explicitly teaching a concept or promoting a brand's own product.",
+    "target_audience_guess": {
+      "age_range": "18-35",
+      "interests": [
+        "graphic design",
+        "AI tools",
+        "tech news",
+        "photography"
+      ],
+      "region": "global"
+    },
+    "has_cta": false,
+    "cta_text": "",
+    "framework_version": "0.1-draft",
+    "language": "English",
+    "transcript_best_effort": "it works, and it's fun. It's like those paper dolls, right? But you can play with, and then also design and let's change. Again, it's not perfect, but it's just a preview that we send all the information to the image models, and the results follow.",
+    "music_present": false,
+    "mood": "excited",
+    "energy": "high",
+    "voice_clarity": 5,
+    "background_noise": "medium",
+    "first_3_seconds_sound": "A man is speaking about a product feature, accompanied by crowd chatter and murmur.",
+    "sound_dependent": false,
+    "available": true,
+    "mean_volume_db": -17.9,
+    "max_volume_db": -0.8,
+    "silence_ratio": 0.009456402424596312,
+    "first_sound_sec": 0.0
+  },
+  "wave1": [
+    {
+      "persona_id": "casual_dyn_1",
+      "score": 4.35,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 5,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "Since I like photography and looking at tools, the demo of an AI image editing tool caught my eye immediately. Watching someone drag and adjust elements like paper dolls on a big screen is pretty neat. However, the background noise and conference setting make it a bit messy to watch all the way through, and it feels more like a quick tech snippet than something I need to keep watching.",
+        "biggest_issue": "Conference recording quality is a bit noisy and distracting.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The opening shows a live tech conference presentation about a new image editing tool, which caught my attention given my interest in photography and design. However, the on-screen text cluttered the screen with unrelated promotions for pajamas and bedding, making it confusing to follow the context.",
+        "biggest_issue": "Confusing and irrelevant on-screen text about pajamas and bedding mixed into a tech demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_dyn_2",
+      "score": 4.89,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As someone interested in tech news and mobile apps, seeing a live demonstration of a new AI image editing tool caught my attention right away. The enthusiasm in the room and the visual of dragging elements like paper dolls felt genuinely interesting to watch unfold.",
+        "biggest_issue": "The on-screen text contains a weird mixture of a discount offer for pajamas and bedding alongside the design caption, which feels a bit messy and distracting.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 5,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As someone interested in tech news and mobile apps, seeing a live presentation of a new AI image editing tool caught my eye. The visuals clearly showed a person reacting to a conference demo about a software feature. However, the on-screen text had a bizarre mix-up with a 25% discount on pajamas and bedding which detracted from the tech focus, making it a bit confusing.",
+        "biggest_issue": "Confusing and irrelevant on-screen text about pajamas and bedding mixed into a tech demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_dyn_1",
+      "score": 6.3615,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone interested in video editing and tech tools, seeing a live demo of a new AI image manipulation feature caught my attention right away. The energy in the clip is engaging, and it gives a quick look at a potentially useful workflow tool.",
+        "biggest_issue": "The audio has some background chatter and the voice clarity isn't the crispest, though it doesn't cross into harsh audio feedback.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 5,
+        "reason": "As a creator working in digital art, seeing live demos of new image editing AI tools catches my attention immediately. The hook shows a genuine reaction to a conference presentation, and the visual demonstration of dragging elements like paper dolls is fascinating from an editing perspective. Since I am watching with sound off, the on-screen text helps explain the context, though it gets a bit cluttered with random promo text at the end.",
+        "biggest_issue": "The on-screen text includes unrelated discount info at the end which dilutes the tech focus.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_1",
+      "score": 7.0015,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 8,
+        "watch_to_end": 7,
+        "share_likelihood": 8,
+        "comment_likelihood": 6,
+        "reason": "As someone studying digital media and graphic design, seeing a cool new AI editing tool demo right away made me stop instantly. The paper doll analogy for image manipulation is super interesting and relevant to my interests. I watched most of it to see how the tool works, though the background noise and conference setup made the audio a bit messy. I'd definitely share this with my design friends on IG.",
+        "biggest_issue": "The audio has some background chatter and medium noise which makes it feel a bit rough, even though the visual demo is cool.",
+        "criteria_cited": [
+          "hook",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "Since I am watching without sound, the visual of someone reacting excitedly to a live tech demo on a big screen immediately caught my eye as a design student. Watching someone interact with an AI image editing tool like paper dolls looks genuinely interesting. However, the random on-screen text about 25% off pajamas and bedding is super cluttered and distracting, which clashes with my pet peeve for messy layouts.",
+        "biggest_issue": "Cluttered and confusing on-screen text mixing up software tools with random shopping discounts.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_dyn_2",
+      "score": 5.52,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 5,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As a junior frontend developer interested in AI tools, seeing a live tech conference demo caught my attention right away in the first couple of seconds. The paper doll-like AI image editing concept looks genuinely cool to play around with. However, the background noise makes the audio a bit muddy, and the on-screen text has weird ad overlays or clutter unrelated to the actual tool being demoed. It's a neat preview, but without a deep dive into the actual workflow or coding/UI implementation, it's just a quick watch rather than something I'd share or comment on.",
+        "biggest_issue": "Confusing on-screen text with unrelated promotional clutter and somewhat noisy audio detract from a clean tech demo experience.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a frontend dev interested in AI tools, seeing a live conference demo of a new image editing workflow caught my eye immediately, even with sound off on my commute. The visual of the drag-and-drop feature looked genuinely cool and useful. However, the random on-screen text about a 25% off pajama and bedding sale was super confusing and ruined the clean tech vibe.",
+        "biggest_issue": "Irrelevant and confusing e-commerce promotional text overlaid on a tech conference demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_1",
+      "score": 5.8,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a designer, seeing a new tool demo like Project Hands On catches my eye right away, and the paper doll analogy in the audio is intriguing. However, the background noise and conference setup make it feel a bit like a casual reaction clip rather than a deep dive into vector tools or design systems. I stayed to watch the whole thing because of the tech preview, but it didn't give me enough actionable design detail to share or comment.",
+        "biggest_issue": "The conference recording format lacks deep technical or workflow detail, leaving me wanting more substance about how the tool actually functions.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a brand identity designer, seeing a new AI tool demonstrated at a live conference immediately catches my eye, even with the sound off. The visual of manipulating image elements like paper dolls is intriguing. However, the random on-screen text about a 25% discount on pajamas and bedding is completely disjointed and confusing, which hurts the overall clarity.",
+        "biggest_issue": "Confusing and irrelevant on-screen text about pajamas and bedding paired with a tech conference demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_dyn_2",
+      "score": 6.205,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 7,
+        "watch_to_end": 6,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone interested in new tech tools and AI developments, seeing a live preview of an interactive image editing model caught my attention immediately. The hook showing an excited reaction to a conference demo made me stop to see what tool was being showcased. However, the random on-screen text about pajamas and bedding was distracting and slightly confusing.",
+        "biggest_issue": "Irrelevant e-commerce on-screen text cluttering a tech demo video.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 7,
+        "watch_to_end": 7,
+        "share_likelihood": 6,
+        "comment_likelihood": 4,
+        "reason": "As someone interested in tech and software tools, seeing a live conference demo of a new AI image editing feature immediately caught my attention even with the sound off. The visual of the dragging and adjusting interaction was clear, and I wanted to see how the tool worked.",
+        "biggest_issue": "The on-screen text includes unrelated discount info for pajamas and bedding right alongside the software handle, which is distracting and out of place.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_dyn_1",
+      "score": 2.8945,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a cybersecurity analyst, I am naturally skeptical of flashy AI tool demos, especially when the transcript casually mentions 'we send all the information to the image models.' The video shows a neat conference presentation, but it doesn't offer deep technical insights or address data privacy concerns regarding where all that user image data is going.",
+        "biggest_issue": "The content feels like overhyped tech marketing rather than a reliable, practical demonstration, and it glosses over privacy implications.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a cybersecurity analyst, I am instantly suspicious of overhyped AI image editing claims flashing on screen alongside random e-commerce text about pajamas and bedding. The hook just shows someone reacting excitedly at a conference without giving me a substantive technical breakdown or security evaluation of the tool being demonstrated.",
+        "biggest_issue": "The on-screen text mixes an unverified software hype claim with unrelated retail promos, lacking the technical depth I look for.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    }
+  ],
+  "wave1_personas": [
+    {
+      "id": "genz_dyn_1",
+      "archetype": "gen_z_scroller",
+      "age": "18-25",
+      "gender": "woman",
+      "region": "Pune, India",
+      "interests": [
+        "graphic design",
+        "digital aesthetics",
+        "visual trends"
+      ],
+      "language_pref": "Marathi/Hinglish",
+      "sound_on_probability": 0.61,
+      "scroll_habit": "Watches between classes and stops for a clear visual payoff.",
+      "base_skip_rate": 0.77,
+      "cares_about": [
+        "graphic design",
+        "digital aesthetics",
+        "visual trends"
+      ],
+      "pet_peeves": [
+        "cluttered layouts",
+        "slow loading software"
+      ],
+      "context": "She is a university student studying digital media and working part-time at a campus coffee shop."
+    },
+    {
+      "id": "genz_dyn_2",
+      "archetype": "gen_z_scroller",
+      "age": "18-24",
+      "gender": "woman",
+      "region": "Mumbai, India",
+      "interests": [
+        "AI tools",
+        "coding workflows",
+        "typography"
+      ],
+      "language_pref": "Hindi/Hinglish",
+      "sound_on_probability": 0.28,
+      "scroll_habit": "Scrolls quickly on a crowded commute, usually muted with captions visible.",
+      "base_skip_rate": 0.82,
+      "cares_about": [
+        "AI tools",
+        "coding workflows",
+        "typography"
+      ],
+      "pet_peeves": [
+        "poor user interfaces",
+        "unresponsive websites"
+      ],
+      "context": "He works as a junior frontend developer in a mid-sized software startup."
+    },
+    {
+      "id": "casual_dyn_1",
+      "archetype": "casual_viewer",
+      "age": "30-42",
+      "gender": "man",
+      "region": "Patna, India",
+      "interests": [
+        "photography",
+        "minimalist interiors",
+        "color palettes"
+      ],
+      "language_pref": "Hindi/Bhojpuri",
+      "sound_on_probability": 0.64,
+      "scroll_habit": "Pauses for practical demonstrations but leaves if context takes too long.",
+      "base_skip_rate": 0.75,
+      "cares_about": [
+        "photography",
+        "minimalist interiors",
+        "color palettes"
+      ],
+      "pet_peeves": [
+        "blurry images",
+        "overcomplicated gadgets"
+      ],
+      "context": "She is an administrative assistant who enjoys browsing lifestyle blogs on the weekends."
+    },
+    {
+      "id": "casual_dyn_2",
+      "archetype": "casual_viewer",
+      "age": "25-34",
+      "gender": "woman",
+      "region": "Surat, India",
+      "interests": [
+        "tech news",
+        "smart home devices",
+        "mobile apps"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.22,
+      "scroll_habit": "Browses muted while commuting and only pauses for instantly clear visuals.",
+      "base_skip_rate": 0.83,
+      "cares_about": [
+        "tech news",
+        "smart home devices",
+        "mobile apps"
+      ],
+      "pet_peeves": [
+        "batteries that drain fast",
+        "misleading product specs"
+      ],
+      "context": "He works in logistics and spends his evenings reading about upcoming consumer electronics."
+    },
+    {
+      "id": "niche_fan_dyn_1",
+      "archetype": "niche_fan",
+      "age": "28-40",
+      "gender": "woman",
+      "region": "Indore, India",
+      "interests": [
+        "vector illustration",
+        "brand strategy",
+        "design systems"
+      ],
+      "language_pref": "Hindi",
+      "sound_on_probability": 0.58,
+      "scroll_habit": "Looks for ingredient detail and skips generic product praise.",
+      "base_skip_rate": 0.68,
+      "cares_about": [
+        "vector illustration",
+        "brand strategy",
+        "design systems"
+      ],
+      "pet_peeves": [
+        "unsolicited design feedback",
+        "missing source files"
+      ],
+      "context": "She is a freelance brand identity designer managing multiple client accounts from home."
+    },
+    {
+      "id": "niche_fan_dyn_2",
+      "archetype": "niche_fan",
+      "age": "18-29",
+      "gender": "man",
+      "region": "Kochi, India",
+      "interests": [
+        "neural networks",
+        "productivity software",
+        "open source projects"
+      ],
+      "language_pref": "Malayalam/English",
+      "sound_on_probability": 0.38,
+      "scroll_habit": "Recognizes niche references quickly even with the phone muted.",
+      "base_skip_rate": 0.69,
+      "cares_about": [
+        "neural networks",
+        "productivity software",
+        "open source projects"
+      ],
+      "pet_peeves": [
+        "paywalled features",
+        "broken API integrations"
+      ],
+      "context": "He is an avid hobbyist who tests out machine learning models and automation scripts in his spare time."
+    },
+    {
+      "id": "skeptic_dyn_1",
+      "archetype": "skeptic",
+      "age": "26-36",
+      "gender": "woman",
+      "region": "Ahmedabad, India",
+      "interests": [
+        "data privacy",
+        "software security",
+        "hardware reliability"
+      ],
+      "language_pref": "Gujarati/Hindi",
+      "sound_on_probability": 0.63,
+      "scroll_habit": "Skips vague advice and saves only specific useful demonstrations.",
+      "base_skip_rate": 0.78,
+      "cares_about": [
+        "data privacy",
+        "software security",
+        "hardware reliability"
+      ],
+      "pet_peeves": [
+        "overhyped tech claims",
+        "unnecessary data collection"
+      ],
+      "context": "He works as a cybersecurity analyst and prefers traditional, proven hardware setups over new trends."
+    },
+    {
+      "id": "creator_dyn_1",
+      "archetype": "creator_peer",
+      "age": "28-39",
+      "gender": "man",
+      "region": "Hyderabad, India",
+      "interests": [
+        "video editing",
+        "creative lighting",
+        "audio equipment"
+      ],
+      "language_pref": "Telugu/Hinglish",
+      "sound_on_probability": 0.59,
+      "scroll_habit": "Skips derivative jokes but appreciates a strong original performance.",
+      "base_skip_rate": 0.72,
+      "cares_about": [
+        "video editing",
+        "creative lighting",
+        "audio equipment"
+      ],
+      "pet_peeves": [
+        "copyright infringement",
+        "harsh audio feedback"
+      ],
+      "context": "She produces educational videos about digital art techniques and software tutorials."
+    }
+  ],
+  "wave2": [
+    {
+      "persona_id": "casual_break_4",
+      "score": 3.056,
+      "sound_on_probability": 0.64,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The video shows a neat AI tech demo, but as someone interested in DIY and local food, a software presentation at a conference doesn't hold my attention for long. The context takes a bit to parse and it's not a practical repair or local dish.",
+        "biggest_issue": "Not aligned with personal interests in DIY or local food.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The opening shows a guy reacting at a live event, but as a casual viewer interested in DIY and local food, a tech demo about AI image editing tools doesn't connect with my everyday interests. The on-screen text also mixes up design tools with a pajama sale discount, which made it confusing.",
+        "biggest_issue": "The topic of AI image editing tools is completely outside my interests in DIY and local food, making it hard to care about the demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_commute_1",
+      "score": 1.482,
+      "sound_on_probability": 0.22,
+      "sound_on": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I was looking for home ideas or a quick recipe during my commute, but instead it's just a tech conference video about AI image editing. It doesn't connect with my interests at all.",
+        "biggest_issue": "Not related to home ideas, recipes, or comedy, so it failed to keep my attention.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone commuting and browsing muted, I stopped for a second because of the live presentation visuals, but the confusing mix of a tech demo and random pajamas/bedding sale text on screen made it completely irrelevant to my home ideas or recipe interests.",
+        "biggest_issue": "Confusing on-screen text advertising pajamas and bedding over a tech conference video ruins clarity.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "casual_home_2",
+      "score": 2.834,
+      "sound_on_probability": 0.71,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a casual viewer relaxing after dinner, seeing a live tech conference presentation about an AI image editing tool isn't very relevant to my main interests in cricket, travel, or home cooking. The opening shows someone reacting in an audience, but the software demo itself feels a bit dry and unrelated to my daily life, causing me to scroll past quickly.",
+        "biggest_issue": "The topic of AI image editing tools is outside my core interests in cooking, travel, and cricket, making it hard to stay engaged.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As a casual viewer sitting down after dinner in Bhopal who is more into cricket, travel, and cooking, a tech conference demo about AI image editing tools doesn't grab my attention. Without sound, seeing someone react to a big screen showing paper doll-like editing feels a bit abstract and doesn't connect with my interests. The on-screen text also mixes up design tools with a bedding sale, which makes it confusing.",
+        "biggest_issue": "The topic of AI image editing tools is outside my core interests of cricket, travel, and cooking, and the silent visuals combined with confusing text don't pull me in.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_break_4",
+      "score": 3.741,
+      "sound_on_probability": 0.59,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "As someone into acting and creator videos, seeing someone record a tech presentation with a bit of live excitement caught my attention for a second, but it quickly just feels like a standard event clip rather than a performance or sketch I can sink my teeth into.",
+        "biggest_issue": "It feels more like a standard tech news repost than an original creator piece with a clear character point of view.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "As a creator peer watching with sound off, the opening showing someone reacting in an audience at a tech conference caught my attention briefly to see what was on the screen. However, without audio, the visual of a person recording a presentation doesn't give a strong enough character-driven performance or sketch element to hold my interest all the way through the 23 seconds, especially with distracting retail promotional text overlaid.",
+        "biggest_issue": "Confusing mix of tech demo visuals and unrelated retail promo text on screen without clear audio context.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_commute_1",
+      "score": 5.034,
+      "sound_on_probability": 0.26,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "The hook immediately shows a tech conference reaction which caught my eye as a creator interested in editing tools. The demo of the AI image editing tool like paper dolls was genuinely interesting to watch until the end. However, the random e-commerce promo text 'All pajamas and bedding' in the overlay felt disjointed and messy for a tech preview, and the text placement risked hitting app controls. Still, the core concept kept me engaged.",
+        "biggest_issue": "Confusing overlay text promoting pajamas and bedding on a tech design video.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 6,
+        "watch_to_end": 5,
+        "share_likelihood": 4,
+        "comment_likelihood": 3,
+        "reason": "As someone who judges framing and pacing on transit with sound off, the opening visual of someone reacting excitedly to a screen caught my eye, though the sudden mix of tech demo and unrelated pajama sale text in the captions was confusing. The captions were visible and mostly within the safe area, but the content shifted context abruptly.",
+        "biggest_issue": "Confusing mix of tech demo visuals with unrelated e-commerce text in the captions, lacking a clear single idea.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "creator_home_2",
+      "score": 5.205,
+      "sound_on_probability": 0.82,
+      "sound_on": {
+        "stop_scrolling": 6,
+        "watch_to_end": 7,
+        "share_likelihood": 5,
+        "comment_likelihood": 4,
+        "reason": "As a creator who pays attention to tech and tools, the live demo of an AI image editing feature caught my interest right away. The background noise was a bit loud, but the spoken demo was understandable and the concept was cool to see in action.",
+        "biggest_issue": "The background noise and crowd murmur made the audio feel slightly messy, even though the dialogue was still followable.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The opening shows a man reacting at a live event, but the on-screen text abruptly shifts into random promotional text for 'All pajamas and bedding' with a 25% off discount, which completely breaks the context of a tech demo. As someone who cares about video production and clear visual framing, the clash between the tech demonstration visuals and retail text on screen makes it confusing and loses my interest quickly.",
+        "biggest_issue": "Confusing on-screen text mixing a tech conference demo with unrelated retail product promotions.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_break_4",
+      "score": 2.8,
+      "sound_on_probability": 0.61,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "The hook just shows someone reacting to a tech conference screen, which doesn't really catch my attention since I'm mostly into food and dance stuff. It's about AI image editing tools, which is totally outside what I care about. There's no hostel recipe or dance move for me to learn, so I scrolled past pretty quickly.",
+        "biggest_issue": "The topic of tech conference AI tools has zero relevance to my interests in food, campus life, and dance.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "I'm looking for hostel food recipes or dance moves, not tech conference demos about AI image editing. Even though I paused briefly to see what was happening on the big screen, it didn't give me any practical takeaway for my interests.",
+        "biggest_issue": "Content is totally outside my interests in food and dance, offering nothing relevant to my daily life.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_commute_1",
+      "score": 2.23,
+      "sound_on_probability": 0.28,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The tech demo looks mildly interesting, but it's just a guy recording a conference screen, which doesn't really grab my attention on a crowded commute. I don't care about AI image editing tools enough to sit through a 23-second clip of someone else's excitement.",
+        "biggest_issue": "A long setup before the funny bit",
+        "criteria_cited": [
+          "hook",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I am on my crowded commute with sound off, and the text overlay includes random ads for pajamas and bedding mixed in with a tech demo. It takes too long to figure out what is actually happening in the video, and there is no joke or relatable meme to keep me hooked.",
+        "biggest_issue": "Confusing on-screen text with unrelated shopping ads and a slow setup without an immediate visual hook.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "genz_home_2",
+      "score": 2.71,
+      "sound_on_probability": 0.76,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The tech demo looks mildly interesting since it's about AI image editing, but it has nothing to do with gaming, cricket, or comedy. It doesn't give me any clever reference to send to my squad, so I quickly lose interest.",
+        "biggest_issue": "Total niche mismatch for my interests in gaming and comedy, offering no relatable punchlines or squad material.",
+        "criteria_cited": [
+          "hook",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 3,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "Since I am scrolling with sound off, I just see a guy recording a conference screen showing some tech demo. It doesn't have anything to do with gaming, comedy, or cricket, and there's no clever gaming reference or Hinglish punchline for me. Just looks like dry tech news.",
+        "biggest_issue": "Completely outside my interests in gaming and comedy, offering zero visual hook without the audio context.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_break_4",
+      "score": 3.121,
+      "sound_on_probability": 0.62,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The hook of someone reacting excitedly in an audience caught my attention briefly, but as a brand marketer, the content feels a bit like generic conference hype rather than a solid retail or consumer demonstration. It's interesting to see new tech previews, but without a clear connection to practical retail application or consumer research insights, it doesn't compel me to share it internally with the team.",
+        "biggest_issue": "Lack of clear audience fit or practical application for retail/consumer research contexts.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 5,
+        "watch_to_end": 4,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As a marketer watching without sound, I saw a conference reaction shot that quickly pivoted to random e-commerce text about pajamas and bedding. The disconnect between a live tech demo and a retail discount overlay was confusing and ruined the professional utility.",
+        "biggest_issue": "Confusing mix of a tech demo visual with mismatched promotional text overlay about pajamas and bedding.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_commute_1",
+      "score": 2.95,
+      "sound_on_probability": 0.31,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a brand marketer, I'm immediately distracted by the text overlay which completely contradicts the video content—it talks about a tech conference and AI image editing tool, but the text on screen is pushing a 25% discount on pajamas and bedding. That kind of disconnect is a jarring user experience and signals poor campaign execution.",
+        "biggest_issue": "Mismatched on-screen text advertising e-commerce discount on a tech conference video.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a marketer commuting with sound off, the opening didn't immediately signal a clear brand or product benefit for my interests, and the text overlay suddenly mixing in pajama and bedding sales distracted completely from the tech demo.",
+        "biggest_issue": "Confusing on-screen text about pajamas and bedding paired with a tech demo breaks clarity and audience targeting.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      }
+    },
+    {
+      "persona_id": "marketer_home_2",
+      "score": 3.5275,
+      "sound_on_probability": 0.77,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 5,
+        "share_likelihood": 3,
+        "comment_likelihood": 2,
+        "reason": "The text overlay mentions a 25% discount on pajamas and bedding while the video itself is about an AI image editing tool at a tech conference. This mismatch is confusing and makes the promotional overlay feel jarring and untargeted, violating my expectation for clear terms and relevance.",
+        "biggest_issue": "Confusing on-screen text mismatching the tech demo content with apparel discounts.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "sound_and_text"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As a marketer, the hook caught my attention with a live tech conference demo, but the on-screen text completely ruined the context by talking about 25% off pajamas and bedding. The disconnect between the AI image editing tool being shown and the retail discount copy is confusing and undermines the professionalism of the ad.",
+        "biggest_issue": "Disjointed on-screen text promoting unrelated retail items over a tech product demo.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_break_4",
+      "score": 1.495,
+      "sound_on_probability": 0.58,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 2,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "This tech demo about an AI image editing tool has nothing to do with skincare, ingredients, or dermatology. As someone who looks specifically for skincare content, I have no interest in graphic design software.",
+        "biggest_issue": "Complete niche mismatch for my interests in skincare and dermatology.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As someone interested in skincare and dermatology, seeing a tech conference demo about AI image editing has zero relevance to me. The on-screen text even abruptly switches to promoting pajamas and bedding sales, which is completely confusing.",
+        "biggest_issue": "Complete niche mismatch and confusing on-screen text about pajamas and bedding mixed with a tech conference.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention",
+          "shareability"
+        ]
+      }
+    },
+    {
+      "persona_id": "niche_fan_commute_1",
+      "score": 1.35,
+      "sound_on_probability": 0.38,
+      "sound_on": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "As an anime and collectibles fan who doesn't follow tech design software, a clip of a guy reacting to an AI image editing tool at a conference has zero relevance to my interests. The paper doll analogy doesn't appeal to me, and there's nothing here for someone looking for anime references or collectibles.",
+        "biggest_issue": "Total niche mismatch for an anime and collectibles enthusiast.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "shareability"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 2,
+        "watch_to_end": 1,
+        "share_likelihood": 1,
+        "comment_likelihood": 1,
+        "reason": "I am looking for anime references and collectibles, and this video is a tech conference demo about an AI image editing tool. Even though my phone is muted, the on-screen text and visuals clearly show software features rather than anything related to my interests, so I quickly lost interest.",
+        "biggest_issue": "The tech conference topic has no connection to my interests in anime and collectibles.",
+        "criteria_cited": [
+          "hook",
+          "clarity"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_break_4",
+      "score": 2.8555,
+      "sound_on_probability": 0.63,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 1,
+        "reason": "As someone focused on business and practical utilities, seeing an AI tech demo at a conference is mildly interesting, but it feels like vague tech hype rather than a specific tool or business tip I can use right now. There are no clear details on what the tool is called or how to access it, and the on-screen text abruptly shifts to promoting pajamas and bedding, which completely ruins the credibility.",
+        "biggest_issue": "The on-screen text shifts to an unrelated retail discount while the video shows a tech demo, creating confusion and lacking any practical utility.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "As someone interested in business and practical tools, I stopped briefly out of curiosity when I saw a live conference screen, but the on-screen text abruptly shifts into random promotional text for pajamas and bedding (\"Today only 25% OFF\"), completely muddying what is actually being showcased. Without audio, it just looks like a confused mix of a tech demo and an unrelated sale.",
+        "biggest_issue": "Confusing on-screen text that mixes a tech demo with an irrelevant retail discount ad ruins the clarity.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    },
+    {
+      "persona_id": "skeptic_commute_1",
+      "score": 2.95,
+      "sound_on_probability": 0.34,
+      "sound_on": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The opening shows a reaction to a live tech presentation, but as a skeptic looking for product claims backed by visible tests or comparisons, a conference demo falls short of real evidence. Furthermore, the on-screen text abruptly pitches pajamas and bedding with a 25 percent off deal, which feels disjointed and raises questions about hidden promotions.",
+        "biggest_issue": "The tech demo lacks a rigorous test condition, and the sudden promotional text for pajamas makes the video feel confusing.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      },
+      "sound_off": {
+        "stop_scrolling": 4,
+        "watch_to_end": 3,
+        "share_likelihood": 2,
+        "comment_likelihood": 2,
+        "reason": "The opening shows someone reacting at a tech conference, but without audio, it's hard to tell what the actual software does beyond vague hand gestures. The on-screen text also abruptly pivots to a random pajama and bedding discount, which looks like a spammy caption glitch and immediately triggers my skepticism.",
+        "biggest_issue": "Confusing on-screen text mixing a tech demo with a random bedding sale, plus no clear evidence or comparison of the AI tool's actual capabilities.",
+        "criteria_cited": [
+          "hook",
+          "clarity",
+          "retention"
+        ]
+      }
+    }
+  ],
+  "waves_run": [
+    1,
+    2
+  ],
+  "wave1_selection": "dynamic",
+  "wave1_raw_ids": [
+    "genz_dyn_1",
+    "genz_dyn_2",
+    "casual_dyn_1",
+    "casual_dyn_2",
+    "niche_fan_dyn_1",
+    "niche_fan_dyn_2",
+    "skeptic_dyn_1",
+    "creator_dyn_1"
+  ],
+  "dimension_means": {
+    "wave1": {
+      "sound_on": {
+        "stop_scrolling": 6.5,
+        "watch_to_end": 5.75,
+        "share_likelihood": 5.125,
+        "comment_likelihood": 3.875
+      },
+      "sound_off": {
+        "stop_scrolling": 6.125,
+        "watch_to_end": 5.625,
+        "share_likelihood": 4.5,
+        "comment_likelihood": 3.375
+      }
+    },
+    "wave2": {
+      "sound_on": {
+        "stop_scrolling": 3.9375,
+        "watch_to_end": 3.5625,
+        "share_likelihood": 2.3125,
+        "comment_likelihood": 1.9375
+      },
+      "sound_off": {
+        "stop_scrolling": 3.75,
+        "watch_to_end": 2.75,
+        "share_likelihood": 1.8125,
+        "comment_likelihood": 1.5
+      }
+    }
+  },
+  "per_persona_scores": {
+    "casual_dyn_1": 4.35,
+    "casual_dyn_2": 4.89,
+    "creator_dyn_1": 6.3615,
+    "genz_dyn_1": 7.0015,
+    "genz_dyn_2": 5.52,
+    "niche_fan_dyn_1": 5.8,
+    "niche_fan_dyn_2": 6.205,
+    "skeptic_dyn_1": 2.8945,
+    "casual_break_4": 3.056,
+    "casual_commute_1": 1.482,
+    "casual_home_2": 2.834,
+    "creator_break_4": 3.741,
+    "creator_commute_1": 5.034,
+    "creator_home_2": 5.205,
+    "genz_break_4": 2.8,
+    "genz_commute_1": 2.23,
+    "genz_home_2": 2.71,
+    "marketer_break_4": 3.121,
+    "marketer_commute_1": 2.95,
+    "marketer_home_2": 3.5275,
+    "niche_fan_break_4": 1.495,
+    "niche_fan_commute_1": 1.35,
+    "skeptic_break_4": 2.8555,
+    "skeptic_commute_1": 2.95
+  },
+  "label": "Virality potential estimate",
+  "core_resonance": 5.3778,
+  "crossover_score": 2.9588,
+  "final_score": 5.3778,
+  "reach_tier": "Medium",
+  "tier_note": "",
+  "gate_passed": true,
+  "personas_intended": 24,
+  "personas_scored": 24,
+  "personas_failed": [],
+  "complete": true,
+  "suggestions": [
+    {
+      "suggestion": "Remove the confusing and irrelevant on-screen text about pajamas and bedding so viewers instantly understand the tech demo focus.",
+      "evidence": "Confusing and irrelevant on-screen text about pajamas and bedding mixed into a tech demo.",
+      "persona_id": "casual_dyn_1",
+      "quote": "Confusing and irrelevant on-screen text about pajamas and bedding mixed into a tech demo.",
+      "criterion": "clarity"
+    },
+    {
+      "suggestion": "Strengthen the opening hook by ensuring the screen immediately showcases the core AI tool feature rather than starting with ambient audience reaction alone.",
+      "evidence": "As someone interested in tech news and mobile apps, seeing a live demonstration of a new AI image editing tool caught my attention right away.",
+      "persona_id": "casual_dyn_2",
+      "quote": "As someone interested in tech news and mobile apps, seeing a live demonstration of a new AI image editing tool caught my attention right away.",
+      "criterion": "hook"
+    },
+    {
+      "suggestion": "Add a clear payoff or final workflow takeaway to give viewers a compelling reason to watch the entire 23-second clip.",
+      "evidence": "The conference recording format lacks deep technical or workflow detail, leaving me wanting more substance about how the tool actually functions.",
+      "persona_id": "niche_fan_dyn_1",
+      "quote": "The conference recording format lacks deep technical or workflow detail, leaving me wanting more substance about how the tool actually functions.",
+      "criterion": "retention"
+    }
+  ],
+  "errors": [],
+  "call_count": 53
+}

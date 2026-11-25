@@ -9,6 +9,7 @@ from pathlib import Path
 import streamlit as st
 from core.scoring import confidence_for_display, score_interval
 
+from demo_history import load_demo_history_items
 from game_html import game_html as build_game_html
 from run_helpers import (
     FALLBACK_PROGRESS_TEXT,
@@ -88,6 +89,7 @@ from ui_theme import (
 ROOT = Path(__file__).resolve().parent
 RESULT_DIR = ROOT / "tmp"
 HISTORY_DIR = RESULT_DIR / "history"
+DEMO_RESULTS_DIR = ROOT / "demo_results"
 HISTORY_NAMES_PATH = ROOT / "data" / "history_names.json"
 DEMO_MODE = demo_mode_enabled()
 GAME_HTML = build_game_html()
@@ -189,6 +191,7 @@ for result_path in result_files:
             thumb_path = generated_thumb
     history_items.append({
         "result_file": result_path.name,
+        "history_id": f"local:{result_path.name}",
         "result_path": str(result_path),
         "result": result_data,
         "meta_id": meta_id,
@@ -207,7 +210,11 @@ for result_path in result_files:
         "confidence": result_data.get("confidence"),
         "incomplete": is_incomplete(result_data),
         "thumbnail_path": thumb_path if thumb_path.is_file() else None,
+        "is_demo": False,
     })
+history_items.extend(load_demo_history_items(
+    DEMO_RESULTS_DIR, existing_results=[item["result"] for item in history_items]
+))
 history_items = history_items_newest_first(history_items)
 active_run = run_is_active(st.session_state)
 option_paths = [item["result_path"] for item in history_items]
@@ -420,7 +427,7 @@ def _render_history():
         tile_columns = st.columns(3, gap="small")
         for index, item in enumerate(shown_history):
             with tile_columns[index % 3]:
-                widget_key = history_tile_widget_key(item["result_file"])
+                widget_key = history_tile_widget_key(item.get("history_id", item["result_file"]))
                 selected = item["result_path"] == st.session_state.get("selected_result_path")
                 with st.container(key=widget_key, border=True):
                     thumbnail_path = item.get("thumbnail_path")
@@ -437,9 +444,14 @@ def _render_history():
                                  args=(item["result_path"],), use_container_width=True):
                         pass
                     rename_key = widget_key.replace("history_tile_", "history_rename_", 1)
-                    if st.button("✎", key=rename_key, help="Rename this result"):
+                    if st.button(
+                        "✎", key=rename_key,
+                        help="Saved demo analyses cannot be renamed" if item.get("is_demo") else "Rename this result",
+                        disabled=item.get("is_demo", False),
+                    ):
                         _begin_history_rename(item["result_file"], item["display_name"])
-                    if st.session_state.get("history_edit_result_file") == item["result_file"]:
+                    if (not item.get("is_demo")
+                            and st.session_state.get("history_edit_result_file") == item["result_file"]):
                         with st.form(f"history_rename_form_{widget_key}"):
                             renamed = st.text_input(
                                 "Display name", key="history_rename_value", max_chars=60,
