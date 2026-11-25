@@ -1,8 +1,9 @@
 """Theme CSS and escaped HTML fragments for the saved-result viewer."""
 
 from html import escape
+import math
 
-from ui_helpers import range_band_percentages, score_range
+from ui_helpers import DIMENSION_LABELS, weakest_dimension
 
 
 CSS = """
@@ -95,22 +96,24 @@ h1,h2,h3,p,div,span { font-family:'Plus Jakarta Sans',sans-serif; }
 .vs-progress .vs-pill.done { color:#126A47; background:#E8F7F0; }
 .vs-progress .vs-pill.done::before { content:"✓"; margin-right:.35rem; }
 .vs-progress .vs-pill.pending, .vs-progress .vs-pill.upcoming { color:#8A8997; background:#F3F3F6; }
-.vs-progress .vs-pill.active { color:#fff; background:linear-gradient(100deg,#E6007E,#A83CF0); box-shadow:0 0 0 0 rgba(168,60,240,.32); animation:vs-glow 2s ease-in-out infinite; }
+.vs-progress .vs-pill.active, .vs-progress .vs-pill.current { color:#fff; background:linear-gradient(100deg,#E6007E,#A83CF0); box-shadow:0 0 0 0 rgba(168,60,240,.32); animation:vs-glow 2s ease-in-out infinite; }
+.vs-progress .vs-pill.failed { color:#9B1C1C; background:#FDECEC; }
+.vs-progress .vs-pill.skipped { color:#6B6578; background:#ECEAF0; }
 @keyframes vs-glow { 50% { box-shadow:0 0 13px 3px rgba(168,60,240,.25); } }
 .vs-wait-copy { margin:.35rem 0 .1rem; color:#4E4D60; font-weight:600; }
 .vs-elapsed { color:#9694A2; font-size:.72rem; }
 .vs-game-frame { width:100%; height:260px; border:0; }
-.vs-tier { border:0; color:#fff; padding:2rem; overflow:hidden; }
+.vs-tier { position:relative; border:0; color:#fff; padding:2rem 2rem 3.75rem; overflow:hidden; }
 .vs-tier-low { background:linear-gradient(115deg,#6A4C93,#A83CF0); }
 .vs-tier-medium { background:linear-gradient(115deg,#E6007E,#A83CF0); }
 .vs-tier-high { background:linear-gradient(115deg,#A83CF0,#2F7BFF); }
 .vs-tier-label { font-size:clamp(2.3rem,6vw,4rem); line-height:1; letter-spacing:-.06em; font-weight:800; margin:.7rem 0 1.2rem; }
 .vs-tier-reason { max-width:740px; color:rgba(255,255,255,.86); font-size:.8rem; line-height:1.5; margin:.65rem 0 0; }
 .vs-tier-kicker { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.82; }
-.vs-range-title { font-size:.8rem; font-weight:700; margin:1.4rem 0 .55rem; }
-.vs-range-track { position:relative; height:10px; border-radius:999px; background:rgba(255,255,255,.28); }
-.vs-range-band { position:absolute; top:0; height:10px; border-radius:999px; background:#fff; box-shadow:0 0 0 3px rgba(255,255,255,.18); }
-.vs-range-labels { display:flex; justify-content:space-between; opacity:.76; font-size:.7rem; margin-top:.3rem; }
+.vs-estimate-title { font-size:.8rem; font-weight:700; margin:1.4rem 0 .55rem; }
+.vs-estimate-values { display:flex; justify-content:space-between; gap:.75rem; font-size:.82rem; margin-top:.3rem; }
+.vs-estimate-note { display:table; margin-top:.35rem; padding:.2rem .45rem; border-radius:6px; background:rgba(43,15,67,.48); color:#F5EFFA; font-size:.78rem; font-weight:600; line-height:1.45; }
+.vs-estimate-confidence { position:absolute; right:2rem; bottom:1.15rem; padding:.28rem .62rem; border-radius:999px; background:rgba(43,15,67,.58); color:#fff; font-size:.76rem; font-weight:700; line-height:1.4; }
 .vs-mini-card { min-height:155px; }
 .vs-mini-value { font-size:1.55rem; font-weight:800; letter-spacing:-.04em; color:#242236; margin:.65rem 0 .4rem; }
 .vs-mini-copy { color:var(--muted); font-size:.83rem; line-height:1.6; }
@@ -127,8 +130,13 @@ h1,h2,h3,p,div,span { font-family:'Plus Jakarta Sans',sans-serif; }
 .vs-heat-row { display:grid; grid-template-columns:minmax(110px,170px) 1fr 36px; gap:.75rem; align-items:center; margin:.8rem 0; }
 .vs-heat-name { font-size:.78rem; color:#454456; font-weight:600; }
 .vs-heat-track { height:8px; overflow:hidden; border-radius:999px; background:#F0EEF4; }
-.vs-heat-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#E6007E,#A83CF0); }
 .vs-heat-value { text-align:right; font-size:.72rem; color:#777889; font-weight:700; }
+.vs-dimension-row { display:grid; grid-template-columns:minmax(105px,135px) 1fr 38px auto; gap:.55rem; align-items:center; margin:.7rem 0; }
+.vs-dimension-name { color:#454456; font-size:.75rem; font-weight:650; }
+.vs-dimension-track { height:9px; overflow:hidden; border-radius:999px; background:#F0EEF4; }
+.vs-dimension-value { color:#777889; font-size:.72rem; text-align:right; font-weight:750; }
+.vs-weakest-tag { padding:.12rem .38rem; border-radius:999px; color:#9B347A; background:#FCE5F2; font-size:.58rem; font-weight:800; text-transform:uppercase; }
+.vs-sound-warning { display:inline-block; margin:.25rem 0 .7rem; padding:.4rem .7rem; border:1px solid #F2C9DE; border-radius:999px; background:#FFF5FA; color:#9B347A; font-size:.72rem; font-weight:750; }
 .vs-suggestion { min-height:210px; }
 .vs-suggestion-text { font-size:.95rem; line-height:1.65; font-weight:600; color:#202033; margin:.85rem 0 1rem; }
 .vs-quote { border-left:3px solid #E6007E; background:#FBF8FC; padding:.85rem 1rem; border-radius:0 12px 12px 0; color:#626174; font-size:.82rem; line-height:1.6; }
@@ -173,7 +181,7 @@ h1,h2,h3,p,div,span { font-family:'Plus Jakarta Sans',sans-serif; }
 .vs-history-tier-medium { color:#A22A6F; background:#FCE5F2; }
 .vs-history-tier-high { color:#fff; background:linear-gradient(100deg,#A83CF0,#2F7BFF); }
 .vs-history-tier-incomplete { color:#73717D; background:#E7E6EB; }
-.vs-history-range { margin:.1rem 0 .4rem; color:#555367; font-size:.75rem; font-weight:700; }
+.vs-history-score { margin:.1rem 0 .4rem; color:#555367; font-size:.75rem; font-weight:700; }
 .vs-history-meta { display:flex; flex-wrap:wrap; gap:.3rem .55rem; color:#858493; font-size:.66rem; line-height:1.45; }
 .vs-history-niche { color:#9B347A; font-weight:700; }
 .vs-history-placeholder { display:flex; height:104px; align-items:center; justify-content:center; margin-bottom:.45rem; border-radius:13px; background:linear-gradient(135deg,#FCE5F2,#EDE4FA 55%,#DCE7FF); color:#8C3F9D; font-size:2rem; font-weight:800; }
@@ -187,6 +195,8 @@ h1,h2,h3,p,div,span { font-family:'Plus Jakarta Sans',sans-serif; }
   .block-container { padding:1.2rem 1rem 2rem; }
   .vs-wordmark { margin-bottom:1.8rem; }
   .vs-card { padding:19px; border-radius:17px; }
+  .vs-tier { padding-bottom:3.5rem; }
+  .vs-estimate-confidence { right:19px; bottom:1rem; }
   .vs-heat-row { grid-template-columns:100px 1fr 32px; gap:.5rem; }
   .vs-audience-counters { grid-template-columns:1fr; }
   .vs-audience-counter { display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
@@ -316,9 +326,10 @@ def history_tile_html(item, selected=False):
         range_markup = ""
         if value is not None:
             try:
-                low, high = score_range(value)
+                score = float(value)
+                confidence = str(item.get("confidence") or "Unavailable")
                 range_markup = (
-                    f'<div class="vs-history-range">about {low:.1f} to {high:.1f} out of 10</div>'
+                    f'<div class="vs-history-score">{escape(f"{score:.1f} / 10 · Confidence: {confidence}", quote=True)}</div>'
                 )
             except (TypeError, ValueError):
                 pass
@@ -336,19 +347,24 @@ def history_placeholder_html(display_name):
     return f'<div class="vs-history-placeholder">{escape(initial, quote=True)}</div>'
 
 
-def result_hero_html(tier, niche, core_value, niche_reason="", demo_replay=False):
+def result_hero_html(tier, niche, core_value, niche_reason="", demo_replay=False,
+                     confidence=None, score_range=None):
     tier_text = str(tier)
     tier_class = {"low": "vs-tier-low", "medium": "vs-tier-medium", "high": "vs-tier-high"}.get(
         tier_text.lower(), "vs-tier-medium"
     )
     range_markup = ""
     if core_value is not None:
-        low, high = score_range(core_value)
-        left, width = range_band_percentages(core_value)
+        score_text = "Unavailable"
+        if (isinstance(score_range, (list, tuple)) and len(score_range) == 2
+                and all(isinstance(bound, (int, float)) for bound in score_range)):
+            score_text = f"{float(score_range[0]):.1f}–{float(score_range[1]):.1f}"
+        confidence_label = escape(str(confidence or "Unavailable"), quote=True)
         range_markup = (
-            '<div class="vs-range-title">Core resonance range</div>'
-            f'<div class="vs-range-track"><span class="vs-range-band" style="left:{left:.2f}%;width:{width:.2f}%"></span></div>'
-            f'<div class="vs-range-labels"><span>0</span><span>about {low:.1f} to {high:.1f} / 10</span><span>10</span></div>'
+            '<div class="vs-estimate-title">Core audience estimate</div>'
+            f'<div class="vs-estimate-values"><span>{escape(score_text, quote=True)}</span></div>'
+            '<div class="vs-estimate-note">Estimated score is out of 10</div>'
+            f'<div class="vs-estimate-confidence">Confidence: {confidence_label}</div>'
         )
     reason_label = "Niche set by you" if niche_reason == "user override" else "Auto-detected"
     reason_markup = f'<p class="vs-tier-reason">{escape(reason_label, quote=True)}</p>'
@@ -361,15 +377,18 @@ def result_hero_html(tier, niche, core_value, niche_reason="", demo_replay=False
     )
 
 
-def score_card_html(title, value, sentence):
-    range_text = "Unavailable"
-    if value is not None:
-        low, high = score_range(value)
-        range_text = f"about {low:.1f} to {high:.1f}"
+def score_card_html(title, value, sentence, confidence=None, score_range=None):
+    score_text = "Unavailable"
+    if (isinstance(score_range, (list, tuple)) and len(score_range) == 2
+            and all(isinstance(bound, (int, float)) for bound in score_range)):
+        score_text = f"{float(score_range[0]):.1f}–{float(score_range[1]):.1f}"
+    confidence_text = escape(str(confidence or "Unavailable"), quote=True)
     return (
         f'<section class="vs-card vs-mini-card"><div class="vs-card-title">{escape(str(title), quote=True)}</div>'
-        f'<div class="vs-mini-value">{range_text}</div>'
-        f'<div class="vs-mini-copy">{escape(str(sentence), quote=True)}</div></section>'
+        f'<div class="vs-mini-value">{escape(score_text, quote=True)}</div>'
+        f'<div class="vs-mini-copy">Confidence: {confidence_text}</div>'
+        f'<div class="vs-mini-copy">{escape(str(sentence), quote=True)}</div>'
+        f'<div class="vs-mini-copy">95% percentile-bootstrap interval; requires at least 3 scored personas.</div></section>'
     )
 
 
@@ -401,6 +420,52 @@ def wider_audience_raw_score_html(raw_score):
     return f'<p><strong>Wider audience (crossover) raw score:</strong> {value}</p>'
 
 
+def dimension_bars_html(dimension_means, wave, condition, weakest=False):
+    """Render escaped, bounded score bars from saved dimension means."""
+    wave_data = dimension_means.get(wave) if isinstance(dimension_means, dict) else None
+    values = wave_data.get(condition) if isinstance(wave_data, dict) else None
+    values = values if isinstance(values, dict) else {}
+    weakest_key = weakest_dimension(dimension_means, wave, condition) if weakest else None
+    rows = []
+    for key, label in DIMENSION_LABELS.items():
+        raw = values.get(key)
+        try:
+            value = float(raw)
+            if not math.isfinite(value):
+                raise ValueError
+            bounded = min(10.0, max(0.0, value))
+            displayed = f"{value:.1f}"
+        except (TypeError, ValueError):
+            bounded, displayed = 0.0, "—"
+        weakest_tag = '<span class="vs-weakest-tag">weakest</span>' if key == weakest_key else ""
+        fill_width = f"{bounded * 10:g}%"
+        fill_style = (
+            f"display:block;width:{fill_width};height:100%;min-width:{'3px' if bounded > 0 else '0'};"
+            "border-radius:inherit;background-image:linear-gradient(90deg,#E6007E,#A83CF0);"
+        )
+        rows.append(
+            '<div class="vs-dimension-row">'
+            f'<span class="vs-dimension-name">{escape(label, quote=True)}</span>'
+            '<div class="vs-dimension-track" style="width:100%;height:8px;position:relative;'
+            'background:#F0EEF4;border-radius:999px;overflow:hidden"><div style="'
+            f'{fill_style}"></div></div>'
+            f'<span class="vs-dimension-value">{escape(displayed, quote=True)}</span>{weakest_tag}</div>'
+        )
+    return '<div class="vs-dimension-bars">' + "".join(rows) + "</div>"
+
+
+def sound_warning_html(gap):
+    """Render the Wave 1 muted-audio warning with a one-decimal gap."""
+    try:
+        points = float(gap)
+    except (TypeError, ValueError):
+        return ""
+    if not math.isfinite(points) or points < 1.0:
+        return ""
+    message = f"Loses {points:.1f} points when muted. Add captions or on-screen text."
+    return f'<div class="vs-sound-warning">{escape(message, quote=True)}</div>'
+
+
 def heat_bar_html(label, value):
     if value is None:
         fill = 0.0
@@ -408,10 +473,17 @@ def heat_bar_html(label, value):
     else:
         fill = min(10.0, max(0.0, float(value))) * 10
         displayed = f"{float(value):.1f}"
+    fill_width = f"{fill:g}%"
+    fill_style = (
+        f"display:block;width:{fill_width};height:100%;min-width:{'3px' if fill > 0 else '0'};"
+        "border-radius:inherit;background-image:linear-gradient(90deg,#E6007E,#A83CF0);"
+    )
     return (
         '<div class="vs-heat-row">'
         f'<span class="vs-heat-name">{escape(str(label), quote=True)}</span>'
-        f'<span class="vs-heat-track"><span class="vs-heat-fill" style="width:{fill:.1f}%"></span></span>'
+        '<div class="vs-heat-track" style="width:100%;height:8px;position:relative;'
+        'background:#F0EEF4;border-radius:999px;overflow:hidden"><div style="'
+        f'{fill_style}"></div></div>'
         f'<span class="vs-heat-value">{displayed}</span></div>'
     )
 

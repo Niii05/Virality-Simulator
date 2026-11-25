@@ -166,13 +166,16 @@ def generate_safe_filename(original_filename):
     return f"{uuid.uuid4().hex}{extension}"
 
 
-def build_pipeline_command(python_executable, video_path, out_path, niche=None, context_file=None):
+def build_pipeline_command(python_executable, video_path, out_path, niche=None, context_file=None,
+                           retry_suggestions=False):
     """Build pipeline argv without shell parsing or interpolation."""
     command = [str(python_executable), "-m", "core.pipeline", str(video_path)]
     if niche is not None:
         command.extend(["--niche", str(niche)])
     if context_file is not None:
         command.extend(["--context-file", str(context_file)])
+    if retry_suggestions:
+        command.append("--retry-suggestions")
     command.extend(["--out", str(out_path)])
     return command
 
@@ -351,3 +354,68 @@ def current_pipeline_stage(log_text):
     if stage == "suggestions":
         return "Scoring and suggestions"
     return None
+
+
+_PIPELINE_STAGE_LABELS = {
+    "reading_reel": "Reading reel",
+    "core_audience": "Core audience",
+    "gate": "Gate",
+    "wider_audience": "Wider audience",
+    "scoring": "Scoring",
+    "suggestions": "Scoring",
+}
+_PIPELINE_STAGE_EVENT = re.compile(
+    r"Pipeline stage event stage=([a-z_]+) status=(started|completed|incomplete|failed|skipped)"
+)
+
+
+def pipeline_stage_statuses(log_text):
+    """Return the latest explicit status for each pipeline stage."""
+    statuses = {}
+    for stage, status in _PIPELINE_STAGE_EVENT.findall(str(log_text)):
+        statuses[stage] = status
+    return statuses
+
+
+def pipeline_active_stage(log_text):
+    """Find an explicitly active stage, using model-call logs only as a fallback."""
+    active_stage = None
+    for stage, status in _PIPELINE_STAGE_EVENT.findall(str(log_text)):
+        if status == "started":
+            active_stage = stage
+        elif active_stage == stage:
+            active_stage = None
+    if active_stage:
+        return _PIPELINE_STAGE_LABELS.get(active_stage)
+
+    api_stage = current_pipeline_stage(log_text)
+    if api_stage == "Reading reel":
+        return (api_stage if pipeline_stage_statuses(log_text).get("reading_reel")
+                not in {"completed", "failed", "skipped"} else None)
+    if api_stage == "Audience waves":
+        statuses = pipeline_stage_statuses(log_text)
+        for key in ("core_audience", "gate", "wider_audience"):
+            if statuses.get(key) not in {"completed", "incomplete", "failed", "skipped"}:
+                return _PIPELINE_STAGE_LABELS[key]
+        return None
+    if api_stage == "Scoring and suggestions":
+        if pipeline_stage_statuses(log_text).get("suggestions") in {
+            "completed", "incomplete", "failed", "skipped"
+        }:
+            return None
+        return "Scoring"
+    return None
+
+
+def pipeline_terminal_status(log_text):
+    """Return the pipeline's result/suggestions status recorded at final persistence."""
+    matches = re.findall(
+        r"Pipeline terminal result_status=(complete|incomplete) "
+        r"suggestions_status=(completed|failed|skipped|unknown) "
+        r"process_status=(normal|error)", str(log_text),
+    )
+    if not matches:
+        return None
+    result_status, suggestions_status, process_status = matches[-1]
+    return {"result": result_status, "suggestions": suggestions_status,
+            "process": process_status}

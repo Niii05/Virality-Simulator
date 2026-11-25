@@ -1,31 +1,21 @@
-﻿# Virality Simulator Handoff
+# Virality Simulator Handoff
 
-## History naming, thumbnails, and result layout
+## Hero estimate presentation
 
-- `data/history_names.json`: editable legacy result-name map with boundary-aware prefixes.
-- `ui_helpers.py`: longest-prefix title lookup, metadata-name priority, and date-based fallbacks for old result filenames.
-- `run_helpers.py`: best-effort legacy `testN.mp4` thumbnail extraction with ffmpeg and optional OpenCV fallback.
-- `app.py`: reads the name map, shows `Niche not recorded` when absent, generates missing legacy thumbnails outside Demo mode, removes saved-result stage pills, and orders result sections as cards, suggestions, Audience Wall, archetype heat strip, Details, Limitations, then footer.
-- `ui_theme.py`: uses the new missing-niche fallback in History tiles while escaping display strings.
-- `tests/test_ui_helpers.py`, `tests/test_run_helpers.py`: cover prefix boundaries and priority, fallback titles, absent niche, display-name placeholder, section order, saved-result pills, and mocked thumbnail extraction.
+- The explanatory score note now has a high-contrast, slightly muted treatment on the gradient.
+- Confidence is positioned at the bottom-right of the hero card in a dark translucent pill for legibility.
+- Range text, score logic, bootstrap, confidence logic, and other card content are unchanged.
 
-## PowerShell commands
+## Files changed for this task
 
-Launch the app:
+- `ui_theme.py`: estimate note and bottom-right confidence styling and markup.
+- `tests/test_ui_helpers.py`: focused layout and contrast-hook assertions.
+- `HANDOFF.md`: refreshed.
 
-```powershell
-.\venv\Scripts\python.exe -m streamlit run app.py
-```
-
-Run the full project suite:
+## Verification
 
 ```powershell
-.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider tests
+.\venv\Scripts\python.exe -m pytest tests\test_ui_helpers.py -q
 ```
 
-## Verification and limits
-
-- Full pytest suite passed: 240 tests (`.\venv\Scripts\python.exe -m pytest -q -p no:cacheprovider tests`).
-- Thumbnail extraction was tested with a mocked extractor; ffmpeg/OpenCV were not used on project videos.
-- The app and pipeline were not launched. No LLM/API calls were made, and `.env` was not opened.
-- No changes were made under `core/`, `prompts/`, or `knowledge_base/`.
+Result: 98 passed in 0.91s. No API calls or commits were made. The full suite was not run.

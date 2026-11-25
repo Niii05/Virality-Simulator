@@ -4,7 +4,7 @@ import copy
 import json
 from pathlib import Path
 
-from core import framework, llm
+from core import config, framework, llm
 
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "brief.txt"
 AUDIO_ONLY_FIELDS = {
@@ -31,7 +31,9 @@ def build_brief(extract_result, audio=None, creator_context=None):
                    "anything beyond it. Never identify a real person from their face.\n"
                    + creator_context)
     prompt += "\n\nExtracted context (transcript is approximate):\n" + json.dumps(data, ensure_ascii=False)
-    result = llm.ask_json(prompt, images=extract_result.get("frames", []))
+    result = llm.ask_json(prompt, images=extract_result.get("frames", []),
+                          retries=llm.BRIEF_RETRY_CAP, retry_cap=llm.BRIEF_RETRY_CAP,
+                          timeout_sec=config.VISION_BRIEF_TIMEOUT_SEC)
     if not isinstance(result, dict):
         raise ValueError("Brief response must be a JSON object")
     result["niche_category"] = framework.normalize_niche(result.get("niche_category"))

@@ -213,14 +213,14 @@ def _transcript_for_source(video_path, audio_result=None):
     return gemini_text or whisper_text, gemini_language or whisper_language
 
 
-def extract_all(video_path, n_frames=8, audio_result=None):
+def extract_all(video_path, n_frames=8, audio_result=None, frames_dir=FRAMES_DIR):
     """Extract duration, frames, transcript, and speech metadata."""
     check_media_tools()
     video_path = Path(video_path)
     if not video_path.exists() or not video_path.is_file():
         raise VideoError(f"Video file not found: {video_path}")
     duration = get_duration(video_path)
-    frames = extract_frames(video_path, n_frames)
+    frames = extract_frames(video_path, n_frames, out_dir=frames_dir)
     transcript, language = _transcript_for_source(video_path, audio_result=audio_result)
     return {
         "duration_sec": round(duration, 1),

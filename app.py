@@ -7,6 +7,7 @@ from html import escape
 from pathlib import Path
 
 import streamlit as st
+from core.scoring import confidence_for_display, score_interval
 
 from game_html import game_html as build_game_html
 from run_helpers import (
@@ -14,6 +15,9 @@ from run_helpers import (
     DemoRunner,
     build_pipeline_command,
     current_pipeline_stage,
+    pipeline_active_stage,
+    pipeline_stage_statuses,
+    pipeline_terminal_status,
     demo_stage_seconds_from_env,
     elapsed_run_seconds,
     generate_safe_filename,
@@ -49,22 +53,28 @@ from ui_helpers import (
     niche_hint,
     resolve_niche_choice,
     score_bucket,
+    suggestions_error_count,
     select_extreme_personas,
     sanitize_history_name,
     slice_history_items,
+    select_history_result as store_history_selection,
     shorten_first_sentence,
     stage_pill_states,
     stage_progress_percent,
+    should_show_last_run_warning,
     wider_audience_label,
+    sound_score_gap,
+    selected_result_path as resolve_selected_result_path,
 )
 from ui_theme import (
     CSS,
     audience_tile_style_html,
     demo_banner_html,
-    feature_card_html,
     hero_html,
     history_placeholder_html,
     history_tile_html,
+    dimension_bars_html,
+    sound_warning_html,
     heat_bar_html,
     progress_html,
     result_hero_html,
@@ -87,9 +97,17 @@ LIMITATIONS = [
     "Brand or celebrity fame is not visible unless added as context.",
     "Trending audio is not detected.",
     "Niche rubric guidance is partly extrapolated from ad guidance and creator advice.",
-    "Results vary by about 0.8 between runs.",
+    "Confidence reflects score spread across simulated personas, not calibrated real-world accuracy.",
 ]
 NICHE_OPTIONS = ["Auto-detect", *NICHE_CATEGORIES, "Food", "Other (describe)"]
+ARCHETYPE_LABELS = {
+    "genz": "Gen Z scroller",
+    "casual": "Casual viewer",
+    "niche_fan": "Niche fan",
+    "skeptic": "Skeptic",
+    "creator": "Creator peer",
+    "marketer": "Brand marketer",
+}
 
 
 def _select_wall_persona(persona_id):
@@ -97,7 +115,7 @@ def _select_wall_persona(persona_id):
 
 
 def _select_history_result(result_path):
-    st.session_state["selected_result_path"] = result_path
+    store_history_selection(st.session_state, result_path)
 
 
 def _begin_history_rename(result_file, display_name):
@@ -110,19 +128,6 @@ st.markdown(CSS, unsafe_allow_html=True)
 if DEMO_MODE:
     st.markdown(demo_banner_html(), unsafe_allow_html=True)
 st.markdown(hero_html(), unsafe_allow_html=True)
-st.markdown('<div class="vs-how-title">How it works</div>', unsafe_allow_html=True)
-feature_data = [
-    ("Step 01", "🎬", "Upload", "Drop your reel."),
-    ("Step 02", "👥", "Audience", "24 AI personas react in two waves."),
-    ("Step 03", "✦", "Score", "A tier and a range, not a promise."),
-    ("Step 04", "💬", "Fix", "3 suggestions with a quote."),
-]
-feature_columns = st.columns(4, wrap=True)
-for index, column in enumerate(feature_columns):
-    with column:
-        label, icon, title, copy = feature_data[index]
-        st.markdown(feature_card_html(label, icon, title, copy, dark=index == 3), unsafe_allow_html=True)
-
 for key, default in (
     ("run_active", False),
     ("run_process", None),
@@ -131,6 +136,7 @@ for key, default in (
     ("last_run_result_path", None),
     ("last_run_log_path", None),
     ("last_run_error_count", 0),
+    ("last_run_terminal_status", None),
 ):
     if key not in st.session_state:
         st.session_state[key] = default
@@ -193,23 +199,19 @@ for result_path in result_files:
         "sort_timestamp": sort_timestamp,
         "niche": niche_value,
         "tier": result_data.get("reach_tier"),
-        "core_score": result_data.get("core_resonance"),
+        "core_score": (
+            result_data.get("core_resonance")
+            if result_data.get("core_resonance") is not None
+            else result_data.get("final_score")
+        ),
+        "confidence": result_data.get("confidence"),
         "incomplete": is_incomplete(result_data),
         "thumbnail_path": thumb_path if thumb_path.is_file() else None,
     })
 history_items = history_items_newest_first(history_items)
-option_paths = [item["result_path"] for item in history_items]
-
-selected_result_path = pending_result if pending_result in option_paths else st.session_state.get("selected_result_path")
-if selected_result_path not in option_paths:
-    newest_complete = next((item for item in history_items if not item["incomplete"]), None)
-    selected_result_path = newest_complete["result_path"] if newest_complete else None
-if selected_result_path is None:
-    st.session_state.pop("selected_result_path", None)
-else:
-    st.session_state["selected_result_path"] = selected_result_path
-
 active_run = run_is_active(st.session_state)
+option_paths = [item["result_path"] for item in history_items]
+selected_result_path = resolve_selected_result_path(st.session_state, option_paths, pending_result)
 upload_panel = st.container(key="upload-panel", border=True)
 selected_file = Path(selected_result_path) if selected_result_path and not active_run else None
 selected_history_item = next(
@@ -310,7 +312,7 @@ with upload_panel:
         if DEMO_MODE:
             st.info("This replays a saved result locally. No API calls or upload writes will occur.")
         else:
-            st.info("This run uses about 53 Gemini calls. Free tier has a daily limit.")
+            st.info("This run uses multiple Gemini calls. Free tier has a daily limit.")
         if st.button("Start", type="primary", key="confirm_start"):
             if run_is_active(st.session_state):
                 st.warning("A run is already in progress.")
@@ -338,6 +340,7 @@ with upload_panel:
                     st.session_state["last_run_log_path"] = None
                     st.session_state["last_run_failed"] = False
                     st.session_state["last_run_error_count"] = 0
+                    st.session_state["last_run_terminal_status"] = None
                     st.session_state.pop("demo_log_tail", None)
                     st.session_state.pop("demo_result_payload", None)
                     st.session_state["run_confirm_pending"] = False
@@ -386,6 +389,7 @@ with upload_panel:
                 st.session_state["last_run_log_path"] = str(log_path)
                 st.session_state["last_run_failed"] = False
                 st.session_state["last_run_error_count"] = 0
+                st.session_state["last_run_terminal_status"] = None
                 st.session_state["run_confirm_pending"] = False
                 try:
                     started = start_subprocess(st.session_state, command, log_path, ROOT)
@@ -396,12 +400,13 @@ with upload_panel:
                     st.rerun()
 
 
-if not active_run:
+def _render_history():
     st.markdown(
         '<div class="vs-history-heading">Your history'
         f'<span class="vs-history-count">{escape(str(len(history_items)), quote=True)}</span></div>',
         unsafe_allow_html=True,
     )
+    st.caption("Click a run to open its analysis.")
     show_incomplete = st.toggle("Show incomplete runs", key="history_show_incomplete")
     visible_history = filter_history_items(history_items, show_incomplete)
     show_all = st.session_state.get("history_show_all", False)
@@ -464,6 +469,7 @@ if not active_run:
                             st.rerun()
     elif not history_items:
         st.caption("Your analyzed reels will appear here.")
+
 
 
 def _monitor_demo(demo):
@@ -529,16 +535,20 @@ def _monitor_pipeline():
 
     log_path = st.session_state.get("run_log_path", "")
     log_text = read_log_text(log_path)
-    stage = current_pipeline_stage(log_text)
-    st.markdown(progress_html(stage_pill_states(stage)), unsafe_allow_html=True)
+    stage_statuses = pipeline_stage_statuses(log_text)
+    stage = pipeline_active_stage(log_text)
+    api_marker = current_pipeline_stage(log_text)
+    st.markdown(progress_html(stage_pill_states(stage, stage_statuses)), unsafe_allow_html=True)
     elapsed = elapsed_run_seconds(st.session_state)
-    progress_pct = stage_progress_percent(stage)
+    progress_pct = stage_progress_percent(stage, stage_statuses)
     progress_copy = run_progress_copy(stage, elapsed, fallback_stage=FALLBACK_PROGRESS_TEXT)
     st.progress(progress_pct, text=progress_copy["waiting_message"])
     st.caption(progress_copy["duration_caption"])
     if progress_copy["long_run_message"]:
         st.info(progress_copy["long_run_message"])
     st.caption(progress_copy["stage_caption"])
+    if api_marker:
+        st.caption(f"Latest API-call marker: {api_marker}")
 
     if process.poll() is None:
         if st.button("Cancel", key="cancel_pipeline"):
@@ -562,12 +572,18 @@ def _monitor_pipeline():
     output_path = Path(st.session_state.get("run_result_path", ""))
     process_failed = process.returncode != 0 or not output_path.is_file()
     error_count = 0
+    vision_brief_failed = False
+    output_result = None
     if output_path.is_file():
         try:
             output_result = json.loads(output_path.read_text(encoding="utf-8"))
             if isinstance(output_result, dict):
                 errors = output_result.get("errors")
                 error_count = len(errors) if isinstance(errors, list) else 0
+                vision_brief_failed = any(
+                    isinstance(item, dict) and item.get("stage") == "vision_brief"
+                    for item in errors or []
+                )
                 process_failed = process_failed or is_incomplete(output_result)
             else:
                 process_failed = True
@@ -578,6 +594,14 @@ def _monitor_pipeline():
     st.session_state["run_process"] = None
     st.session_state["last_run_failed"] = process_failed
     st.session_state["last_run_error_count"] = error_count
+    st.session_state["last_run_vision_brief_failed"] = vision_brief_failed
+    terminal_marker = pipeline_terminal_status(log_text) or {}
+    st.session_state["last_run_terminal_status"] = {
+        "process": "error" if process.returncode != 0 else "normal",
+        "result": terminal_marker.get("result", "incomplete" if process_failed else "complete"),
+        "suggestions": output_result.get("suggestions_status", terminal_marker.get("suggestions", "unknown"))
+        if output_path.is_file() and isinstance(output_result, dict) else "unknown",
+    }
     st.session_state["last_run_log_path"] = str(log_path)
     st.session_state["last_run_result_path"] = str(output_path) if output_path.is_file() else None
     if output_path.is_file():
@@ -592,34 +616,78 @@ if active_run:
 monitor = st.fragment(run_every=2 if active_run else None)(_monitor_pipeline)
 monitor()
 
-if not active_run and st.session_state.get("last_run_failed"):
-    st.warning(f"Incomplete run, rerun needed. Errors: {st.session_state.get('last_run_error_count', 0)}")
+if not active_run and should_show_last_run_warning(
+    st.session_state.get("last_run_failed"),
+    st.session_state.get("last_run_result_path"),
+    selected_file,
+    result,
+):
+    if st.session_state.get("last_run_vision_brief_failed"):
+        st.warning(f"vision brief failed, rerun. Errors: {st.session_state.get('last_run_error_count', 0)}")
+    else:
+        st.warning(f"Incomplete run, rerun needed. Errors: {st.session_state.get('last_run_error_count', 0)}")
     log_tail = st.session_state.get("demo_log_tail") or last_log_lines(
         st.session_state.get("last_run_log_path", ""), 3
     )
     if log_tail:
         st.code(log_tail)
-    failed_result_path = st.session_state.get("last_run_result_path")
-    if selected_file is None or failed_result_path is None or str(selected_file) == failed_result_path:
-        st.stop()
+
+if not active_run and st.session_state.get("last_run_terminal_status"):
+    terminal = st.session_state["last_run_terminal_status"]
+    st.caption(
+        "Pipeline process: "
+        f"{terminal.get('process', 'unknown')}; result: {terminal.get('result', 'unknown')}; "
+        f"suggestions: {terminal.get('suggestions', 'unknown')}"
+    )
 
 if result is None:
     if not result_files:
         st.info("No saved result files found in tmp/. Upload a reel to create one.")
+    _render_history()
+    with st.expander("Limitations"):
+        for point in LIMITATIONS:
+            st.markdown(f"- {point}")
+    st.markdown('<footer class="vs-footer">Estimate of potential, not a prediction or a guarantee.</footer>', unsafe_allow_html=True)
     st.stop()
+
+suggestion_error_count = suggestions_error_count(result)
+if suggestion_error_count:
+    st.warning(
+        "Suggestions could not be generated. Your score and persona results are saved. "
+        f"You can retry suggestions only. Errors: {suggestion_error_count}"
+    )
 
 if is_incomplete(result):
     errors = result.get("errors")
     error_count = len(errors) if isinstance(errors, list) else 0
-    st.warning(f"Incomplete run, rerun needed. Errors: {error_count}")
+    vision_brief_failed = any(
+        isinstance(item, dict) and item.get("stage") == "vision_brief"
+        for item in errors or []
+    )
+    if vision_brief_failed:
+        st.warning(f"vision brief failed, rerun. Errors: {error_count}")
+    else:
+        st.warning(f"Incomplete run, rerun needed. Errors: {error_count}")
     if str(selected_file) == st.session_state.get("last_run_result_path"):
         log_tail = last_log_lines(st.session_state.get("last_run_log_path", ""), 3)
         if log_tail:
             st.code(log_tail)
+    _render_history()
+    with st.expander("Limitations"):
+        for point in LIMITATIONS:
+            st.markdown(f"- {point}")
+    st.markdown('<footer class="vs-footer">Estimate of potential, not a prediction or a guarantee.</footer>', unsafe_allow_html=True)
     st.stop()
 
+core_score_interval = result.get("core_score_interval")
+if core_score_interval is None:
+    core_score_interval = score_interval(
+        item.get("score") for item in result.get("wave1", [])
+        if isinstance(item, dict) and isinstance(item.get("score"), (int, float))
+    )
 result_columns = st.columns([1.55, 1], wrap=True)
 with result_columns[0]:
+    display_confidence = confidence_for_display(result)
     st.markdown(
         result_hero_html(
             result.get("reach_tier", "Tier unavailable"), niche,
@@ -628,13 +696,17 @@ with result_columns[0]:
                 DEMO_MODE
                 and str(selected_file) == st.session_state.get("demo_replay_result_path")
             ),
+            confidence=display_confidence,
+            score_range=core_score_interval,
         ),
         unsafe_allow_html=True,
     )
 with result_columns[1]:
     st.markdown(
         score_card_html("Core audience", result.get("core_resonance"),
-                        "How strongly the core audience connects with the reel."),
+                        "How strongly the core audience connects with the reel.",
+                        confidence=display_confidence,
+                        score_range=core_score_interval),
         unsafe_allow_html=True,
     )
     st.markdown(
@@ -642,9 +714,77 @@ with result_columns[1]:
         unsafe_allow_html=True,
     )
     st.caption("Labels are rough buckets; small differences between reels are not meaningful.")
-st.caption("Scores move by about 0.8 between identical runs.")
+sound_gap = sound_score_gap(result)
+if sound_gap is not None and sound_gap >= 1.0:
+    st.markdown(sound_warning_html(sound_gap), unsafe_allow_html=True)
+
+st.markdown('<div id="analysis"></div>', unsafe_allow_html=True)
+if st.session_state.pop("selection_scroll_pending", False):
+    try:
+        st.components.v1.html("<script>try{parent.document.getElementById(\'analysis\').scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}</script>", height=0)
+    except Exception:
+        pass
+with st.container(border=True):
+    st.markdown('<div class="vs-card-title">Why this score</div>', unsafe_allow_html=True)
+    st.markdown("**Audience dimensions**")
+    dimension_sound_label = st.segmented_control(
+        "Sound condition",
+        options=("Sound on", "Sound off"),
+        default="Sound on",
+        label_visibility="collapsed",
+        key="dimension_sound_condition",
+    )
+    dimension_condition = "sound_off" if dimension_sound_label == "Sound off" else "sound_on"
+    dimension_columns = st.columns(2, gap="large")
+    for column, wave, wave_label in zip(
+        dimension_columns, ("wave1", "wave2"), ("Wave 1", "Wave 2")
+    ):
+        with column:
+            st.markdown(f"**{wave_label}**")
+            st.markdown(
+                dimension_bars_html(
+                    result.get("dimension_means"), wave, dimension_condition,
+                    weakest=(wave == "wave1"),
+                ),
+                unsafe_allow_html=True,
+            )
+    averages = archetype_averages(result)
+    st.markdown('<div class="vs-card-title">Archetype means</div>', unsafe_allow_html=True)
+    for archetype_key, archetype_label in ARCHETYPE_LABELS.items():
+        st.markdown(heat_bar_html(archetype_label, averages.get(archetype_key)), unsafe_allow_html=True)
 
 st.markdown('<div class="vs-section-label">Suggestions to strengthen the reel</div>', unsafe_allow_html=True)
+if suggestion_error_count and result.get("complete") is True and not DEMO_MODE:
+    metadata = selected_history_item.get("metadata", {}) if selected_history_item else {}
+    meta_id = selected_history_item.get("meta_id", "") if selected_history_item else ""
+    original_name = metadata.get("original_upload_filename", "")
+    extension = Path(str(original_name)).suffix.lower()
+    retry_video = RESULT_DIR / "uploads" / f"{meta_id}{extension}"
+    retry_context = RESULT_DIR / f"context_ui_{meta_id}.txt"
+    if (meta_id and extension in {".mp4", ".mov"} and retry_video.is_file()
+            and retry_context.is_file()):
+        if st.button("Retry suggestions only", key=f"retry_suggestions_{meta_id}"):
+            niche_override = (result.get("niche_category")
+                              if result.get("niche_reason") == "user override" else None)
+            command = build_pipeline_command(
+                sys.executable, retry_video, selected_file, niche=niche_override,
+                context_file=retry_context, retry_suggestions=True,
+            )
+            log_path = RESULT_DIR / f"pipeline_suggestions_retry_{meta_id}.log"
+            st.session_state["run_result_path"] = str(selected_file)
+            st.session_state["last_run_result_path"] = str(selected_file)
+            st.session_state["last_run_failed"] = False
+            st.session_state["last_run_error_count"] = 0
+            try:
+                started = start_subprocess(st.session_state, command, log_path, ROOT)
+            except OSError as error:
+                st.error(f"Could not start suggestions retry: {type(error).__name__}: {error}")
+                started = False
+            if started:
+                st.rerun()
+    else:
+        st.caption("Suggestions-only retry is unavailable because this result's saved upload or context is missing.")
+
 suggestion_columns = st.columns(3, wrap=True)
 suggestions = result.get("suggestions") or []
 for index, column in enumerate(suggestion_columns):
@@ -748,19 +888,6 @@ if audience_personas:
 else:
     st.info("No scored audience personas are available in this result.")
 
-averages = archetype_averages(result)
-archetype_labels = {
-    "genz": "Gen Z scroller",
-    "casual": "Casual viewer",
-    "niche_fan": "Niche fan",
-    "skeptic": "Skeptic",
-    "creator": "Creator peer",
-    "marketer": "Brand marketer",
-}
-st.markdown('<div class="vs-section-label">Archetype heat strip</div>', unsafe_allow_html=True)
-for archetype_key, archetype_label in archetype_labels.items():
-    st.markdown(heat_bar_html(archetype_label, averages.get(archetype_key)), unsafe_allow_html=True)
-
 with st.expander("Details", expanded=False):
     st.markdown(
         wider_audience_raw_score_html(result.get("crossover_score")),
@@ -781,6 +908,8 @@ with st.expander("Details", expanded=False):
         )
     st.markdown("**Per-persona scores**")
     st.json(result.get("per_persona_scores", {}))
+
+_render_history()
 
 with st.expander("Limitations"):
     for point in LIMITATIONS:

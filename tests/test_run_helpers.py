@@ -12,6 +12,9 @@ from run_helpers import (
     MAX_UPLOAD_BYTES,
     build_pipeline_command,
     current_pipeline_stage,
+    pipeline_active_stage,
+    pipeline_stage_statuses,
+    pipeline_terminal_status,
     demo_stage_seconds_from_env,
     generate_safe_filename,
     redact_log_text,
@@ -57,6 +60,17 @@ def test_pipeline_command_is_an_argv_list_with_optional_arguments():
     ]
 
 
+def test_pipeline_command_has_explicit_suggestions_retry_flag():
+    command = build_pipeline_command(
+        r"C:\venv\python.exe", "tmp/uploads/id.mp4", "tmp/result.json",
+        retry_suggestions=True,
+    )
+    assert command == [
+        r"C:\venv\python.exe", "-m", "core.pipeline", "tmp/uploads/id.mp4",
+        "--retry-suggestions", "--out", "tmp/result.json",
+    ]
+
+
 def test_redact_log_text_masks_gemini_keys_and_labeled_api_keys():
     redacted = redact_log_text(
         "provider returned AIzaSyExampleSecretValue API_KEY=another-secret"
@@ -71,6 +85,28 @@ def test_current_stage_uses_existing_pipeline_stage_markers():
     assert current_pipeline_stage("Model call stage=vision_brief model=test") == "Reading reel"
     assert current_pipeline_stage("Model call stage=persona:p1:sound_on model=test") == "Audience waves"
     assert current_pipeline_stage("no stage markers") is None
+
+
+def test_pipeline_progress_separates_api_marker_stage_status_and_terminal_status():
+    log = """Model call stage=suggestions model=test
+Pipeline stage event stage=reading_reel status=completed
+Pipeline stage event stage=core_audience status=completed
+Pipeline stage event stage=gate status=completed
+Pipeline stage event stage=wider_audience status=completed
+Pipeline stage event stage=scoring status=completed
+Pipeline stage event stage=suggestions status=started
+"""
+    assert current_pipeline_stage(log) == "Scoring and suggestions"
+    assert pipeline_stage_statuses(log)["scoring"] == "completed"
+    assert pipeline_active_stage(log) == "Scoring"
+    terminal_log = log + (
+        "Pipeline stage event stage=suggestions status=failed\n"
+        "Pipeline terminal result_status=complete suggestions_status=failed process_status=normal"
+    )
+    assert pipeline_active_stage(terminal_log) is None
+    assert pipeline_terminal_status(terminal_log) == {
+        "result": "complete", "suggestions": "failed", "process": "normal"
+    }
 
 
 def test_start_subprocess_guards_against_two_active_runs(tmp_path):

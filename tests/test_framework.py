@@ -46,7 +46,7 @@ def test_brief_prompt_gets_framework_niche_hints_and_saves_reason(monkeypatch):
     data = framework_data()
     captured = {}
     # Return an unknown value to exercise the general fallback as well.
-    monkeypatch.setattr(llm, "ask_json", lambda prompt, **kwargs: (captured.update(prompt=prompt) or {
+    monkeypatch.setattr(llm, "ask_json", lambda prompt, **kwargs: (captured.update(prompt=prompt, kwargs=kwargs) or {
         "niche_category": "tech_news", "niche_reason": "The clip reacts to a software demo without teaching a step."}))
     result = brief.build_brief({"frames": [], "transcript": "software demo"})
     for niche, entry in data["niches"].items():
@@ -55,6 +55,8 @@ def test_brief_prompt_gets_framework_niche_hints_and_saves_reason(monkeypatch):
     assert "When unsure, general is better than a wrong niche" in captured["prompt"]
     assert result["niche_category"] == "general"
     assert result["niche_reason"] == "The clip reacts to a software demo without teaching a step."
+    assert captured["kwargs"]["retries"] == captured["kwargs"]["retry_cap"] == llm.BRIEF_RETRY_CAP == 5
+    assert captured["kwargs"]["timeout_sec"] == 120
     assert framework.get_version() == data["meta"]["version"]
 
 
@@ -233,3 +235,99 @@ def test_result_fields_are_added_by_pipeline(monkeypatch, tmp_path):
     assert output["framework_version"] == framework.get_version()
     assert output["user_context"] is None
     assert output["context_used"] is False
+
+
+def test_vision_brief_failure_writes_incomplete_result_without_scores(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "CACHE_DIR", tmp_path / "cache")
+    monkeypatch.setattr(pipeline.audio, "audio_brief", lambda *_: {"available": False})
+    monkeypatch.setattr(pipeline, "extract_all", lambda *args, **kwargs: {"frames": []})
+    monkeypatch.setattr(pipeline.brief, "build_full_brief",
+                        lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("brief unavailable")))
+    monkeypatch.setattr(pipeline, "simulate", lambda *args, **kwargs: pytest.fail("must skip waves"))
+    monkeypatch.setattr(pipeline, "score_result", lambda *args, **kwargs: pytest.fail("must skip scoring"))
+    monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: pytest.fail("must skip suggestions"))
+    monkeypatch.setattr(pipeline.llm, "CALL_EVENTS", [])
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+
+    output = pipeline.run(video, tmp_path / "result.json")
+
+    assert output["complete"] is False
+    assert output["failure_stage"] == "vision_brief"
+    assert output["errors"] == [
+        {"stage": "audio", "error": "Audio unavailable"},
+        {"stage": "vision_brief", "error": "RuntimeError: brief unavailable"},
+    ]
+    assert output["final_score"] is None
+    assert output["core_resonance"] is None
+    assert output["per_persona_scores"] == {}
+    assert output["wave1"] == output["wave2"] == []
+    assert output["brief"] is None
+    assert json.loads((tmp_path / "result.json").read_text(encoding="utf-8"))["errors"] == output["errors"]
+
+
+def test_vision_failure_rerun_reuses_cached_successful_audio(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "CACHE_DIR", tmp_path / "cache")
+    audio_calls = []
+    monkeypatch.setattr(pipeline.audio, "audio_brief", lambda *_: audio_calls.append(1) or {
+        "available": True, "transcript": "cached audio"})
+    monkeypatch.setattr(pipeline, "extract_all", lambda *args, **kwargs: {"frames": []})
+    vision_calls = []
+    def build_brief(*args, **kwargs):
+        vision_calls.append(1)
+        if len(vision_calls) == 1:
+            raise RuntimeError("brief unavailable")
+        return {"niche_category": "general", "niche_reason": "mock"}
+    monkeypatch.setattr(pipeline.brief, "build_full_brief", build_brief)
+    monkeypatch.setattr(pipeline, "simulate", lambda *args, **kwargs: {
+        "wave1": [], "wave2": [], "wave1_selection": "fallback", "wave1_raw_ids": [],
+        "wave1_personas": [], "dimension_means": {}, "errors": [], "gate_passed": False,
+        "waves_run": [1]})
+    monkeypatch.setattr(pipeline, "score_result", lambda *_: {"complete": True, "final_score": 0})
+    monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: ([], []))
+    monkeypatch.setattr(pipeline.llm, "CALL_EVENTS", [])
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+
+    first = pipeline.run(video, tmp_path / "first.json")
+    second = pipeline.run(video, tmp_path / "second.json")
+
+    assert first["failure_stage"] == "vision_brief"
+    assert second["complete"] is True
+    assert len(audio_calls) == 1
+    assert len(vision_calls) == 2
+
+
+def test_pipeline_marks_missing_required_personas_incomplete(monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "CACHE_DIR", tmp_path / "cache")
+    monkeypatch.setattr(pipeline.audio, "audio_brief", lambda *_: {"available": False})
+    monkeypatch.setattr(pipeline, "extract_all", lambda *args, **kwargs: {})
+    monkeypatch.setattr(pipeline.brief, "build_full_brief", lambda *args, **kwargs: {
+        "niche_category": "general", "niche_reason": "mock"})
+    wave1 = [{"persona_id": f"persona-{index}", "score": 8,
+              "sound_on": {"stop_scrolling": 8, "share_likelihood": 8,
+                           "watch_to_end": 8, "comment_likelihood": 8,
+                           "reason": "mock", "biggest_issue": "mock"}}
+             for index in range(4)]
+    missing_errors = [{"persona_id": f"persona-{index}", "error": "RuntimeError: overloaded"}
+                      for index in range(4, 8)]
+    monkeypatch.setattr(pipeline, "simulate", lambda *args, **kwargs: {
+        "wave1": wave1, "wave2": [], "wave1_personas": [{"id": f"persona-{i}"} for i in range(8)],
+        "wave1_selection": "fixed_fallback", "wave1_raw_ids": [],
+        "dimension_means": {}, "gate_passed": False, "waves_run": [1],
+        "personas_intended": 8, "personas_scored": 4, "personas_failed": [f"persona-{i}" for i in range(4, 8)],
+        "complete": False, "errors": missing_errors})
+    monkeypatch.setattr(pipeline, "generate", lambda *args, **kwargs: ([], []))
+    monkeypatch.setattr(pipeline.llm, "CALL_EVENTS", [])
+    video = tmp_path / "clip.mp4"
+    video.write_bytes(b"video")
+
+    output = pipeline.run(video, tmp_path / "result.json", use_cache=False)
+
+    assert output["complete"] is False
+    assert output["personas_scored"] == 4
+    assert output["personas_intended"] == 8
+    assert output["reach_tier"] == "Incomplete - rerun"
+    assert {item["persona_id"] for item in output["errors"] if "persona_id" in item} == {
+        f"persona-{index}" for index in range(4, 8)
+    }

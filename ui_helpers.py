@@ -9,21 +9,33 @@ import re
 from pathlib import Path
 
 
-def score_range(value, margin=0.8):
-    """Return a clamped low/high score range."""
-    value = float(value)
-    return max(0.0, value - margin), min(10.0, value + margin)
-
-
 def is_incomplete(result):
     """Whether a saved result lacks a finished final score."""
     return result.get("complete") is False or result.get("final_score") is None
 
 
-def range_band_percentages(value, margin=0.8):
-    """Return the highlighted range start and width on a 0-10 track, in percent."""
-    low, high = score_range(value, margin)
-    return low * 10, (high - low) * 10
+def suggestions_error_count(result):
+    """Count saved errors from the optional suggestions stage."""
+    errors = result.get("errors")
+    if not isinstance(errors, list):
+        return 0
+    return sum(1 for item in errors
+               if isinstance(item, dict) and item.get("stage") == "suggestions")
+
+
+def should_show_last_run_warning(last_run_failed, last_run_result_path,
+                                 selected_result_path, selected_result):
+    """Avoid repeating the selected result's incomplete warning for that same run."""
+    if not last_run_failed:
+        return False
+    same_selected_result = (
+        last_run_result_path is not None
+        and selected_result_path is not None
+        and str(last_run_result_path) == str(selected_result_path)
+        and isinstance(selected_result, dict)
+        and is_incomplete(selected_result)
+    )
+    return not same_selected_result
 
 
 ARCHETYPES = {
@@ -52,6 +64,18 @@ AUDIENCE_SCORE_BUCKETS = (
 )
 WIDER_AUDIENCE_NARROW_THRESHOLD = 3.5
 WIDER_AUDIENCE_BROAD_THRESHOLD = 6.5
+DIMENSION_WEIGHTS = {
+    "stop_scrolling": 0.35,
+    "share_likelihood": 0.25,
+    "watch_to_end": 0.25,
+    "comment_likelihood": 0.15,
+}
+DIMENSION_LABELS = {
+    "stop_scrolling": "Stop scrolling",
+    "watch_to_end": "Watch to end",
+    "share_likelihood": "Share",
+    "comment_likelihood": "Comment",
+}
 
 
 def demo_mode_enabled(environ=None):
@@ -97,6 +121,77 @@ def wider_audience_label(crossover_score):
     if score < WIDER_AUDIENCE_BROAD_THRESHOLD:
         return "Moderate"
     return "Broad"
+
+
+def weighted_dimension_score(dimension_means, wave="wave1", condition="sound_on"):
+    """Calculate a weighted 0-10 score from saved per-wave dimension means."""
+    wave_data = dimension_means.get(wave) if isinstance(dimension_means, dict) else None
+    values = wave_data.get(condition) if isinstance(wave_data, dict) else None
+    if not isinstance(values, dict):
+        return None
+    weighted = []
+    for dimension, weight in DIMENSION_WEIGHTS.items():
+        value = values.get(dimension)
+        if isinstance(value, bool):
+            continue
+        try:
+            score = float(value)
+        except (TypeError, ValueError):
+            continue
+        if math.isfinite(score):
+            weighted.append((score, weight))
+    if len(weighted) != len(DIMENSION_WEIGHTS):
+        return None
+    return sum(score * weight for score, weight in weighted)
+
+
+def sound_score_gap(result):
+    """Return Wave 1 weighted sound-on minus sound-off points, when available."""
+    means = result.get("dimension_means") if isinstance(result, dict) else None
+    sound_on = weighted_dimension_score(means, "wave1", "sound_on")
+    sound_off = weighted_dimension_score(means, "wave1", "sound_off")
+    return None if sound_on is None or sound_off is None else sound_on - sound_off
+
+
+def weakest_dimension(dimension_means, wave="wave1", condition="sound_on"):
+    """Return the key of the lowest available dimension for a wave/condition."""
+    wave_data = dimension_means.get(wave) if isinstance(dimension_means, dict) else None
+    values = wave_data.get(condition) if isinstance(wave_data, dict) else None
+    if not isinstance(values, dict):
+        return None
+    scores = []
+    for key in DIMENSION_LABELS:
+        value = values.get(key)
+        if isinstance(value, bool):
+            continue
+        try:
+            score = float(value)
+        except (TypeError, ValueError):
+            continue
+        if math.isfinite(score):
+            scores.append((score, key))
+    return min(scores)[1] if scores else None
+
+
+def selected_result_path(session_state, option_paths, pending_result=None):
+    """Resolve explicit selection or a just-completed run; never auto-select history."""
+    selected = pending_result if pending_result in option_paths else session_state.get("selected_result_path")
+    if selected not in option_paths:
+        selected = None
+    previous = session_state.get("selected_result_path")
+    if selected is None:
+        session_state.pop("selected_result_path", None)
+    else:
+        session_state["selected_result_path"] = selected
+    if selected is not None and selected != previous:
+        session_state["selection_scroll_pending"] = True
+    return selected
+
+
+def select_history_result(session_state, result_path):
+    """Store a tile selection and request a best-effort scroll to the analysis."""
+    session_state["selected_result_path"] = result_path
+    session_state["selection_scroll_pending"] = True
 
 
 def niche_hint(choice):
@@ -207,28 +302,47 @@ RUN_DURATION_CAPTION = "Usually 8 to 15 minutes. Keep this tab open."
 LONG_RUN_WARNING = "This is taking longer than usual, probably Gemini is busy. You can keep waiting or cancel."
 
 
-def _run_stage_index(current_stage):
-    """Resolve the detected pipeline stage to one of the five UI stage indexes."""
-    if isinstance(current_stage, int):
-        return min(len(RUN_STAGES) - 1, max(0, current_stage))
-    if current_stage in RUN_STAGES:
-        return RUN_STAGES.index(current_stage)
-    # The log parser reports these broader stages while the audience wave runs.
-    return {"Audience waves": 1, "Scoring and suggestions": 4}.get(current_stage, 0)
+_PIPELINE_STAGE_KEYS = {
+    "Reading reel": "reading_reel",
+    "Core audience": "core_audience",
+    "Gate": "gate",
+    "Wider audience": "wider_audience",
+    "Scoring": "scoring",
+}
 
 
-def stage_pill_states(current_stage):
-    """Return (label, state) pairs for the done/current/upcoming run pills."""
-    current_index = _run_stage_index(current_stage)
-    return [
-        (label, "done" if index < current_index else "current" if index == current_index else "upcoming")
-        for index, label in enumerate(RUN_STAGES)
-    ]
+def stage_pill_states(current_stage=None, stage_statuses=None):
+    """Render only explicitly completed stages as done; call markers are merely current."""
+    stage_statuses = stage_statuses or {}
+    states = []
+    for label in RUN_STAGES:
+        stage_key = _PIPELINE_STAGE_KEYS[label]
+        status = stage_statuses.get(stage_key)
+        active = label == current_stage and (
+            status == "started" or stage_statuses.get("suggestions") == "started"
+        )
+        if active:
+            state = "current"
+        elif status == "completed":
+            state = "done"
+        elif status == "skipped":
+            state = "skipped"
+        elif status in {"incomplete", "failed"}:
+            state = "failed"
+        elif label == current_stage or status == "started":
+            state = "current"
+        else:
+            state = "upcoming"
+        states.append((label, state))
+    return states
 
 
-def stage_progress_percent(current_stage):
-    """Return progress in 20-point stages, with the active stage half filled."""
-    return _run_stage_index(current_stage) * 20 + 10
+def stage_progress_percent(current_stage=None, stage_statuses=None):
+    """Estimate progress from explicit stage results and the current stage marker."""
+    states = stage_pill_states(current_stage, stage_statuses)
+    terminal = sum(state in {"done", "failed", "skipped"} for _, state in states)
+    current = sum(state == "current" for _, state in states)
+    return min(100, terminal * 20 + current * 10)
 
 
 def rotating_wait_message(elapsed_seconds):

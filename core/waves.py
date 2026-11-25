@@ -8,12 +8,66 @@ from pathlib import Path
 
 from core import config, llm
 from core.personas import load_personas
-from core.persona_react import react
+from core.persona_react import react, react_batch
 
 logger = logging.getLogger(__name__)
 AUDIENCE_PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "audience_match.txt"
 AUDIENCE_PERSONAS_PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "audience_personas.txt"
 DIMENSIONS = ("stop_scrolling", "watch_to_end", "share_likelihood", "comment_likelihood")
+
+
+def _batch_attempt_events(batch_ids, first_event):
+    batch_ids = set(batch_ids)
+    events = []
+    for event in llm.CALL_EVENTS[first_event:]:
+        stage = event.get("stage", "")
+        if not stage.startswith("persona:") or not stage.endswith(":batch"):
+            continue
+        stage_ids = set(stage[len("persona:"):-len(":batch")].split(","))
+        if stage_ids & batch_ids:
+            events.append(event)
+    return events
+
+
+def _log_persona_batch_start(batch, wave_number, batch_id):
+    for persona in batch:
+        logger.info(
+            "Persona start persona_id=%s archetype=%s wave=%s batch_id=%s model=pending attempt_count=0 final_status=STARTED",
+            persona["id"], persona.get("archetype", "unknown"), wave_number, batch_id,
+        )
+
+
+def _log_persona_batch_end(batch, wave_number, batch_id, events, status, error=None):
+    model_names = list(dict.fromkeys(event.get("model", "unknown") for event in events))
+    model_attempts = ",".join(
+        f"{event.get('model', 'unknown')}:{event.get('attempt', 0)}:{event.get('status', 'UNKNOWN')}"
+        for event in events
+    ) or "none"
+    reason = (f" error={type(error).__name__}: {llm._redact_error(error)}"
+              if error is not None else "")
+    for persona in batch:
+        logger.info(
+            "Persona completion persona_id=%s archetype=%s wave=%s batch_id=%s model=%s attempt_count=%s model_attempts=%s final_status=%s%s",
+            persona["id"], persona.get("archetype", "unknown"), wave_number,
+            batch_id, ",".join(model_names) or "cache", len(events),
+            model_attempts, status, reason,
+        )
+
+
+def _execute_logged_batch(batch, full_brief, audio_available, reaction_cache,
+                          persona_runs, wave_number, batch_id):
+    _log_persona_batch_start(batch, wave_number, batch_id)
+    first_event = len(llm.CALL_EVENTS)
+    try:
+        results = _persona_batch(batch, full_brief, audio_available,
+                                 reaction_cache, persona_runs)
+    except Exception as error:
+        events = _batch_attempt_events((p["id"] for p in batch), first_event)
+        _log_persona_batch_end(batch, wave_number, batch_id, events, "FAILED", error)
+        raise
+    events = _batch_attempt_events((p["id"] for p in batch), first_event)
+    _log_persona_batch_end(batch, wave_number, batch_id, events, "COMPLETED")
+    return results
 
 
 class _Wave1People(list):
@@ -274,22 +328,7 @@ def _choose_wave1_by_match(brief, personas):
         return _Wave1People(_balanced(personas, config.WAVE1_SIZE), "fallback", raw_ids), f"audience_match fallback ({type(error).__name__}: {error})"
 
 
-def _one_persona(persona, full_brief, audio_available, reaction_cache=None):
-    def reaction(condition):
-        cached = reaction_cache.get(persona, condition) if reaction_cache else None
-        if cached is not None:
-            return cached
-        with llm.call_stage(f"persona:{persona['id']}:{condition}"):
-            value = react(persona, full_brief, condition)
-        if reaction_cache:
-            reaction_cache.set(persona, condition, value)
-        return value
-
-    on = reaction("sound_on")
-    if audio_available:
-        off = reaction("sound_off")
-    else:
-        off = on
+def _score_persona(persona, on, off, audio_available):
     def score(reaction):
         return sum(config.SCORE_WEIGHTS[field] * reaction[field] for field in config.SCORE_WEIGHTS)
     mode = config.SOUND_MODE
@@ -306,16 +345,80 @@ def _one_persona(persona, full_brief, audio_available, reaction_cache=None):
             "sound_on": on, "sound_off": off if audio_available else None}
 
 
-def run_wave(personas, full_brief, audio_available=True, reaction_cache=None):
+def _persona_batch(personas, full_brief, audio_available, reaction_cache, persona_runs):
+    cached = {}
+    missing = []
+    conditions = ("sound_on", "sound_off") if audio_available else ("sound_on",)
+    for persona in personas:
+        values = {condition: reaction_cache.get(persona, condition) if reaction_cache else None
+                  for condition in conditions}
+        if all(value is not None for value in values.values()):
+            cached[persona["id"]] = values
+        else:
+            missing.append(persona)
+
+    generated = {}
+    if missing:
+        ids = ",".join(persona["id"] for persona in missing)
+        with llm.call_stage(f"persona:{ids}:batch"):
+            generated = react_batch(missing, full_brief, conditions=conditions, runs=persona_runs)
+        if reaction_cache:
+            for persona in missing:
+                for condition, value in generated[persona["id"]].items():
+                    reaction_cache.set(persona, condition, value)
+
+    results = []
+    for persona in personas:
+        reactions = cached.get(persona["id"]) or generated[persona["id"]]
+        on = reactions["sound_on"]
+        off = reactions.get("sound_off") if audio_available else on
+        results.append(_score_persona(persona, on, off, audio_available))
+    return results
+
+
+def _one_persona(persona, full_brief, audio_available, reaction_cache=None):
+    """Score one persona with separate condition cache entries for compatibility."""
+    conditions = ("sound_on", "sound_off") if audio_available else ("sound_on",)
+    reactions = {}
+    for condition in conditions:
+        value = reaction_cache.get(persona, condition) if reaction_cache else None
+        if value is None:
+            with llm.call_stage(f"persona:{persona['id']}:{condition}"):
+                value = react(persona, full_brief, condition)
+            if reaction_cache:
+                reaction_cache.set(persona, condition, value)
+        reactions[condition] = value
+    on = reactions["sound_on"]
+    off = reactions.get("sound_off") if audio_available else on
+    return _score_persona(persona, on, off, audio_available)
+
+
+def run_wave(personas, full_brief, audio_available=True, reaction_cache=None, persona_runs=None,
+             wave_number=1):
     results, errors = [], []
+    persona_runs = config.WAVE1_RUNS if persona_runs is None else persona_runs
+    size = max(1, int(config.BATCH_SIZE))
+    batches = [(index // size + 1, personas[index:index + size])
+               for index in range(0, len(personas), size)]
     with ThreadPoolExecutor(max_workers=max(1, min(config.MAX_WORKERS, 5))) as pool:
-        futures = {pool.submit(_one_persona, p, full_brief, audio_available, reaction_cache): p for p in personas}
+        futures = {}
+        for batch_number, batch in batches:
+            batch_id = f"wave{wave_number}-batch{batch_number:02d}"
+            future = pool.submit(_execute_logged_batch, batch, full_brief,
+                                 audio_available, reaction_cache, persona_runs,
+                                 wave_number, batch_id)
+            futures[future] = (batch_number, batch, batch_id)
         for future in as_completed(futures):
-            p = futures[future]
+            _, batch, batch_id = futures[future]
             try:
-                results.append(future.result())
+                batch_results = future.result()
+                results.extend(batch_results)
             except Exception as error:
-                errors.append({"persona_id": p["id"], "error": f"{type(error).__name__}: {error}"})
+                safe_error = llm._redact_error(error)
+                for persona in batch:
+                    errors.append({"stage": "persona", "wave": wave_number,
+                                   "batch_id": batch_id, "persona_id": persona["id"],
+                                   "error": f"{type(error).__name__}: {safe_error}"})
     return sorted(results, key=lambda x: x["persona_id"]), errors
 
 
@@ -346,21 +449,41 @@ def simulate(brief, audio_available=True, personas=None, reaction_cache=None, wa
                                     getattr(wave1_people, "raw_ids", []))
     selection_type = getattr(wave1_people, "selection", "fallback" if selection_error else "llm")
     raw_ids = getattr(wave1_people, "raw_ids", [])
-    def execute_wave(selected_people):
+    def execute_wave(selected_people, persona_runs, wave_number):
         if reaction_cache is None:
-            return run_wave(selected_people, brief, audio_available)
-        return run_wave(selected_people, brief, audio_available, reaction_cache)
+            return run_wave(selected_people, brief, audio_available,
+                            persona_runs=persona_runs, wave_number=wave_number)
+        return run_wave(selected_people, brief, audio_available, reaction_cache,
+                        persona_runs=persona_runs, wave_number=wave_number)
 
-    wave1, errors = execute_wave(wave1_people)
+    logger.info("Pipeline stage event stage=core_audience status=started")
+    wave1, errors = execute_wave(wave1_people, config.WAVE1_RUNS, 1)
+    wave1_complete = bool(wave1_people) and len(wave1) == len(wave1_people)
+    logger.info("Pipeline stage event stage=core_audience status=%s",
+                "completed" if wave1_complete else "incomplete")
     core_resonance = sum(x["score"] for x in wave1) / len(wave1) if wave1 else 0.0
-    passed = bool(wave1) and core_resonance >= config.GATE_THRESHOLD
+    logger.info("Pipeline stage event stage=gate status=started")
+    passed = (len(wave1) == len(wave1_people) and bool(wave1)
+              and core_resonance >= config.GATE_THRESHOLD)
+    gate_outcome = ("passed" if passed else
+                    "wave1_incomplete" if not wave1_complete else "threshold_not_met")
+    logger.info("Pipeline stage event stage=gate status=completed outcome=%s", gate_outcome)
     wave2, wave2_errors = ([], [])
+    wave2_people = []
     means_by_wave = {"wave1": dimension_means(wave1)}
     if passed:
         selected = {p["id"] for p in wave1_people}
         wave2_people = select_wave2_personas(all_personas, exclude_ids=selected)
-        wave2, wave2_errors = execute_wave(wave2_people)
+        logger.info("Pipeline stage event stage=wider_audience status=started")
+        wave2, wave2_errors = execute_wave(wave2_people, config.WAVE2_RUNS, 2)
+        wave2_complete = (len(wave2) == len(wave2_people)
+                          and not any(error.get("wave") == 2 for error in wave2_errors))
+        logger.info("Pipeline stage event stage=wider_audience status=%s",
+                    "completed" if wave2_complete else "incomplete")
         means_by_wave["wave2"] = dimension_means(wave2)
+    else:
+        logger.info("Pipeline stage event stage=wider_audience status=skipped outcome=%s",
+                    gate_outcome)
     if selection_error:
         errors.append({"stage": "audience_personas", "error": selection_error})
     scored_ids = {item["persona_id"] for item in wave1 + wave2}
@@ -368,6 +491,24 @@ def simulate(brief, audio_available=True, personas=None, reaction_cache=None, wa
     waves_run = [1, 2] if passed else [1]
     intended = len(all_personas) if passed else len(wave1_people)
     scored = len(scored_ids)
+    wave2_candidates = (wave2_people if passed else
+                        select_wave2_personas(all_personas,
+                                              exclude_ids={p["id"] for p in wave1_people}))
+    gate_skipped_ids = ({p["id"] for p in wave2_candidates}
+                        if not passed and len(wave1) == len(wave1_people) else set())
+    failed_ids_set = set(failed_ids)
+    known_ids = scored_ids | failed_ids_set | gate_skipped_ids
+    not_started_ids = {p["id"] for p in wave1_people + wave2_candidates} - known_ids
+    completion_status = "complete" if scored == intended else "incomplete"
+    execution_summary = {
+        "total_personas": len(all_personas),
+        "completed": len(scored_ids),
+        "failed": len(failed_ids_set),
+        "gate_skipped": len(gate_skipped_ids),
+        "not_started": len(not_started_ids),
+        "overall_completion_status": completion_status,
+    }
+    logger.info("Persona execution summary %s", json.dumps(execution_summary, sort_keys=True))
     crossover_score = (sum(item["score"] for item in wave2) / len(wave2)
                        if 2 in waves_run and wave2 else None)
     return {"wave1": wave1, "wave1_personas": list(wave1_people), "wave2": wave2,
@@ -379,4 +520,7 @@ def simulate(brief, audio_available=True, personas=None, reaction_cache=None, wa
             "dimension_means": means_by_wave,
             "personas_intended": intended, "personas_scored": scored,
             "personas_failed": failed_ids, "complete": scored == intended,
+            "persona_execution_summary": execution_summary,
+            "personas_gate_skipped": sorted(gate_skipped_ids),
+            "personas_not_started": sorted(not_started_ids),
             "errors": errors + wave2_errors}

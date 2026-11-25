@@ -1,5 +1,5 @@
-streamlit
-faster-whisper
-python-dotenv
-google-genai
-numpy
+streamlit==1.66.1
+faster-whisper==1.2.1
+python-dotenv==1.2.4
+google-genai==2.34.0
+numpy==2.5.4

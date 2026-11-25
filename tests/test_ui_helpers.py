@@ -11,6 +11,7 @@ from pathlib import Path
 from ui_helpers import (
     AUDIENCE_SCORE_THRESHOLD,
     NICHE_CATEGORIES,
+    RUN_STAGES,
     audience_spotlight_html,
     audience_summary,
     archetype_averages,
@@ -25,30 +26,40 @@ from ui_helpers import (
     slice_history_items,
     group_personas_by_archetype,
     is_incomplete,
-    range_band_percentages,
+    suggestions_error_count,
     resolve_niche_choice,
     rotating_wait_message,
     score_bucket,
-    score_range,
     select_extreme_personas,
     shorten_first_sentence,
     stage_pill_states,
     stage_progress_percent,
+    should_show_last_run_warning,
     wider_audience_label,
+    sound_score_gap,
+    weakest_dimension,
     split_audience_comments,
+    selected_result_path,
+    select_history_result,
 )
 from game_html import game_html
 from run_helpers import elapsed_run_seconds, read_history_meta, save_legacy_test_thumbnail, write_history_meta
 from ui_helpers import LONG_RUN_WARNING, RUN_DURATION_CAPTION, run_progress_copy
 from ui_theme import (
+    CSS,
     audience_tile_style_html,
     chat_bubble_html,
+    dimension_bars_html,
     history_tile_html,
+    result_hero_html,
+    score_card_html,
     history_placeholder_html,
+    heat_bar_html,
     suggestion_card_html,
     demo_banner_html,
     wider_audience_card_html,
     wider_audience_raw_score_html,
+    sound_warning_html,
 )
 
 NODE = shutil.which("node")
@@ -70,16 +81,17 @@ def test_saved_result_view_has_no_stage_pills():
     assert "progress_html(" not in saved_result_source
 
 
-def test_selected_result_sections_are_in_required_order_and_limitations_are_last():
+def test_page_sections_are_in_required_order_and_limitations_are_last():
     app_source = (Path(__file__).resolve().parents[1] / "app.py").read_text(encoding="utf-8")
     saved_result_source = app_source[app_source.index("result_columns = st.columns"):]
     markers = (
         "result_hero_html(",
         'score_card_html("Core audience"',
+        "Why this score",
         "Suggestions to strengthen the reel",
         "Audience Wall",
-        "Archetype heat strip",
         'with st.expander("Details"',
+        "_render_history()",
         'with st.expander("Limitations"',
         "Estimate of potential, not a prediction or a guarantee.",
     )
@@ -270,6 +282,75 @@ def test_audience_summary_counts_threshold_and_weighted_reaction_dimensions():
     }
 
 
+def test_sound_gap_uses_weighted_wave_one_dimensions_and_finds_weakest():
+    result = {
+        "dimension_means": {
+            "wave1": {
+                "sound_on": {
+                    "stop_scrolling": 8,
+                    "share_likelihood": 6,
+                    "watch_to_end": 4,
+                    "comment_likelihood": 2,
+                },
+                "sound_off": {
+                    "stop_scrolling": 4,
+                    "share_likelihood": 4,
+                    "watch_to_end": 4,
+                    "comment_likelihood": 4,
+                },
+            }
+        }
+    }
+    assert sound_score_gap(result) == pytest.approx(1.6)
+    assert weakest_dimension(result["dimension_means"], "wave1", "sound_on") == "comment_likelihood"
+    assert sound_score_gap({"dimension_means": {}}) is None
+
+
+def test_new_result_markup_escapes_json_strings_and_marks_weakest_dimension():
+    dimensions = {
+        "wave1": {"sound_on": {
+            "stop_scrolling": 8,
+            "share_likelihood": 6,
+            "watch_to_end": 4,
+            "comment_likelihood": 2,
+        }}
+    }
+    bars = dimension_bars_html(dimensions, "wave1", "sound_on", weakest=True)
+    assert bars.count("class=\"vs-weakest-tag\"") == 1
+    assert "2.0" in bars and "8.0" in bars
+    assert "Loses 1.2 points when muted." in sound_warning_html(1.24)
+    assert sound_warning_html(0.99) == ""
+
+def test_score_bar_html_renders_scaled_gradient_fills():
+    dimensions = {
+        "wave1": {"sound_on": {
+            "stop_scrolling": 8.1,
+            "share_likelihood": 4.0,
+            "watch_to_end": 0,
+            "comment_likelihood": 0,
+        }}
+    }
+    bars = dimension_bars_html(dimensions, "wave1", "sound_on")
+    assert "width:81%" in bars
+    assert "width:40%" in bars
+    assert "width:0%" in bars
+    assert "background-image:linear-gradient(90deg,#E6007E,#A83CF0)" in bars
+    assert "min-width:3px" in bars and "min-width:0" in bars
+
+
+def test_selection_starts_empty_then_selects_completed_or_clicked_run():
+    session = {}
+    options = ["old", "new"]
+    assert selected_result_path(session, options) is None
+    assert "selected_result_path" not in session
+    assert selected_result_path(session, options, pending_result="new") == "new"
+    assert session["selected_result_path"] == "new"
+    clicked_session = {"selected_result_path": "new"}
+    select_history_result(clicked_session, "old")
+    assert selected_result_path(clicked_session, options) == "old"
+    assert clicked_session["selection_scroll_pending"] is True
+
+
 def test_audience_groups_recognize_dynamic_persona_ids_in_display_order():
     personas = collect_scored_personas({
         "wave1": [
@@ -332,7 +413,10 @@ def test_audience_spotlight_escapes_quote_and_persona_id():
 
 @pytest.mark.parametrize("index", range(5))
 def test_stage_pills_mark_done_current_and_upcoming_for_each_stage(index):
-    states = stage_pill_states(index)
+    keys = ("reading_reel", "core_audience", "gate", "wider_audience", "scoring")
+    statuses = {key: "completed" for key in keys[:index]}
+    statuses[keys[index]] = "started"
+    states = stage_pill_states(RUN_STAGES[index], statuses)
     assert [state for _, state in states] == [
         "done" if step < index else "current" if step == index else "upcoming"
         for step in range(5)
@@ -341,7 +425,25 @@ def test_stage_pills_mark_done_current_and_upcoming_for_each_stage(index):
 
 @pytest.mark.parametrize("index", range(5))
 def test_stage_progress_advances_in_twenty_point_steps_and_half_fills_current(index):
-    assert stage_progress_percent(index) == index * 20 + 10
+    keys = ("reading_reel", "core_audience", "gate", "wider_audience", "scoring")
+    statuses = {key: "completed" for key in keys[:index]}
+    statuses[keys[index]] = "started"
+    assert stage_progress_percent(RUN_STAGES[index], statuses) == index * 20 + 10
+
+
+def test_stage_pills_do_not_infer_completed_stages_from_api_marker():
+    assert [state for _, state in stage_pill_states("Scoring") ] == [
+        "upcoming", "upcoming", "upcoming", "upcoming", "current"
+    ]
+
+
+def test_last_run_warning_is_deduplicated_only_for_same_incomplete_result():
+    result = {"complete": False, "final_score": 0.0}
+    assert not should_show_last_run_warning(True, "same.json", "same.json", result)
+    assert should_show_last_run_warning(True, "same.json", "other.json", result)
+    assert should_show_last_run_warning(
+        True, "same.json", "same.json", {"complete": True, "final_score": 7.0}
+    )
 
 
 @pytest.mark.parametrize(
@@ -458,12 +560,60 @@ assert.equal(spawned, 10000);
     )
 
 
-@pytest.mark.parametrize(
-    "value,expected",
-    [(5.2, (4.4, 6.0)), (0.2, (0.0, 1.0)), (9.9, (9.1, 10.0)), (0, (0.0, 0.8)), (10, (9.2, 10.0))],
-)
-def test_score_range_clamps_to_scale(value, expected):
-    assert score_range(value) == pytest.approx(expected)
+def test_core_audience_card_displays_dynamic_range_without_scale_suffix():
+    from core.scoring import score_interval
+
+    first_scores = [2, 3, 4, 6, 7, 8, 5, 4]
+    second_scores = [4, 4, 5, 5, 5, 5, 6, 6]
+    first_range = score_interval(first_scores)
+    second_range = score_interval(second_scores)
+    hero = result_hero_html(
+        "Medium", "comedy", 6.25, confidence="High", score_range=first_range
+    )
+    card = score_card_html(
+        "Core audience", sum(first_scores) / len(first_scores), "Core connection",
+        confidence="High", score_range=first_range,
+    )
+    assert f"{first_range[0]:.1f}–{first_range[1]:.1f}" in hero
+    assert "6.2 / 10" not in hero and "/ 10" not in hero
+    assert "Estimated score is out of 10" in hero
+    assert "Confidence: High" in hero
+    assert f"{first_range[0]:.1f}–{first_range[1]:.1f}" in card
+    assert "/ 10" not in card
+    assert first_range != second_range
+
+
+def test_hero_shows_unavailable_range_and_scale_explanation():
+    hero = result_hero_html(
+        "Medium", "comedy", 6.25, confidence="High", score_range=None
+    )
+    assert "Unavailable" in hero
+    assert "Estimated score is out of 10" in hero
+    assert "Confidence: High" in hero
+    assert "6.2 / 10" not in hero
+
+
+def test_hero_estimate_note_and_confidence_have_readable_separate_placements():
+    from core.scoring import score_interval
+
+    score_range = score_interval([2, 3, 4, 6, 7, 8, 5, 4])
+    hero = result_hero_html(
+        "Medium", "comedy", 6.25, confidence="Medium", score_range=score_range
+    )
+    assert hero.index("vs-estimate-note") < hero.index("vs-estimate-confidence")
+    assert "Estimated score is out of 10" in hero
+    assert "Confidence: Medium" in hero
+    assert ".vs-estimate-note {" in CSS and "color:#F5EFFA" in CSS
+    assert ".vs-estimate-confidence { position:absolute; right:" in CSS
+    assert "bottom:1.15rem" in CSS
+
+
+def test_core_audience_card_shows_unavailable_when_range_is_missing():
+    card = score_card_html(
+        "Core audience", 5.0, "Core connection", confidence="High", score_range=None
+    )
+    assert "Unavailable" in card
+    assert "requires at least 3 scored personas" in card
 
 
 @pytest.mark.parametrize(
@@ -479,12 +629,19 @@ def test_incomplete_detection(result, expected):
     assert is_incomplete(result) is expected
 
 
-@pytest.mark.parametrize(
-    "value,expected",
-    [(5.2, (44.0, 16.0)), (0.2, (0.0, 10.0)), (9.9, (91.0, 9.0))],
-)
-def test_range_band_percentages(value, expected):
-    assert range_band_percentages(value) == pytest.approx(expected)
+def test_suggestions_error_count_ignores_other_stages_and_malformed_items():
+    assert suggestions_error_count({"errors": [
+        {"stage": "suggestions", "error": "unavailable"},
+        {"stage": "persona", "error": "failed"}, None,
+        {"stage": "suggestions", "error": "quota"},
+    ]}) == 2
+    assert suggestions_error_count({"errors": "invalid"}) == 0
+
+
+def test_legacy_history_score_without_confidence_still_renders():
+    markup = history_tile_html({"display_name": "Old run", "core_score": 6.25})
+    assert "6.2 / 10" in markup
+    assert "Confidence: Unavailable" in markup
 
 
 def test_archetype_averages_group_wave_scores_by_report_prefix():

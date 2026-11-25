@@ -21,9 +21,28 @@ def test_silent_brief_removes_audio_without_api_call(monkeypatch):
     assert result is not source
 
 
+def test_build_brief_preserves_prompt_and_extracted_frames(monkeypatch):
+    captured = {}
+    frame = "frame-1.jpg"
+
+    def fake_ask_json(prompt, **kwargs):
+        captured["prompt"] = prompt
+        captured.update(kwargs)
+        return {"niche_category": "general"}
+
+    monkeypatch.setattr(llm, "ask_json", fake_ask_json)
+
+    brief.build_brief({"frames": [frame], "transcript": "approximate words"})
+
+    assert captured["images"] == [frame]
+    assert "Extracted context (transcript is approximate)" in captured["prompt"]
+    assert "approximate words" in captured["prompt"]
+
+
 def test_persona_validation_and_clamping(monkeypatch):
     data = [{"stop_scrolling": 99, "watch_to_end": -2, "share_likelihood": 4.5,
-             "comment_likelihood": 2, "reason": "specific", "biggest_issue": "slow"}]
+             "comment_likelihood": 2, "reason": "specific", "biggest_issue": "slow",
+             "criteria_cited": []}]
     monkeypatch.setattr(llm, "ask_json", lambda *a, **k: data[0])
     persona = personas.load_personas()[0]
     result = persona_react.react(persona, {"on_screen_text": "x"}, "sound_off")
@@ -166,7 +185,7 @@ def test_fallback_model_after_retries(monkeypatch):
     monkeypatch.setattr(llm, "_get_client", lambda: SimpleNamespace(models=models))
     monkeypatch.setattr(llm.time, "sleep", lambda _: None)
     assert llm.ask("x", retries=2) == "ok"
-    assert models.models == ["main", "main", "fallback"]
+    assert models.models == ["main", "fallback"]
 
 
 def test_persona_data_is_24_valid_entries():

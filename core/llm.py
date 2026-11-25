@@ -29,11 +29,14 @@ _next_call_at = 0.0
 _circuit_lock = threading.Lock()
 _model_failures = {}
 _model_circuit_until = {}
+_unavailable_models = set()
 API_CALL_COUNT = 0
 CALL_EVENTS = []
 _CALL_STAGE = ContextVar("llm_call_stage", default="unspecified")
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 _REPAIR_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "json_repair.txt"
+BRIEF_RETRY_CAP = 5
+TIMEOUT_SAME_MODEL_RETRIES = 1
 
 
 def _get_client(timeout_sec=None):
@@ -70,6 +73,11 @@ def _model_name():
     return os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 
 
+def _canonical_model_name(model):
+    """Normalize common model resource-name aliases for fallback deduplication."""
+    return str(model).strip().rstrip("/").rsplit("/", 1)[-1].casefold()
+
+
 def _timeout_seconds():
     raw_value = os.getenv("LLM_TIMEOUT_SEC", "60")
     try:
@@ -79,6 +87,11 @@ def _timeout_seconds():
     if not math.isfinite(seconds) or seconds <= 0:
         raise RuntimeError("LLM_TIMEOUT_SEC must be a positive number.")
     return seconds
+
+
+def _supports_minimal_thinking(model):
+    model_name = str(model).rsplit("/", 1)[-1].lower()
+    return re.match(r"^gemini-3(?:[.-])", model_name) is not None
 
 
 def _status_code(error):
@@ -202,6 +215,8 @@ def _call_status(error):
     if status == 503:
         return "OVERLOADED"
     if status == 429:
+        if _daily_quota_exhausted(error):
+            return "DAILY_QUOTA"
         return "RATE_LIMITED"
     if status in (401, 403):
         return "AUTH_ERROR"
@@ -235,7 +250,7 @@ def _safe_error_message(error):
     return message
 
 
-def _raise_provider_error(error):
+def _raise_provider_error(error, model=None):
     status = _status_code(error)
     detail = f"{type(error).__name__}: {_redact_error(error)}"
     if status == 401:
@@ -243,14 +258,15 @@ def _raise_provider_error(error):
     if status == 403:
         raise RuntimeError(f"Gemini access was denied (403; {detail}). Check API key permissions.") from error
     if status == 404:
-        raise RuntimeError(f"Gemini model was not found (404; {detail}). Check GEMINI_MODEL.") from error
+        raise RuntimeError(f"Gemini model {model!r} was not found (404; {detail}).") from error
     raise RuntimeError(
         f"Gemini request failed ({type(error).__name__}: {_redact_error(error)})"
     ) from error
 
 
 def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
-        audio_path=None, model=None, timeout_sec=None):
+        audio_path=None, model=None, timeout_sec=None, response_json_schema=None,
+        retry_cap=3):
     """Send a prompt and optional JPEG images to the configured model."""
     parts = [prompt]
     for path in images or []:
@@ -261,31 +277,52 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
             types.Part.from_bytes(data=Path(audio_path).read_bytes(), mime_type="audio/wav")
         )
 
-    generation_config = types.GenerateContentConfig(
-        temperature=temperature,
-        response_mime_type="application/json" if json_mode else None,
-    )
-
-    timeout_seconds = _timeout_seconds() if timeout_sec is None else float(timeout_sec)
+    use_timeout_client = timeout_sec is not None
+    if timeout_sec is not None:
+        timeout_seconds = float(timeout_sec)
+    else:
+        timeout_seconds = _timeout_seconds()
     if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
         raise ValueError("timeout_sec must be a positive number.")
-    attempts = min(max(1, int(retries)), 3)
+    attempts = min(max(1, int(retries)), max(1, int(retry_cap)))
     explicit_model = model is not None
     if explicit_model:
         models = [str(model)]
     else:
         models = [_model_name()]
-        fallback = os.getenv("GEMINI_FALLBACK_MODEL", "").strip()
-        if fallback and fallback not in models:
+        fallback = (os.getenv("GEMINI_FALLBACK_MODEL", "").strip()
+                    or config.FALLBACK_MODEL.strip())
+        if fallback and all(_canonical_model_name(fallback) != _canonical_model_name(item)
+                            for item in models):
             models.append(fallback)
     if models and _circuit_open(models[0]):
         logging.getLogger(__name__).warning("Model circuit open model=%s; routing directly to fallback", models[0])
         models = models[1:]
         if not models:
             raise RuntimeError("Gemini model circuit is open and no fallback model is configured.")
-    for model_index, model in enumerate(models):
-        if _circuit_open(model):
+    model_index = 0
+    while model_index < len(models):
+        model = models[model_index]
+        if not explicit_model and model in _unavailable_models:
+            logging.getLogger(__name__).warning("Skipping unavailable Gemini model=%s", model)
+            if not explicit_model and model_index > 0 and models[0] not in _unavailable_models:
+                models.append(models[0])
+            model_index += 1
             continue
+        if _circuit_open(model):
+            model_index += 1
+            continue
+        thinking_config = None
+        if (_CALL_STAGE.get() == "vision_brief"
+                and _canonical_model_name(model) != "gemini-3.8-flash"
+                and _supports_minimal_thinking(model)):
+            thinking_config = types.ThinkingConfig(thinking_level="MINIMAL")
+        generation_config = types.GenerateContentConfig(
+            temperature=temperature,
+            response_mime_type="application/json" if json_mode else None,
+            response_json_schema=response_json_schema,
+            thinking_config=thinking_config,
+        )
         attempt = 0
         while True:
             call_started = time.perf_counter()
@@ -293,7 +330,8 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                 global API_CALL_COUNT
                 _rate_limit_call()
                 API_CALL_COUNT += 1
-                client = _get_client(timeout_sec=timeout_seconds) if timeout_sec is not None else _get_client()
+                client = (_get_client(timeout_sec=timeout_seconds)
+                          if use_timeout_client else _get_client())
                 response = client.models.generate_content(
                     model=model, contents=parts, config=generation_config
                 )
@@ -303,18 +341,42 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                 return response.text
             except Exception as error:
                 reason = "fallback" if model_index else ("retry" if attempt else "initial")
-                _record_call(model, attempt + 1, time.perf_counter() - call_started,
-                             _call_status(error), reason)
-                logging.getLogger(__name__).error("Model request error model=%s: %s: %s",
-                                                  model, type(error).__name__, _redact_error(error))
-                _note_model_failure(model)
+                call_status = _call_status(error)
                 status = _status_code(error)
-                if status in (401, 403, 404):
-                    _raise_provider_error(error)
+                _record_call(model, attempt + 1, time.perf_counter() - call_started,
+                             call_status, reason)
+                logging.getLogger(__name__).error(
+                    "Model request error stage=%s model=%s attempt=%s http_status=%s classification=%s error=%s: %s",
+                    _CALL_STAGE.get(), model, attempt + 1, status, call_status,
+                    type(error).__name__, _redact_error(error),
+                )
+                _note_model_failure(model)
+                model_circuit_open = _circuit_open(model)
+                if status == 404:
+                    _unavailable_models.add(model)
+                    logging.getLogger(__name__).warning("Skipping unavailable Gemini model=%s", model)
+                    if not explicit_model and model_index == 0 and len(models) > 1:
+                        break
+                    if not explicit_model and model_index > 0 and models[0] not in _unavailable_models:
+                        models.append(models[0])
+                        break
+                    _raise_provider_error(error, model)
+                if status in (401, 403):
+                    _raise_provider_error(error, model)
                 if status == 429 and _daily_quota_exhausted(error):
                     raise RuntimeError(f"Gemini daily quota is exhausted; stopping retries. Original error: {type(error).__name__}: {_redact_error(error)}") from error
+                if status == 503 and model_index == 0 and len(models) > 1:
+                    break
+                if model_circuit_open:
+                    if model_index + 1 < len(models):
+                        break
+                    _raise_provider_error(error, model)
                 no_fallback = len(models) == 1 and not explicit_model
-                long_overload_retry = status in (503, 504) and no_fallback
+                using_fallback_model = (
+                    model_index > 0
+                    and _canonical_model_name(model) != _canonical_model_name(models[0])
+                )
+                long_overload_retry = status in (503, 504) and (no_fallback or using_fallback_model)
                 if long_overload_retry and attempt >= max(0, int(config.RETRY_503_MAX)):
                     raise RuntimeError(
                         "Gemini is experiencing temporary Google service overload "
@@ -322,18 +384,22 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                         "because successful steps are cached. Original error: "
                         f"{type(error).__name__}: {_redact_error(error)}"
                     ) from error
-                if _is_timeout(error) and attempt == attempts - 1:
-                    raise RuntimeError(
-                        f"Gemini request timed out after {timeout_seconds:g} seconds. "
-                        f"Original error: {type(error).__name__}: {_safe_error_message(error)}. "
-                        "Check your network/VPN."
-                    ) from error
+                if _is_timeout(error):
+                    same_model_retries = min(TIMEOUT_SAME_MODEL_RETRIES, attempts - 1)
+                    if attempt >= same_model_retries:
+                        if model_index + 1 < len(models):
+                            break
+                        raise RuntimeError(
+                            f"Gemini request timed out after {timeout_seconds:g} seconds. "
+                            f"Original error: {type(error).__name__}: {_safe_error_message(error)}. "
+                            "Check your network/VPN."
+                        ) from error
                 if not _is_retryable(error):
-                    _raise_provider_error(error)
+                    _raise_provider_error(error, model)
                 if not long_overload_retry and attempt == attempts - 1:
                     if model_index + 1 < len(models):
                         break
-                    _raise_provider_error(error)
+                    _raise_provider_error(error, model)
                 retry_after = _retry_after_seconds(error) if status == 429 else None
                 if retry_after is not None:
                     delay = min(retry_after, config.LLM_RETRY_MAX_SECONDS)
@@ -353,6 +419,7 @@ def ask(prompt, images=None, json_mode=False, temperature=0.7, retries=3,
                                 backoff + random.uniform(0, config.LLM_RETRY_JITTER_SECONDS))
                 time.sleep(delay)
                 attempt += 1
+        model_index += 1
     raise RuntimeError("No available Gemini model remains after retries or circuit-breaker checks.")
 
 
@@ -371,9 +438,12 @@ def _raw_snippet(raw):
     return snippet[: config.LLM_ERROR_SNIPPET_LENGTH]
 
 
-def ask_json(prompt, images=None, audio_path=None, temperature=0.7):
+def ask_json(prompt, images=None, audio_path=None, temperature=0.7, response_json_schema=None,
+             retries=3, retry_cap=3, timeout_sec=None):
     """Return a JSON object, allowing one model repair attempt if needed."""
-    raw = ask(prompt, images=images, audio_path=audio_path, json_mode=True, temperature=temperature)
+    raw = ask(prompt, images=images, audio_path=audio_path, json_mode=True,
+              temperature=temperature, response_json_schema=response_json_schema,
+              retries=retries, retry_cap=retry_cap, timeout_sec=timeout_sec)
     for attempt in range(2):
         try:
             result = json.loads(_strip_json_fence(raw))
@@ -391,5 +461,9 @@ def ask_json(prompt, images=None, audio_path=None, temperature=0.7):
                     audio_path=audio_path,
                     json_mode=True,
                     temperature=temperature,
+                    response_json_schema=response_json_schema,
+                    retries=retries,
+                    retry_cap=retry_cap,
+                    timeout_sec=timeout_sec,
                 )
     raise ValueError(f"Could not parse JSON response: {_raw_snippet(raw)}")
